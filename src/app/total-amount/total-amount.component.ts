@@ -2,7 +2,7 @@ import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { BOOKINGS } from '../bookings-list';
 import { TotalAmountService } from '../total-amount.service';
-import { ChangeDetectorRef, AfterViewChecked } from '@angular/core';
+import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 
 @Component({
@@ -11,14 +11,14 @@ import { ChangeDetectorRef, AfterViewChecked } from '@angular/core';
   styleUrls: ['./total-amount.component.css']
 })
 
-export class TotalAmountComponent implements AfterViewChecked{
+export class TotalAmountComponent implements AfterContentChecked{
   total_amount: number = 0;
   
   ngOnInit(): void {
     this.calculateTotal();
   }
 
-  ngAfterViewChecked(): void {
+  ngAfterContentChecked(): void {
     this.calculateTotal();
   }
   calculateTotal(): void {

@@ -14,8 +14,8 @@ import { ChangeDetectorRef } from '@angular/core';
 export class AddBookingComplexComponent {
 
   addBooking(date: string, description: string, amount: number): void{
+    
     this.bookingsTableService.addBooking(date, description, amount);
-    this.totalAmountService.calculate_total();
     this.changeDetectorRef.markForCheck();
   }
   constructor (private bookingsTableService: BookingsTableService, 
