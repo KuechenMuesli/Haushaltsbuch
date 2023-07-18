@@ -15,11 +15,11 @@ ngOnInit(): void {
   this.getBookings();
 }
 
-  getBookings(): void {
-    this.bookings = this.bookingsTableService.getBookings()
-  }
 
-  constructor(private bookingsTableService: BookingsTableService) {
-
-  }
+getBookings(): void {
+    this.bookings = this.bookingsTableService.getBookings();
 }
+
+constructor(private bookingsTableService: BookingsTableService) {}
+}
+ 
