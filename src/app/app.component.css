@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(248, 186, 106);
+}
+.all{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#title{
+    background-color:rgb(209, 86, 86);
+    font-size: 40px;
+}
+
+#elements{
+    font-size: 15px
+}

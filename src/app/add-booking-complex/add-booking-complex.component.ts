@@ -12,6 +12,8 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 
 export class AddBookingComplexComponent {
+  bookings: Booking[] = this.bookingsTableService.getBookings();
+  latest_date: string = this.bookings[this.bookings.length - 1].date;
 
   addBooking(date: string, description: string, amount: number): void{
     
