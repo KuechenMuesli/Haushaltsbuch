@@ -1,0 +1,16 @@
+<h2>Buchungen</h2>
+<ul class="bookings">
+
+    <table id="bookingsTable">
+        <tr>
+            <th>Datum</th>
+            <th>Beschreibung</th>
+            <th>Betrag</th>
+        </tr>
+        <tr *ngFor="let booking of bookings">
+            <td>{{booking.date}}</td>
+            <td>{{booking.description}}</td>
+            <td>{{booking.amount}} €</td>
+        </tr>
+    </table>
+</ul>
