@@ -3,3 +3,13 @@ table, th, td{
     border: 1px solid black;
     border-collapse: collapse;
 }
+#total_amount{
+    font-weight: normal;
+}
+.positive {
+    color: green;
+  }
+  
+  .negative {
+    color: red;
+  }

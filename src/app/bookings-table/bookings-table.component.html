@@ -6,11 +6,15 @@
             <th>Datum</th>
             <th>Beschreibung</th>
             <th>Betrag</th>
+            <th id="total_amount"><app-total-amount></app-total-amount></th>
         </tr>
+        
         <tr *ngFor="let booking of bookings">
-            <td>{{booking.date}}</td>
-            <td>{{booking.description}}</td>
-            <td>{{booking.amount}} €</td>
+            <td>{{ booking.date }}</td>
+            <td>{{ booking.description }}</td>
+            <td [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
+                {{ booking.amount }} €
+            </td>
         </tr>
     </table>
 </ul>

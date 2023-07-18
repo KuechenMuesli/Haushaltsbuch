@@ -10,8 +10,9 @@ import { Booking } from '../booking';
 })
 export class BookingsTableComponent {
   bookings: Booking[] = [];
-
+  
 ngOnInit(): void {
+  
   this.getBookings();
 }
 
@@ -22,4 +23,3 @@ getBookings(): void {
 
 constructor(private bookingsTableService: BookingsTableService) {}
 }
- 
