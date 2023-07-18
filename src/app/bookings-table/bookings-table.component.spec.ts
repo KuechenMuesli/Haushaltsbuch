@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { BookingsTableComponent } from './bookings-table.component';
 
+
 describe('BookingsTableComponent', () => {
   let component: BookingsTableComponent;
   let fixture: ComponentFixture<BookingsTableComponent>;
