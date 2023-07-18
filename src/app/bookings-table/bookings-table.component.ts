@@ -3,6 +3,7 @@ import { BookingsTableService } from '../bookings-table.service';
 import { BOOKINGS } from '../bookings-list';
 import { Booking } from '../booking';
 
+
 @Component({
   selector: 'app-bookings-table',
   templateUrl: './bookings-table.component.html',

@@ -15,6 +15,10 @@
             <td [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
                 {{ booking.amount }} €
             </td>
+            <td id="buttons">
+                <button id="edit-button"><mat-icon> border_color</mat-icon></button>
+                <button><mat-icon>delete_forever</mat-icon></button>
+            </td>
         </tr>
     </table>
 </ul>
