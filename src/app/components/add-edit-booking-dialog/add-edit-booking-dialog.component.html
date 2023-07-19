@@ -1,18 +1,23 @@
+
 <dialog id="bookings-dialog" *ngIf="isdialogOpen">
     <form [formGroup]="newBookingForm" (ngSubmit)="onSubmit()">
-        <p>
-            <label for="date">Datum:</label>
-            <input type="date" id="date" formControlName="date">
-        </p>
-        <p>
-            <label for="description">Beschreibung:</label>
-            <input type="text" id="description" formControlName="description">
-        </p>
-        <p>
-            <label for="amount">Betrag:</label>
-            <input type="number" id="amount" formControlName="amount">
-        </p>
-        <button type="submit" [disabled]="newBookingForm.invalid">Okay</button>
-        <button (click)="cancelEditing()">Abbrechen</button>
+
+        <table>
+            <tr>
+                <td><label for="date">Datum:</label></td> 
+                <td><input type="date" id="date" formControlName="date"></td>
+            </tr>
+
+            <tr>
+                <td><label for="description">Beschreibung:</label></td>
+                <td><input type="text" id="description" formControlName="description"></td>
+            </tr>
+            <tr>
+                <td><label for="amount">Betrag:</label></td>
+                <td><input type="number" id="amount" formControlName="amount"></td>
+            </tr>
+        </table>
+        <button (click)="cancelEditing()" class="form-button"><mat-icon>close</mat-icon></button>
+        <button type="submit" [disabled]="newBookingForm.invalid" class="form-button"><mat-icon>done</mat-icon></button>
     </form>
 </dialog>
