@@ -26,13 +26,9 @@ export class BookingsTableComponent {
   }
 
   deleteBooking(id: number): void {
-    this.bookingsTableService.deleteBooking(id);
-    
-    let table = this.document.getElementById("bookingsTable") as HTMLTableElement;
-    table.deleteRow(id);
-
+    let index = this.bookingsTableService.deleteBooking(id);
     this.getBookings();
+    let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
+      table.deleteRow(index + 1);
   }
-
-
 }

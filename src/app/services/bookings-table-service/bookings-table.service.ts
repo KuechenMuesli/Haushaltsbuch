@@ -20,13 +20,10 @@ export class BookingsTableService {
     return BOOKINGS;
   }
 
-  deleteBooking(id: number){
-    for (let i = 0; i < BOOKINGS.length; i++){
-      if (BOOKINGS[i].id == id){
-        delete BOOKINGS[i]
-        break
-      }
-    }
+  deleteBooking(id: number): number{
+    let index = BOOKINGS.findIndex(booking => booking.id === id);
+    BOOKINGS.splice(index, 1);
+    return index;
   }
 
   constructor() { }

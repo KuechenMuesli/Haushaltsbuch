@@ -15,7 +15,7 @@
             <th id="total_amount"><app-total-amount></app-total-amount></th>
         </tr>
         
-        <tr *ngFor="let booking of bookings" id=`{{booking.id}}`>
+        <tr *ngFor="let booking of bookings">
             <td id="table-element">{{ booking.date }}</td>
             <td id="table-element">{{ booking.description }}</td>
             <td id="table-element" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
