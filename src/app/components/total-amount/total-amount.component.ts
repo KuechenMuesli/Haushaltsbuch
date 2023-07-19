@@ -1,7 +1,5 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { BOOKINGS } from '../bookings-list';
-import { TotalAmountService } from '../total-amount.service';
+import { TotalAmountService } from '../../services/total-amount-service/total-amount.service';
 import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 
 

@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
-import { Booking } from '../booking';
-import { BookingsTableService } from '../bookings-table.service';
-import { TotalAmountComponent } from '../total-amount/total-amount.component';
-import { TotalAmountService } from '../total-amount.service';
-import { ChangeDetectorRef } from '@angular/core';
-import { EditBookingService } from '../edit-booking.service';
+import { Booking } from '../../booking';
+import { BookingsTableService } from '../../services/bookings-table-service/bookings-table.service';
+import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 
 @Component({
   selector: 'app-add-booking-complex',
@@ -14,8 +11,6 @@ import { EditBookingService } from '../edit-booking.service';
 
 export class AddBookingComplexComponent {
   constructor (private bookingsTableService: BookingsTableService, 
-    private totalAmountService: TotalAmountService,
-    private changeDetectorRef: ChangeDetectorRef,
     private editAddBookingsService: EditBookingService
     ){}
 
@@ -25,7 +20,6 @@ export class AddBookingComplexComponent {
   addBooking(): void{
     this.editAddBookingsService.addBooking();
     this.editAddBookingsService.openDialog();
-    this.changeDetectorRef.markForCheck();
   }
   
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { EditBookingService } from '../edit-booking.service';
+import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-edit-booking-dialog',
@@ -14,7 +14,7 @@ export class AddEditBookingDialogComponent implements OnInit{
   newBookingForm!: FormGroup; 
 
   id: number = -1;
-
+  
   date: string = ""
   description: string = ""
   amount: number = 0;

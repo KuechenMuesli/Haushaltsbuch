@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { BookingsTableService } from '../bookings-table.service';
-import { BOOKINGS } from '../bookings-list';
-import { Booking } from '../booking';
+import { BookingsTableService } from '../../services/bookings-table-service/bookings-table.service';
+import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 
@@ -15,12 +14,11 @@ import { DOCUMENT } from '@angular/common';
 
 export class BookingsTableComponent {
   bookings: Booking[] = [];
-  
+
   constructor(private bookingsTableService: BookingsTableService, @Inject(DOCUMENT) private document: Document) {
   }
   ngOnInit(): void {
-    
-    this.getBookings();
+    this.bookings = this.bookingsTableService.getBookings();
   }
 
   getBookings(): void {
