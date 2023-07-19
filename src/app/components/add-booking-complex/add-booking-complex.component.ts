@@ -21,5 +21,4 @@ export class AddBookingComplexComponent {
     this.editAddBookingsService.addBooking();
     this.editAddBookingsService.openDialog();
   }
-  
 }

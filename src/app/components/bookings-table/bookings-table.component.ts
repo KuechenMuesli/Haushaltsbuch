@@ -30,6 +30,7 @@ export class BookingsTableComponent {
     this.editBookingService.setCurrentId(id);
     this.editBookingService.openDialog();
   }
+
   deleteBooking(id: number): void {
     let index = this.bookingsTableService.deleteBooking(id);
     this.getBookings();

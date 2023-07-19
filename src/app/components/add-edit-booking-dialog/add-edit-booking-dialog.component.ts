@@ -3,6 +3,7 @@ import { EditBookingService } from '../../services/edit-booking-service/edit-boo
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BookingsTableComponent } from '../bookings-table/bookings-table.component';
 
 @Component({
   selector: 'app-add-edit-booking-dialog',
@@ -21,7 +22,9 @@ export class AddEditBookingDialogComponent implements OnInit{
 
   isdialogOpen: boolean = true;
 
-  constructor(private editBookingService:EditBookingService, @Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder){
+  constructor(private editBookingService:EditBookingService, @Inject(DOCUMENT) private document: Document, 
+  private formBuilder: FormBuilder, private bookingstableComponent: BookingsTableComponent
+  ){
 
     this.editBookingService.dialogOpen$.subscribe((isOpen) => {
     this.isdialogOpen = isOpen;
@@ -56,12 +59,20 @@ export class AddEditBookingDialogComponent implements OnInit{
   showDialog(){
     let shown_booking = this.editBookingService.getValues();
     this.id = shown_booking.id;
-    this.date = "2023-07-19"
+    this.date = shown_booking.date;
     this.description = shown_booking.description;
     this.amount = shown_booking.amount;
     this.createNewBookingForm();
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
     dia.show()
+  }
+
+  cancelEditing(){
+    this.closeDialog();
+    if (this.description == ""){
+      this.bookingstableComponent.deleteBooking(this.id);
+    }
+    
   }
 
   closeDialog(){

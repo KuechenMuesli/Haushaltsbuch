@@ -13,5 +13,6 @@
             <input type="number" id="amount" formControlName="amount">
         </p>
         <button type="submit" [disabled]="newBookingForm.invalid">Okay</button>
+        <button (click)="cancelEditing()">Abbrechen</button>
     </form>
 </dialog>

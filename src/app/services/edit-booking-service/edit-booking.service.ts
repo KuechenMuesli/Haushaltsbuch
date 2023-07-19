@@ -46,5 +46,10 @@ export class EditBookingService {
     }
   }
 
+  deleteBooking(){
+    let index = BOOKINGS.findIndex(booking => booking.id === this.current_id);
+    delete BOOKINGS[index];
+  }
+
   constructor() { }
 }
