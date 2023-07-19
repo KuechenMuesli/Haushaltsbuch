@@ -37,9 +37,9 @@ export class AddEditBookingDialogComponent implements OnInit{
 
   createNewBookingForm(){
     this.newBookingForm = this.formBuilder.group({
-      date:['', Validators.required],
-      description:['', Validators.required],
-      amount:['', Validators.required]
+      date:[`${this.date}`, Validators.required],
+      description:[`${this.description}`, Validators.required],
+      amount:[`${+this.amount}`, Validators.required]
     })
   }
 
@@ -54,6 +54,12 @@ export class AddEditBookingDialogComponent implements OnInit{
   }
 
   showDialog(){
+    let shown_booking = this.editBookingService.getValues();
+    this.id = shown_booking.id;
+    this.date = "2023-07-19"
+    this.description = shown_booking.description;
+    this.amount = shown_booking.amount;
+    this.createNewBookingForm();
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
     dia.show()
   }

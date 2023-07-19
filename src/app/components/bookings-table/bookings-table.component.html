@@ -22,7 +22,7 @@
                 {{ booking.amount }} €
             </td>
             <td id="buttons">
-                <button id="edit-button"><mat-icon> border_color</mat-icon></button>
+                <button (click)="editBooking(booking.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
                 <button (click)="deleteBooking(booking.id)"><mat-icon>delete_forever</mat-icon></button>
             </td>
         </tr>

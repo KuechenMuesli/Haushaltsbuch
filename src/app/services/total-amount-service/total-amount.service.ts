@@ -16,7 +16,7 @@ export class TotalAmountService {
   calculate_total(): void {
     this.total_amount = 0;
     for (let i = this.bookings.length - 1; i >= 0; i--){
-      this.total_amount += this.bookings[i].amount;
+      this.total_amount += +this.bookings[i].amount;
     }
   }
   

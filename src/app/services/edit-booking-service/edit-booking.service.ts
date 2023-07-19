@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { BOOKINGS } from '../../bookings-list';
+import { Booking } from '../../booking';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,11 @@ export class EditBookingService {
   private dialogOpenSubject = new Subject<boolean>();
   dialogOpen$: Observable<boolean> = this.dialogOpenSubject.asObservable();
 
+
+  getValues(): Booking{
+    let index = BOOKINGS.findIndex(booking => booking.id === this.current_id);
+    return BOOKINGS[index];
+  }
   openDialog(){
     this.dialogOpenSubject.next(true);
   }
