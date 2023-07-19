@@ -5,19 +5,19 @@
         <table>
             <tr>
                 <td><label for="date">Datum:</label></td> 
-                <td><input type="date" id="date" formControlName="date"></td>
+                <td><input type="date" id="date" formControlName="date" class="form-input"></td>
             </tr>
 
             <tr>
                 <td><label for="description">Beschreibung:</label></td>
-                <td><input type="text" id="description" formControlName="description"></td>
+                <td><input type="text" id="description" formControlName="description" class="form-input"></td>
             </tr>
             <tr>
                 <td><label for="amount">Betrag:</label></td>
-                <td><input type="number" id="amount" formControlName="amount"></td>
+                <td><input type="number" id="amount" formControlName="amount" class="form-input"></td>
             </tr>
         </table>
-        <button (click)="cancelEditing()" class="form-button"><mat-icon>close</mat-icon></button>
-        <button type="submit" [disabled]="newBookingForm.invalid" class="form-button"><mat-icon>done</mat-icon></button>
+        <button (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
+        <button type="submit" [disabled]="newBookingForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
     </form>
 </dialog>

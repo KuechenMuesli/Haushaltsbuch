@@ -21,9 +21,9 @@
             <td id="table-element" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
                 {{ booking.amount }} €
             </td>
-            <td id="buttons">
+            <td id="buttons-cells">
                 <button (click)="editBooking(booking.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
-                <button (click)="deleteBooking(booking.id)"><mat-icon>delete_forever</mat-icon></button>
+                <button (click)="deleteBooking(booking.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
             </td>
         </tr>
     </table>
