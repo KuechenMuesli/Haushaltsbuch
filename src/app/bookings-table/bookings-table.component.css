@@ -5,9 +5,7 @@ table, th, td{
 
     text-align: center;
 }
-#total_amount{
-    font-weight: normal;
-}
+
 .positive {
   color: green;
 }
@@ -16,10 +14,25 @@ table, th, td{
   color: red;
 }
 
+
+#table-head-elements{
+  font-style: italic;
+  width: 10em;
+}
+#total_amount{
+    font-weight: normal;
+}
+
 #edit-button{
   margin-right: 1em;
 }
 
 #buttons{
   border: none;
+}
+
+#table-element{
+  width: 10em;
+  word-break: break-all;
+  overflow-wrap: break-word;
 }

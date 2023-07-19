@@ -6,6 +6,9 @@ import { BookingsTableComponent } from './bookings-table/bookings-table.componen
 import { AddBookingComplexComponent } from './add-booking-complex/add-booking-complex.component';
 import { TotalAmountComponent } from './total-amount/total-amount.component';
 import { MatIconModule } from '@angular/material/icon';
+import { AddEditBookingDialogComponent } from './add-edit-booking-dialog/add-edit-booking-dialog.component';
+import { FormsModule } from '@angular/forms';
+import { EditBookingService } from './edit-booking.service';
 
 @NgModule({
   declarations: [
@@ -13,16 +16,17 @@ import { MatIconModule } from '@angular/material/icon';
     BookingsTableComponent,
     AddBookingComplexComponent,
     TotalAmountComponent,
-
+    AddEditBookingDialogComponent
   ],
   imports: [
     BrowserModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   exports: [
     MatIconModule
   ],
-  providers: [],
+  providers: [EditBookingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

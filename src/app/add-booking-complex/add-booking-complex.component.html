@@ -1,13 +1,4 @@
 <div>
-    <h2>Buchung hinzufügen</h2>
-    <label for="date">Datum</label>
-    <input #Datum id="date" value="{{latest_date}}">
-    <label for="description">Beschreibung</label>
-    <input #Beschreibung id="description">
-    <label for="amount">Betrag</label>
-    <input #Betrag id="amount">
-    <div>
-        <button (click)="addBooking(Datum.value, Beschreibung.value, +Betrag.value)">Buchung hinzufügen</button>
-    </div>
-
+    <button (click)="addBooking()">Buchung hinzufügen</button>
 </div>
+<app-add-edit-booking-dialog></app-add-edit-booking-dialog>

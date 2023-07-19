@@ -1,0 +1,18 @@
+<dialog id="bookings-dialog" *ngIf="isdialogOpen">
+    <form method="dialog">
+        <p>
+            <label for="date">Datum: </label>
+            <input #Datum id="date">
+
+        </p>
+        <p>
+            <label for="description">Beschreibung: </label>
+            <input #Beschreibung id="description">
+        </p>
+        <p>
+            <label for="amount">Betrag: </label>
+            <input #Betrag id="amount">
+        </p>
+        <button (click)="submitBooking(Datum.value, Beschreibung.value, +Betrag.value)">Okay</button>
+    </form>
+</dialog>
