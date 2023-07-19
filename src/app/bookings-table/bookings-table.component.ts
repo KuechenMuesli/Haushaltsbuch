@@ -12,27 +12,29 @@ import { DOCUMENT } from '@angular/common';
   templateUrl: './bookings-table.component.html',
   styleUrls: ['./bookings-table.component.css']
 })
+
 export class BookingsTableComponent {
   bookings: Booking[] = [];
   
-ngOnInit(): void {
-  
-  this.getBookings();
-}
+  constructor(private bookingsTableService: BookingsTableService, @Inject(DOCUMENT) private document: Document) {
+  }
+  ngOnInit(): void {
+    
+    this.getBookings();
+  }
 
-getBookings(): void {
-    this.bookings = this.bookingsTableService.getBookings();
-}
+  getBookings(): void {
+      this.bookings = this.bookingsTableService.getBookings();
+  }
 
-deleteBooking(id: number): void {
-  this.bookingsTableService.deleteBooking(id);
-  
-  let table = this.document.getElementById("bookingsTable") as HTMLTableElement;
-  table.deleteRow(id);
+  deleteBooking(id: number): void {
+    this.bookingsTableService.deleteBooking(id);
+    
+    let table = this.document.getElementById("bookingsTable") as HTMLTableElement;
+    table.deleteRow(id);
 
-  this.getBookings();
-}
+    this.getBookings();
+  }
 
-constructor(private bookingsTableService: BookingsTableService, @Inject(DOCUMENT) private document: Document) {
-}
+
 }

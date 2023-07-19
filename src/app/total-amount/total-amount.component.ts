@@ -14,6 +14,9 @@ import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
 export class TotalAmountComponent implements AfterContentChecked{
   total_amount: number = 0;
   
+  constructor(private totalAmountService: TotalAmountService,
+    private changeDetectorRef: ChangeDetectorRef){}
+    
   ngOnInit(): void {
     this.calculateTotal();
   }
@@ -26,6 +29,5 @@ export class TotalAmountComponent implements AfterContentChecked{
     this.total_amount = this.totalAmountService.total_amount;
   }
 
-  constructor(private totalAmountService: TotalAmountService,
-    private changeDetectorRef: ChangeDetectorRef){}
+
 }

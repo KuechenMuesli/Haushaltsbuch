@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { BookingsTableComponent } from './bookings-table/bookings-table.component';
 import { AddBookingComplexComponent } from './add-booking-complex/add-booking-complex.component';
@@ -21,7 +22,8 @@ import { EditBookingService } from './edit-booking.service';
   imports: [
     BrowserModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatIconModule

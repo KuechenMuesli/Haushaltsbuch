@@ -1,18 +1,17 @@
 <dialog id="bookings-dialog" *ngIf="isdialogOpen">
-    <form method="dialog">
+    <form [formGroup]="newBookingForm" (ngSubmit)="onSubmit()">
         <p>
-            <label for="date">Datum: </label>
-            <input #Datum id="date">
-
+            <label for="date">Datum:</label>
+            <input type="date" id="date" formControlName="date" value="{{date}}">
         </p>
         <p>
-            <label for="description">Beschreibung: </label>
-            <input #Beschreibung id="description">
+            <label for="description">Beschreibung:</label>
+            <input type="text" id="description" formControlName="description" value="{{description}}">
         </p>
         <p>
-            <label for="amount">Betrag: </label>
-            <input #Betrag id="amount">
+            <label for="amount">Betrag:</label>
+            <input type="number" id="amount" formControlName="amount" value="{{amount}}">
         </p>
-        <button (click)="submitBooking(Datum.value, Beschreibung.value, +Betrag.value)">Okay</button>
+        <button type="submit" [disabled]="newBookingForm.invalid">Okay</button>
     </form>
 </dialog>
