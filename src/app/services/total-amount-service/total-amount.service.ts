@@ -8,11 +8,11 @@ import { BookingsListService } from '../bookings-list-service/bookings-list.serv
 })
 export class TotalAmountService {
   bookingsListIndex: number = this.bookingsListService.bookingsListIndex;
-  bookings: Booking[] = BOOKINGS[this.bookingsListIndex];
+  bookings: Booking[] = BOOKINGS[this.bookingsListIndex].bookingsList;
   total_amount: number = 0;
 
   updateBookings(): void {
-    this.bookings = BOOKINGS[this.bookingsListIndex];
+    this.bookings = BOOKINGS[this.bookingsListIndex].bookingsList;
   }
 
   calculate_total(): void {

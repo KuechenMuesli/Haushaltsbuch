@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
+import { Booking } from '../../booking';
 
 @Component({
   selector: 'app-main-menu',
@@ -7,8 +8,6 @@ import { BookingsListService } from '../../services/bookings-list-service/bookin
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent {
+  
   constructor (private bookingsListService: BookingsListService) {}
-  tableZero(){this.bookingsListService.bookingsListIndex=0;}
-  tableOne(){this.bookingsListService.bookingsListIndex=1;}
-
 }
