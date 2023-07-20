@@ -6,13 +6,13 @@
 </div>
 
 <ul class="bookings">
-
+    <app-total-amount id="total-amount"></app-total-amount>
     <table id="bookingsTable">
         <tr>
             <th id="table-head-elements">Datum</th>
             <th id="table-head-elements">Beschreibung</th>
             <th id="table-head-elements">Betrag</th>
-            <th id="total_amount"><app-total-amount></app-total-amount></th>
+            
         </tr>
         
         <tr *ngFor="let booking of bookings">

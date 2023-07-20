@@ -35,8 +35,9 @@ table, th, td{
   border-width: 1px;
 }
 
-#total_amount{
+#total-amount{
     font-weight: normal;
+    font-size: 20px;
 }
 
 #edit-button{
