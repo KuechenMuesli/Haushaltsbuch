@@ -44,8 +44,7 @@ export class BookingsTableComponent {
 
   deleteBooking(id: number): void {
     let index = this.bookingsTableService.deleteBooking(id);
-    this.getBookings();
     let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
-      table.deleteRow(index + 1);
+    table.deleteRow(index + 1);
   }
 }

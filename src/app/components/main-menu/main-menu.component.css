@@ -16,7 +16,18 @@
     color: green;
 }
 
-#bookings-list{
-    margin-top:10px;
+#table-list{
     margin-left: 10px;
+}
+#edit-button{
+    margin-left: 7px;
+    color: green;
+    background-color: antiquewhite;
+    border: none;
+}
+
+#delete-button{
+    color: cornflowerblue;
+    background-color: antiquewhite;
+    border: none;
 }

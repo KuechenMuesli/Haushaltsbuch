@@ -5,7 +5,14 @@
         <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
     </div>
 
-    <li *ngFor="let list of bookingsList" id="bookings-list">
-        <a routerLink="/table/{{list.id}}">{{list.name}}</a>
-    </li>
+    <table id="table-list">
+        <tr *ngFor="let list of bookingsList" id="bookings-list">
+            <td><a routerLink="/table/{{list.id}}" (click)="updateID(list.id)">{{list.name}}</a></td>
+            <td>
+                <button (click)="editBook(list.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
+                <button (click)="deleteBook(list.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
+            </td>
+        </tr>
+    </table>
+
 </div>
