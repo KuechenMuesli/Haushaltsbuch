@@ -18,10 +18,14 @@ table, th, td{
   margin-left: 13px;
 }
 
+
+.heading{
+  display: flex;
+}
+
 #add_button{
   margin-top: 18px;
 }
-
 
 #table-head-elements{
   font-style: italic;
@@ -30,6 +34,7 @@ table, th, td{
   border-style:solid;
   border-width: 1px;
 }
+
 #total_amount{
     font-weight: normal;
 }
@@ -40,14 +45,14 @@ table, th, td{
   border:none;
   font-size: 10px;
   color: green;
-
 }
+
 #delete-button{
   float: left;
   background-color: transparent;
   border:none;
   font-size: 10px;
-  color: cornflowerblue;
+  color:cornflowerblue;
 }
 
 #table-element{
@@ -58,8 +63,3 @@ table, th, td{
   word-break: break-all;
   overflow-wrap: break-word;
 }
-
-.heading{
-  display: flex;
-}
-

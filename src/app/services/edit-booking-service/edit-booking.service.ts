@@ -17,6 +17,7 @@ export class EditBookingService {
     let index = BOOKINGS.findIndex(booking => booking.id === this.current_id);
     return BOOKINGS[index];
   }
+  
   openDialog(){
     this.dialogOpenSubject.next(true);
   }
