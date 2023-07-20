@@ -17,7 +17,7 @@ export class EditBookingService {
     let index = BOOKINGS.findIndex(booking => booking.id === this.current_id);
     return BOOKINGS[index];
   }
-  
+
   openDialog(){
     this.dialogOpenSubject.next(true);
   }
@@ -52,5 +52,8 @@ export class EditBookingService {
     delete BOOKINGS[index];
   }
 
+  getCurrentDate(): string{
+    return new Date().toISOString().split('T')[0];
+  }
   constructor() { }
 }

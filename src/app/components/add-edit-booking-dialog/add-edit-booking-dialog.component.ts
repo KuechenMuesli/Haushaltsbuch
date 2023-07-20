@@ -61,8 +61,7 @@ export class AddEditBookingDialogComponent implements OnInit{
     this.id = shown_booking.id;
     this.date = shown_booking.date;
     if (this.date == ""){
-      this.date = new Date().toISOString().split('T')[0];
-      console.log(this.date);
+      this.date = this.editBookingService.getCurrentDate();
     }
     this.description = shown_booking.description;
     this.amount = shown_booking.amount;
