@@ -10,12 +10,8 @@ import { EditBookingService } from '../../services/edit-booking-service/edit-boo
 })
 
 export class AddBookingComplexComponent {
-  constructor (private bookingsTableService: BookingsTableService, 
-    private editAddBookingsService: EditBookingService
-    ){}
-
-  bookings: Booking[] = this.bookingsTableService.getBookings();
-  latest_date: string = this.bookings[this.bookings.length - 1].date;
+  constructor (private editAddBookingsService: EditBookingService){
+    }
 
   addBooking(): void{
     this.editAddBookingsService.addBooking();

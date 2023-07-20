@@ -12,14 +12,15 @@ export class EditBookingService {
   current_id: number = -1;
   private dialogOpenSubject = new Subject<boolean>();
   dialogOpen$: Observable<boolean> = this.dialogOpenSubject.asObservable();
-  bookingsListIndex: number = this.bookingsListService.bookingsListIndex;
+  bookingsListId: number = this.bookingsListService.bookingsListId;
 
   constructor(private bookingsListService: BookingsListService) { }
 
 
   getValues(): Booking{
-    let index = BOOKINGS[this.bookingsListIndex].bookingsList.findIndex(booking => booking.id === this.current_id);
-    return BOOKINGS[this.bookingsListIndex].bookingsList[index];
+    this.bookingsListId = this.bookingsListService.bookingsListId;
+    let index = BOOKINGS[this.bookingsListId].bookingsList.findIndex(booking => booking.id === this.current_id);
+    return BOOKINGS[this.bookingsListId].bookingsList[index];
   }
 
   openDialog(){
@@ -35,15 +36,15 @@ export class EditBookingService {
   }
   
   addBooking(): void{
-    let next_id: number = BOOKINGS[this.bookingsListIndex].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookingsListIndex].bookingsList.map(booking => booking.id)) + 1 : 0;
-    BOOKINGS[this.bookingsListIndex].bookingsList.push({id:next_id, date:"", description:"", amount:0});
+    let next_id: number = BOOKINGS[this.bookingsListId].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookingsListId].bookingsList.map(booking => booking.id)) + 1 : 0;
+    BOOKINGS[this.bookingsListId].bookingsList.push({id:next_id, date:"", description:"", amount:0});
     this.current_id = next_id;
   }
 
   editBooking(id: number, date: string, description: string, amount: number): void {
-    for (let i = 0; i < BOOKINGS[this.bookingsListIndex].bookingsList.length; i++){
-      if (BOOKINGS[this.bookingsListIndex].bookingsList[i].id == id){
-        BOOKINGS[this.bookingsListIndex].bookingsList[i] = {
+    for (let i = 0; i < BOOKINGS[this.bookingsListId].bookingsList.length; i++){
+      if (BOOKINGS[this.bookingsListId].bookingsList[i].id == id){
+        BOOKINGS[this.bookingsListId].bookingsList[i] = {
           id, date, description, amount
         };
         break;
@@ -52,7 +53,7 @@ export class EditBookingService {
   }
 
   deleteBooking(){
-    let index = BOOKINGS[this.bookingsListIndex].bookingsList.findIndex(booking => booking.id === this.current_id);
+    let index = BOOKINGS[this.bookingsListId].bookingsList.findIndex(booking => booking.id === this.current_id);
     delete BOOKINGS[index];
   }
 

@@ -4,7 +4,9 @@ import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
-
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
 
 
 @Component({
@@ -15,15 +17,24 @@ import { EditBookingService } from '../../services/edit-booking-service/edit-boo
 
 export class BookingsTableComponent {
   bookings: Booking[] = [];
+  id: number = -1;
+  name: string = "";
 
-  constructor(private bookingsTableService: BookingsTableService, @Inject(DOCUMENT) private document: Document, private editBookingService: EditBookingService) {
+  constructor(private bookingsTableService: BookingsTableService, 
+    @Inject(DOCUMENT) private document: Document, 
+    private bookingsListService: BookingsListService,
+    private editBookingService: EditBookingService,
+    private route: ActivatedRoute, private location: Location,
+   ) {
   }
   ngOnInit(): void {
-    this.bookings = this.bookingsTableService.getBookings();
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.bookingsListService.setBookingsListId(this.id);
+    this.bookings = this.bookingsTableService.getBookings(this.id);
   }
 
   getBookings(): void {
-      this.bookings = this.bookingsTableService.getBookings();
+      this.bookings = this.bookingsTableService.getBookings(this.id);
   }
 
   editBooking(id: number): void{

@@ -4,7 +4,7 @@ import { BookingsList } from "./bookings-list-interface";
 export const BOOKINGS: BookingsList[] = [
     {
         id: 0,
-        name: "Liste 1",
+        name: "Geschäftlich",
         bookingsList: [
             { "id": 0, "date": "2023-07-15", "description": "Gehalt", "amount": 1000 },
             { "id": 1, "date": "2023-07-15", "description": "Einkäufe", "amount": -43 },
@@ -33,12 +33,12 @@ export const BOOKINGS: BookingsList[] = [
     
     {
         id: 1,
-        name: "Liste 2",
+        name: "Privat",
         bookingsList: [
             {"id": 0, "date": "2023-07-15", "description": "Gehalt", "amount": 1000},
-            {"id": 1, "date": "2023-07-15", "description": "Einkäufe", "amount": -43},  
-            {"id": 2, "date": "2023-07-16", "description": "Einkäufe", "amount": -50},  
-            {"id": 3, "date": "2023-07-16", "description": "neues Handy", "amount": -799},  
+            {"id": 1, "date": "2023-07-15", "description": "Einkäufe", "amount": -50},  
+            {"id": 2, "date": "2023-07-16", "description": "Einkäufe", "amount": -90},  
+            {"id": 3, "date": "2023-07-16", "description": "neues Handy", "amount": -1100},  
             {"id": 4, "date": "2023-07-16", "description": "Abonnements", "amount": -78},  
             {"id": 5, "date": "2023-07-17", "description": "Gehalt", "amount": 1000},  
             {"id": 6, "date": "2023-07-17", "description": "Einkäufe", "amount": -60},  
@@ -49,5 +49,10 @@ export const BOOKINGS: BookingsList[] = [
             {"id": 11, "date": "2023-07-19", "description": "Einkäufe", "amount": -70},  
             {"id": 12, "date": "2023-07-20", "description": "Miete", "amount": -800}
         ]
+    },
+    {
+        id:2,
+        name:"test",
+        bookingsList:[]
     }
 ]

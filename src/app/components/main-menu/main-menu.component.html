@@ -1,0 +1,11 @@
+
+<div class="all">
+    <div class="books">
+        <h2 id="heading">Bücher</h2>
+        <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
+    </div>
+
+    <li *ngFor="let list of bookingsList" id="bookings-list">
+        <a routerLink="/table/{{list.id}}">{{list.name}}</a>
+    </li>
+</div>

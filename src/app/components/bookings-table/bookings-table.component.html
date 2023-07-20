@@ -1,7 +1,7 @@
 
 <div class = "all">
 <div class="heading">
-    <h2>Buchungen</h2>
+    <h2>Buchungen: {{id}}</h2>
     <app-add-booking-complex id="add_button"></app-add-booking-complex>
 </div>
 
@@ -12,7 +12,6 @@
             <th id="table-head-elements">Datum</th>
             <th id="table-head-elements">Beschreibung</th>
             <th id="table-head-elements">Betrag</th>
-            
         </tr>
         
         <tr *ngFor="let booking of bookings">

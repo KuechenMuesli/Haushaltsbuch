@@ -1,0 +1,22 @@
+.books{
+    display: flex;
+}
+
+.all{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#heading{
+    margin-left: 10px;
+}
+
+#add-new-book-button{
+    background-color: antiquewhite;
+    border: none;
+    color: green;
+}
+
+#bookings-list{
+    margin-top:10px;
+    margin-left: 10px;
+}
