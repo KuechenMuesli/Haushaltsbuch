@@ -10,6 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { AddEditBookingDialogComponent } from './components/add-edit-booking-dialog/add-edit-booking-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { EditBookingService } from './services/edit-booking-service/edit-booking.service';
+import { AppRoutingModule } from './app-routing.module';
+import { MainMenuComponent } from './components/main-menu/main-menu.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +19,15 @@ import { EditBookingService } from './services/edit-booking-service/edit-booking
     BookingsTableComponent,
     AddBookingComplexComponent,
     TotalAmountComponent,
-    AddEditBookingDialogComponent
+    AddEditBookingDialogComponent,
+    MainMenuComponent
   ],
   imports: [
     BrowserModule,
     MatIconModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   exports: [
     MatIconModule

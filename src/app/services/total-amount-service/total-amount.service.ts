@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BOOKINGS } from '../../bookings-list';
 import { Booking } from '../../booking';
+import { BookingsListService } from '../bookings-list-service/bookings-list.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TotalAmountService {
-  bookings: Booking[] = BOOKINGS;
+  bookingsListIndex: number = this.bookingsListService.bookingsListIndex;
+  bookings: Booking[] = BOOKINGS[this.bookingsListIndex];
   total_amount: number = 0;
 
   updateBookings(): void {
-    this.bookings = BOOKINGS;
+    this.bookings = BOOKINGS[this.bookingsListIndex];
   }
 
   calculate_total(): void {
@@ -21,5 +23,5 @@ export class TotalAmountService {
   }
   
 
-  constructor() { }
+  constructor(private bookingsListService: BookingsListService) { }
 }
