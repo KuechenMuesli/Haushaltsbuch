@@ -24,6 +24,11 @@ table, th, td{
   display: flex;
 }
 
+#book-name{
+  margin-left: 3px;
+  font-style: italic;
+  color:cornflowerblue;
+}
 #add_button{
   margin-top: 18px;
 }

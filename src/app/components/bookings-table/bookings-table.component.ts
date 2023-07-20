@@ -18,7 +18,7 @@ import { BookingsListService } from '../../services/bookings-list-service/bookin
 export class BookingsTableComponent {
   bookings: Booking[] = [];
   id: number = -1;
-  name: string = "";
+  bookName: string = "";
 
   constructor(private bookingsTableService: BookingsTableService, 
     @Inject(DOCUMENT) private document: Document, 
@@ -29,8 +29,10 @@ export class BookingsTableComponent {
   }
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.bookName = this.bookingsListService.getName(this.id);
     this.bookingsListService.setBookingsListId(this.id);
     this.bookings = this.bookingsTableService.getBookings(this.id);
+
   }
 
   getBookings(): void {

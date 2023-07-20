@@ -50,9 +50,19 @@ export const BOOKINGS: BookingsList[] = [
             {"id": 12, "date": "2023-07-20", "description": "Miete", "amount": -800}
         ]
     },
+
     {
-        id:2,
-        name:"test",
-        bookingsList:[]
+        id: 2,
+        name: "Sparbuch",
+        bookingsList: [
+            {"id": 0, "date":"2023-01-01", "description":"Januar 2023", "amount":500},
+            {"id": 1, "date":"2023-02-01", "description":"Februar 2023", "amount":500},
+            {"id": 2, "date":"2023-03-01", "description":"März 2023", "amount":500},
+            {"id": 3, "date":"2023-04-01", "description":"April 2023", "amount":500},
+            {"id": 4, "date":"2023-05-01", "description":"Mai 2023", "amount":500},
+            {"id": 5, "date":"2023-06-01", "description":"Juni 2023", "amount":500},
+            {"id": 6, "date":"2023-07-01", "description":"Juli 2023", "amount":500},
+            
+        ]
     }
 ]

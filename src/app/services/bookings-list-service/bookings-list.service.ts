@@ -19,6 +19,11 @@ export class BookingsListService {
       return BOOKINGS;
   }
 
+  getName(id: number): string{
+    let index = BOOKINGS.findIndex(book => book.id == id);
+    return BOOKINGS[index].name;
+  }
+
   addBook(name: string, amount: number, description: string){
     let id: number = BOOKINGS.length > 0? Math.max(...BOOKINGS.map(bookingsList => bookingsList.id)) + 1 : 0;
     let date: string = new Date().toISOString().split('T')[0];
