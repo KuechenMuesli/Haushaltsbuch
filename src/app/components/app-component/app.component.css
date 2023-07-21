@@ -30,3 +30,7 @@ body{
 #elements{
     font-size: 15px
 }
+
+#title{
+    cursor:pointer;
+}

@@ -32,7 +32,6 @@ export class BookingsTableComponent {
     this.bookName = this.bookingsListService.getName(this.id);
     this.bookingsListService.setBookingsListId(this.id);
     this.bookings = this.bookingsTableService.getBookings(this.id);
-
   }
 
   displayDate(dateString: string){
