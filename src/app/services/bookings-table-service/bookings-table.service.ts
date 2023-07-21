@@ -25,6 +25,7 @@ export class BookingsTableService {
   }
 
   deleteBooking(id: number): number{
+    this.bookingsListId = this.bookingsListService.bookingsListId;
     let index = BOOKINGS[this.bookingsListId].bookingsList.findIndex(booking => booking.id === id);
     BOOKINGS[this.bookingsListId].bookingsList.splice(index, 1);
     return index;

@@ -15,7 +15,7 @@ export class EditBookingService {
   bookingsListId: number = this.bookingsListService.bookingsListId;
 
   constructor(private bookingsListService: BookingsListService) { }
-
+  
 
   getValues(): Booking{
     this.bookingsListId = this.bookingsListService.bookingsListId;

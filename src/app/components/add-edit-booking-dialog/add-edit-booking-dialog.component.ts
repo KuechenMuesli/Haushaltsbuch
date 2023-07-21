@@ -25,7 +25,6 @@ export class AddEditBookingDialogComponent implements OnInit{
   constructor(private editBookingService:EditBookingService, @Inject(DOCUMENT) private document: Document, 
   private formBuilder: FormBuilder, private bookingstableComponent: BookingsTableComponent
   ){
-
     this.editBookingService.dialogOpen$.subscribe((isOpen) => {
     this.isdialogOpen = isOpen;
     if (this.isdialogOpen){

@@ -3,6 +3,7 @@ import { BookingsListService } from '../../services/bookings-list-service/bookin
 import { BookingsList } from '../../bookings-list-interface';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
+import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -11,14 +12,15 @@ import { DOCUMENT } from '@angular/common';
 })
 export class MainMenuComponent {
   bookingsList: BookingsList[] = this.bookingsListService.getBookingsList();
-  constructor (private bookingsListService: BookingsListService, @Inject(DOCUMENT) private document: Document) {}
+  constructor (private bookingsListService: BookingsListService, @Inject(DOCUMENT) private document: Document,
+  private booksDialogService: BooksDialogService) {}
 
   updateID(id: number){
     this.bookingsListService.bookingsListId = id;
   }
   addNewBook(): void{
-    this.bookingsListService.addBook("Test 2", 1000, "Startguthaben");
-  }
+    this.booksDialogService.openDialog();
+}
 
   editBook(id: number){
     

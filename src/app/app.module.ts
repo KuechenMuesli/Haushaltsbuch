@@ -14,6 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { TotalAmountService } from './services/total-amount-service/total-amount.service';
 import { BookingsListService } from './services/bookings-list-service/bookings-list.service';
+import { BookingsBookDialogComponent } from './components/bookings-book-dialog/bookings-book-dialog.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { BookingsListService } from './services/bookings-list-service/bookings-l
     AddBookingComplexComponent,
     TotalAmountComponent,
     AddEditBookingDialogComponent,
-    MainMenuComponent
+    MainMenuComponent,
+    BookingsBookDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +36,7 @@ import { BookingsListService } from './services/bookings-list-service/bookings-l
   exports: [
     MatIconModule
   ],
-  providers: [BookingsListService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
