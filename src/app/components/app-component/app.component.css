@@ -2,8 +2,6 @@ body{
     background-color: rgb(248, 186, 106);
 }
 .all{
-    margin-left:10px;
-    margin-right: 10px;
     font-family: 'Courier New', Courier, monospace;
 
 }
@@ -11,6 +9,8 @@ body{
 #header{
     display: flex;
     background-color: cornflowerblue;
+    position: fixed;
+    width: 100%;
 }
 
 #home-icon{
