@@ -23,6 +23,7 @@ export class BookingsBookDialogComponent implements OnInit{
     this.booksDialogService.dialogOpen$.subscribe((isOpen) => {
       this.isdialogOpen = isOpen;
       if (this.isdialogOpen){
+        this.name = this.booksDialogService.name;
         this.showDialog();
       }
       })
@@ -54,7 +55,7 @@ export class BookingsBookDialogComponent implements OnInit{
   }
 
   cancelEditing(){
-
+    this.closeDialog();
   }
 
   showDialog(){

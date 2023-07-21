@@ -19,6 +19,8 @@ export class BooksDialogService {
 
     if (this.id !== -1){
       this.name = this.bookingsListService.getName(id);
+    }else{
+      this.name = "";
     }
     this.dialogOpenSubject.next(true);
   }
