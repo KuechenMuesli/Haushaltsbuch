@@ -8,13 +8,15 @@
 }
 
 .positive{
-    margin-left: 10px;
     color:green;
-    float: right;
 }
 .negative{
-    margin-left: 10px;
+    
     color:red;
+}
+
+#balance-display{
+    margin-left: 10px;
     float: right;
 }
 
@@ -30,10 +32,6 @@
 
 #table-list{
     margin-left: 10px;
-}
-
-#account-balance{
-    margin-left: 20px;
 }
 
 #edit-button{
