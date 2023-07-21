@@ -10,10 +10,12 @@
 .positive{
     margin-left: 10px;
     color:green;
+    float: right;
 }
 .negative{
     margin-left: 10px;
     color:red;
+    float: right;
 }
 
 #heading{
