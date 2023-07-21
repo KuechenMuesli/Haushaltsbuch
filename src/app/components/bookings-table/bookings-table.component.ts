@@ -35,6 +35,10 @@ export class BookingsTableComponent {
 
   }
 
+  displayDate(dateString: string){
+    let date = new Date(dateString);
+    return date.getDate()+"."+(date.getMonth() + 1 + "." + date.getFullYear())
+  }
   getBookings(): void {
       this.bookings = this.bookingsTableService.getBookings(this.id);
   }
