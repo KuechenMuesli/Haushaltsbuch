@@ -15,6 +15,10 @@
     color:red;
 }
 
+#table-element{
+    width: 250px;
+}
+
 #balance-display{
     margin-left: 10px;
     float: right;
