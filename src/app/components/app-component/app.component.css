@@ -8,9 +8,21 @@ body{
 
 }
 
-#title{
+#header{
+    display: flex;
     background-color: cornflowerblue;
-    font-size: 40px;
+}
+
+#home-icon{
+    font-size: 50px;
+    height: 50px;
+    width: 50px;
+    margin-top: 10px;
+    color: green;
+}
+#home-menu{
+    color: red;
+    size: 40px;
 }
 
 #elements{

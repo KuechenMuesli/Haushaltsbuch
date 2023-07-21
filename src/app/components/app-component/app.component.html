@@ -1,5 +1,6 @@
-<h1 class="all" id="title">{{title}}</h1>
-<nav class="all">
-    <a routerLink="/main-menu">Hauptmenü</a><br>
-</nav>
+<div id="header">
+    
+    <a routerLink="/main-menu" id="home-menu"><mat-icon id="home-icon">home</mat-icon></a>
+    <h1 class="all" id="title" routerLink="/main-menu">{{title}}</h1>
+</div>
 <router-outlet></router-outlet>
