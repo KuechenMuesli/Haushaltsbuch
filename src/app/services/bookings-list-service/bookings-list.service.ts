@@ -24,10 +24,10 @@ export class BookingsListService {
     return BOOKINGS[index].name;
   }
 
-  addBook(name: string, amount: number, description: string){
+  addBook(name: string){
     let id: number = BOOKINGS.length > 0? Math.max(...BOOKINGS.map(bookingsList => bookingsList.id)) + 1 : 0;
     let date: string = new Date().toISOString().split('T')[0];
-    BOOKINGS.push({id:id, name: name, bookingsList:[{id:0, date:date, description:description, amount:amount}]});
+    BOOKINGS.push({id:id, name: name, bookingsList:[]});
   }
 
   deleteBook(id: number): number{
@@ -37,6 +37,13 @@ export class BookingsListService {
       console.log(BOOKINGS.length)
     }
     return index;
+  }
+
+  editBook(id:number, name: string){
+    let index = BOOKINGS.findIndex(book => book.id == id);
+    if (index !== -1){
+      BOOKINGS[index].name = name;
+    }
   }
 
 getBookings(id: number): Booking[] {

@@ -19,11 +19,11 @@ export class MainMenuComponent {
     this.bookingsListService.bookingsListId = id;
   }
   addNewBook(): void{
-    this.booksDialogService.openDialog();
+    this.booksDialogService.openDialog(-1);
 }
 
   editBook(id: number){
-    
+    this.booksDialogService.openDialog(id);
   }
   deleteBook(id: number){
     let index: number = this.bookingsListService.deleteBook(id);

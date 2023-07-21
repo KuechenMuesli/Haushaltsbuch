@@ -5,12 +5,7 @@
         <table>
             <tr>
                 <td><label for="name">Name:</label></td> 
-                <td><input type="text" id="name" formControlName="name" class="form-input"></td>
-            </tr>
-
-            <tr>
-                <td><label for="Kontostand:">Kontostand:</label></td>
-                <td><input type="number" id="account-balance" formControlName="accountBalance" class="form-input"></td>
+                <td><input type="text" id="name" formControlName="name" class="form-input" value="{{name}}"></td>
             </tr>
         </table>
         <button (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>

@@ -15,6 +15,7 @@ export class BookingsBookDialogComponent implements OnInit{
   newBookForm!: FormGroup; 
   name: string = "";
   accountBalance: number = 0;
+  id: number = -1;
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
@@ -33,8 +34,7 @@ export class BookingsBookDialogComponent implements OnInit{
 
   createNewBookForm(){
     this.newBookForm = this.formBuilder.group({
-      name:[`${this.name}`, Validators.required],
-      accountBalance:[`${this.accountBalance}`, Validators.required]
+      name:[`${this.name}`, Validators.required]
     })
   }
 
@@ -42,7 +42,13 @@ export class BookingsBookDialogComponent implements OnInit{
     let formData;
     if(this.newBookForm.valid){
       formData = this.newBookForm.value; 
-      this.bookingsListService.addBook(formData.name, formData.accountBalance, "Kontostand")
+      if (this.booksDialogService.id == -1){
+        this.bookingsListService.addBook(formData.name);
+      }else{
+        this.bookingsListService.editBook(this.booksDialogService.id, formData.name);
+      }
+      
+      
     }
     this.closeDialog()
   }
@@ -52,6 +58,7 @@ export class BookingsBookDialogComponent implements OnInit{
   }
 
   showDialog(){
+    this.name = this.booksDialogService.name;
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
     dia.show()
   }

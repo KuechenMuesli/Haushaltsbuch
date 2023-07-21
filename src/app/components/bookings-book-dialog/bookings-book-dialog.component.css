@@ -1,0 +1,24 @@
+#bookings-dialog{
+    background-color: antiquewhite;
+    border-radius: 20px;
+    font-size: medium;
+    position: fixed;
+}
+
+#cancel-button, #submit-button{
+    float: right;
+    background-color: antiquewhite;
+    border: none;
+}
+
+#submit-button{
+    color:green;
+    margin-right:7px;
+}
+#cancel-button{
+    color: cornflowerblue;
+}
+.form-input{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
