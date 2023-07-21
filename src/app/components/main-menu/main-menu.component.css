@@ -7,6 +7,15 @@
     font-size: 20px;
 }
 
+.positive{
+    margin-left: 10px;
+    color:green;
+}
+.negative{
+    margin-left: 10px;
+    color:red;
+}
+
 #heading{
     margin-left: 10px;
 }
@@ -20,6 +29,11 @@
 #table-list{
     margin-left: 10px;
 }
+
+#account-balance{
+    margin-left: 20px;
+}
+
 #edit-button{
     margin-left: 7px;
     color: green;

@@ -15,12 +15,12 @@ export class TotalAmountService {
     this.bookings = this.bookingsListService.getBookings(this.bookingsListService.bookingsListId);
   }
 
-  calculate_total(): void {
-    this.bookings = this.bookingsListService.getBookings(this.bookingsListService.bookingsListId);
-    this.bookings 
+  calculate_total(id: number): number {
+    this.bookings = this.bookingsListService.getBookings(id);
     this.total_amount = 0;
     for (let i = this.bookings.length - 1; i >= 0; i--){
       this.total_amount += +this.bookings[i].amount;
     }
+    return this.total_amount;
   }
 }

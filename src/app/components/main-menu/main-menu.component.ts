@@ -4,6 +4,7 @@ import { BookingsList } from '../../bookings-list-interface';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';
+import { TotalAmountService } from '../../services/total-amount-service/total-amount.service';
 
 @Component({
   selector: 'app-main-menu',
@@ -12,8 +13,10 @@ import { BooksDialogService } from '../../services/books-dialog-service/books-di
 })
 export class MainMenuComponent {
   bookingsList: BookingsList[] = this.bookingsListService.getBookingsList();
+  accountBalance: number = 0;
+  
   constructor (private bookingsListService: BookingsListService, @Inject(DOCUMENT) private document: Document,
-  private booksDialogService: BooksDialogService) {}
+  private booksDialogService: BooksDialogService, private totalAmountService: TotalAmountService) {}
 
   updateID(id: number){
     this.bookingsListService.bookingsListId = id;
@@ -29,5 +32,10 @@ export class MainMenuComponent {
     let index: number = this.bookingsListService.deleteBook(id);
     let table = this.document.getElementById('table-list') as HTMLTableElement;
     table.deleteRow(index);
+  }
+
+  calculateAccountBalance(id:number){
+    this.accountBalance = this.totalAmountService.calculate_total(id);
+    return this.accountBalance;
   }
 }
