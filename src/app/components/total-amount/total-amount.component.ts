@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { TotalAmountService } from '../../services/total-amount-service/total-amount.service';
-import { ChangeDetectorRef, AfterContentChecked } from '@angular/core';
+import { AfterContentChecked } from '@angular/core';
 import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
 
 

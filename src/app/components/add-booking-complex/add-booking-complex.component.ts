@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Booking } from '../../booking';
-import { BookingsTableService } from '../../services/bookings-table-service/bookings-table.service';
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 
 @Component({
