@@ -8,7 +8,7 @@
 
     <table id="table-list">
         <tr *ngFor="let list of bookingsList" id="bookings-list">
-            <td id="table-element"><a routerLink="/table/{{list.id}}" (click)="updateID(list.id)">{{list.name}}</a></td>
+            <td id="table-element" routerLink="/table/{{list.id}}" (click)="updateID(list.id)">{{list.name}}</td>
             <td id="balance-display"><p [ngClass]="{'positive': calculateAccountBalance(list.id) > 0, 'negative': accountBalance < 0}">{{accountBalance}}€</p></td>
             <td>
                 <button (click)="editBook(list.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>

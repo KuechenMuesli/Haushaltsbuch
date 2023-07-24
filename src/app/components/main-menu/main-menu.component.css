@@ -16,11 +16,17 @@
 }
 
 #table-element{
+    cursor:pointer;
+    border-radius: 20px;
+    background-color: rgb(220, 195, 162);
     width: 250px;
+    max-width: 250px;
+    text-align: center;
+    hyphens:auto;
 }
 
 #balance-display{
-    margin-left: 10px;
+    margin-left: 50px;
     float: right;
 }
 

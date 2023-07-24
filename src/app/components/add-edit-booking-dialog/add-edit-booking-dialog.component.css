@@ -1,6 +1,7 @@
 #bookings-dialog{
     background-color: antiquewhite;
     border-radius: 20px;
+    border-color: rgb(220, 195, 162);
     font-size: medium;
     position: fixed;
 }
