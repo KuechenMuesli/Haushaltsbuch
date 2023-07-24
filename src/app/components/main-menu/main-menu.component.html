@@ -9,11 +9,12 @@
     <table id="table-list">
         <tr *ngFor="let list of bookingsList" id="bookings-list">
             <td id="table-element" routerLink="/table/{{list.id}}" (click)="updateID(list.id)">{{list.name}}</td>
-            <td id="balance-display"><p [ngClass]="{'positive': calculateAccountBalance(list.id) > 0, 'negative': accountBalance < 0}">{{accountBalance}}€</p></td>
+            <td id="balance-display"><p [ngClass]="{'positive': calculateAccountBalance(list.id) > 0, 'negative': accountBalance < 0}" id="balance-text">{{accountBalance}}€</p></td>
             <td>
                 <button (click)="editBook(list.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
                 <button (click)="deleteBook(list.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
             </td>
         </tr>
     </table>
+
 </div>

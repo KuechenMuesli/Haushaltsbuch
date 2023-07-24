@@ -25,16 +25,19 @@
     transition: all .1s ease-in-out;
 }
 #table-element:hover{
-    background-color: rgb(208, 188, 161);
+    background-color: rgb(234, 212, 182);
     transform: scale(0.99);
 }
 
 #balance-display{
-    margin-left: 50px;
+    width: 150px;
+    border-radius: 20px;
+    background-color: rgb(234, 212, 182);
     margin-right: 50px;
-    float: right;
 }
-
+#balance-text{
+    text-align: center;
+}
 #heading{
     margin-left: 10px;
 }
