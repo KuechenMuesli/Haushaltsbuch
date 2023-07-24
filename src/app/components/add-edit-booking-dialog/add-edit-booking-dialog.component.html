@@ -17,7 +17,8 @@
                 <td><input type="number" id="amount" formControlName="amount" class="form-input"></td>
             </tr>
         </table>
-        <button (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
         <button type="submit" [disabled]="newBookingForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
+        <button (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
+        
     </form>
 </dialog>

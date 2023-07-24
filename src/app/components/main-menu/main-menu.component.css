@@ -54,7 +54,7 @@
 }
 
 #buttons{
-    width: 86px;
+    width: 129x;
     background-color: rgb(234, 216, 192);
     margin-right: 50px;
 }
@@ -67,6 +67,12 @@
 }
 
 #delete-button{
+    color:rgb(161, 142, 118);
+    background-color: rgb(234, 216, 192);
+    border: none;
+}
+
+#open-book{
     color:rgb(161, 142, 118);
     background-color: rgb(234, 216, 192);
     border: none;
