@@ -9,15 +9,15 @@
     <app-total-amount id="total-amount"></app-total-amount>
     <table id="bookingsTable">
         <tr>
-            <th class="table-head-elements" (click)="sortTableByDate()" id="date-table-head">Datum</th>
-            <th class="table-head-elements">Beschreibung</th>
-            <th class="table-head-elements" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag</th>
+            <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum</th>
+            <th class="table-head-elements" class="description">Beschreibung</th>
+            <th class="table-head-elements" class="amount" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag</th>
         </tr>
         
         <tr *ngFor="let booking of bookings">
-            <td id="table-element">{{ displayDate(booking.date) }}</td>
-            <td id="table-element">{{ booking.description }}</td>
-            <td id="table-element" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
+            <td id="table-element" class="date">{{ displayDate(booking.date) }}</td>
+            <td id="table-element" class="description">{{ booking.description }}</td>
+            <td id="table-element" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
                 {{ booking.amount }} €
             </td>
             <td id="buttons-cells">

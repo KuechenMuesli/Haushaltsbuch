@@ -23,6 +23,27 @@ table, th, td{
   display: flex;
 }
 
+.date{
+  background-color:rgb(220, 195, 162);
+  border-style: solid;
+  border-color: antiquewhite;
+  border-width: 2px;
+}
+
+.description{
+  background-color: rgb(234, 212, 182);
+  border-style: solid;
+  border-color: antiquewhite;
+  border-width: 2px;
+}
+
+.amount{
+  background-color: rgb(234, 216, 192);
+  border-style: solid;
+  border-color: antiquewhite;
+  border-width: 2px;
+}
+
 .table-head-elements{
   font-style: italic;
   width: 10em;
@@ -78,8 +99,8 @@ table, th, td{
 
 #table-element{
   border-style: solid;
-  border-color: black;
-  border-width: 1px;
+  border-color: antiquewhite;
+  border-width: 2px;
   width: 10em;
   word-break: break-all;
   overflow-wrap: break-word;
