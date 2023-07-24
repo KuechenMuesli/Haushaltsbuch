@@ -23,6 +23,14 @@ table, th, td{
   display: flex;
 }
 
+.table-head-elements{
+  font-style: italic;
+  width: 10em;
+  border:rgb(0, 0, 0);
+  border-style:solid;
+  border-width: 1px;
+}
+
 #book-name{
   margin-left: 3px;
   font-style: italic;
@@ -32,12 +40,12 @@ table, th, td{
   margin-top: 18px;
 }
 
-#table-head-elements{
-  font-style: italic;
-  width: 10em;
-  border:rgb(0, 0, 0);
-  border-style:solid;
-  border-width: 1px;
+#date-table-head{
+  cursor: ns-resize;
+}
+
+#amount-table-head{
+  cursor: ns-resize;
 }
 
 #total-amount{
