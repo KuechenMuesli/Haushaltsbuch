@@ -1,4 +1,5 @@
 #bookings-dialog{
+    z-index: 2;
     background-color: antiquewhite;
     border-radius: 20px;
     border-color: rgb(220, 195, 162);

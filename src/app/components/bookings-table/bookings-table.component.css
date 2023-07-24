@@ -30,6 +30,7 @@ table, th, td{
   border-width: 2px;
 }
 
+
 .description{
   background-color: rgb(234, 212, 182);
   border-style: solid;
@@ -59,6 +60,9 @@ table, th, td{
   user-select: none;
 }
 
+.booking-cells:hover{
+  transform: scale(1.01);
+}
 #book-name{
   margin-left: 3px;
   font-style: italic;
