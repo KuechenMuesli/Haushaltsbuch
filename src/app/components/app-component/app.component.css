@@ -8,7 +8,7 @@ body{
 
 #header{
     display: flex;
-    background-color: cornflowerblue;
+    background-color: rgb(234, 212, 182);
     position: fixed;
     width: 100%;
 }
@@ -18,7 +18,7 @@ body{
     height: 50px;
     width: 50px;
     margin-top: 10px;
-    color: green;
+    color:rgb(161, 142, 118);
     margin-right: 12px;
     margin-left: 12px;
 }

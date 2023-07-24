@@ -21,7 +21,7 @@ table, th, td{
 
 .heading{
   display: flex;
-}
+} 
 
 .date{
   background-color:rgb(220, 195, 162);
@@ -62,7 +62,7 @@ table, th, td{
 #book-name{
   margin-left: 3px;
   font-style: italic;
-  color: cornflowerblue;
+  color:rgb(161, 142, 118);
 }
 #add_button{
   margin-top: 18px;
@@ -94,7 +94,7 @@ table, th, td{
   background-color: transparent;
   border:none;
   font-size: 10px;
-  color:cornflowerblue;
+  color:rgb(161, 142, 118);
 }
 
 #table-element{
