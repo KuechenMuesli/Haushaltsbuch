@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 

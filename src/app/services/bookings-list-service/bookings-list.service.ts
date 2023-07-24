@@ -34,7 +34,6 @@ export class BookingsListService {
     let index = BOOKINGS.findIndex(book => book.id == id);
     if (index !== -1) {
       BOOKINGS.splice(index, 1);
-      console.log(BOOKINGS.length)
     }
     return index;
   }
