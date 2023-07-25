@@ -23,6 +23,9 @@ body{
     margin-right: 12px;
     margin-left: 12px;
 }
+#home-icon:hover{
+    background-color: rgb(200, 184, 163);
+}
 
 #elements{
     font-size: 15px

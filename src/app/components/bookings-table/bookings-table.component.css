@@ -63,6 +63,7 @@ table, th, td{
 .booking-cells:hover{
   transform: scale(1.01);
 }
+
 #book-name{
   margin-left: 3px;
   font-style: italic;
@@ -92,6 +93,9 @@ table, th, td{
   font-size: 10px;
   color: green;
 }
+#edit-button:hover{
+  background-color: rgb(200, 184, 163);
+}
 
 #delete-button{
   float: left;
@@ -99,6 +103,9 @@ table, th, td{
   border:none;
   font-size: 10px;
   color:rgb(161, 142, 118);
+}
+#delete-button:hover{
+  background-color: rgb(200, 184, 163);
 }
 
 #table-element{
