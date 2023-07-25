@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
+import { BookingsService } from '../../services/bookings-service/bookings.service';
 
 @Component({
   selector: 'app-new-booking-button',
@@ -8,11 +9,20 @@ import { BookingsDialogService } from '../../services/bookings-dialog-service/bo
 })
 
 export class NewBookingButtonComponent {
-  constructor (private bookingsDialogService: BookingsDialogService){
+  openDialog: boolean = false;
+
+  constructor (private bookingsService: BookingsService){
     }
 
   addBooking(): void{
-    this.bookingsDialogService.addBooking();
-    this.bookingsDialogService.openDialog();
+    this.bookingsService.bookingId = -1;
+    this.openDialog = true;
+  }
+
+  closeDialog(isDialogOpen: boolean){
+    if(!isDialogOpen){
+      console.log("hallo");
+      this.openDialog = false;
+    }
   }
 }

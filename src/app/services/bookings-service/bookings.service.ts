@@ -7,6 +7,7 @@ import { BooksService } from '../books-service/books.service';
 
 export class BookingsService {
   bookId: number = this.booksService.bookId;
+  bookingId!: number;
   constructor(private booksService: BooksService) { }
 
   getBookings(id: number): Booking[] {
@@ -15,6 +16,12 @@ export class BookingsService {
 
   new_id(): number {
     return BOOKINGS[this.bookId].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookId].bookingsList.map(booking => booking.id)) + 1 : 0;
+  }
+
+  getBooking(id: number): Booking{
+    let bookings = this.getBookings(this.bookId);
+    return bookings[bookings.findIndex(booking => booking.id == id)];
+
   }
 
   addBooking(date: string, description: string, amount: number): Booking[] {
@@ -27,6 +34,17 @@ export class BookingsService {
     let index = BOOKINGS[this.bookId].bookingsList.findIndex(booking => booking.id === id);
     BOOKINGS[this.bookId].bookingsList.splice(index, 1);
     return index;
+  }
+
+  editBooking(id: number, date: string, description: string, amount: number): void {
+    for (let i = 0; i < BOOKINGS[this.bookId].bookingsList.length; i++){
+      if (BOOKINGS[this.bookId].bookingsList[i].id == id){
+        BOOKINGS[this.bookId].bookingsList[i] = {
+          id, date, description, amount
+        };
+        break;
+      }
+    }
   }
 
   calculateBookingsTotal(id: number): number{
