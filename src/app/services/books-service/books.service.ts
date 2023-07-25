@@ -6,13 +6,13 @@ import { BookingsList } from '../../book';
 @Injectable({
   providedIn: 'root'
 })
-export class BookingsListService {
-  bookingsListId: number = 0;
+export class BooksService {
+  bookId: number = 0;
 
   constructor() { }
 
   setBookingsListId(value: number): void{
-    this.bookingsListId = value;
+    this.bookId = value;
   }
 
   getBookingsList(): BookingsList[]{

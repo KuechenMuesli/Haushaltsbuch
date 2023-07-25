@@ -3,7 +3,7 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';
-import { BookingsListService } from '../../services/books-service/books.service';
+import { BooksService } from '../../services/books-service/books.service';
 
 @Component({
   selector: 'app-bookings-book-dialog',
@@ -19,7 +19,7 @@ export class BookingsBookDialogComponent implements OnInit{
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
-  private booksDialogService: BooksDialogService, private bookingsListService: BookingsListService){
+  private booksDialogService: BooksDialogService, private booksService: BooksService){
     this.booksDialogService.dialogOpen$.subscribe((isOpen) => {
       this.isdialogOpen = isOpen;
       if (this.isdialogOpen){
@@ -44,9 +44,9 @@ export class BookingsBookDialogComponent implements OnInit{
     if(this.newBookForm.valid){
       formData = this.newBookForm.value; 
       if (this.booksDialogService.id == -1){
-        this.bookingsListService.addBook(formData.name);
+        this.booksService.addBook(formData.name);
       }else{
-        this.bookingsListService.editBook(this.booksDialogService.id, formData.name);
+        this.booksService.editBook(this.booksDialogService.id, formData.name);
       }
     }
     this.closeDialog()

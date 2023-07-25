@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { BOOKINGS } from '../../test-data';
 import { Booking } from '../../booking';
-import { BookingsListService } from '../books-service/books.service';
+import { BooksService } from '../books-service/books.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +12,15 @@ export class EditBookingService {
   current_id: number = -1;
   private dialogOpenSubject = new Subject<boolean>();
   dialogOpen$: Observable<boolean> = this.dialogOpenSubject.asObservable();
-  bookingsListId: number = this.bookingsListService.bookingsListId;
+  bookId: number = this.booksService.bookId;
 
-  constructor(private bookingsListService: BookingsListService) { }
+  constructor(private booksService: BooksService) { }
   
 
   getValues(): Booking{
-    this.bookingsListId = this.bookingsListService.bookingsListId;
-    let index = BOOKINGS[this.bookingsListId].bookingsList.findIndex(booking => booking.id === this.current_id);
-    return BOOKINGS[this.bookingsListId].bookingsList[index];
+    this.bookId = this.booksService.bookId;
+    let index = BOOKINGS[this.bookId].bookingsList.findIndex(booking => booking.id === this.current_id);
+    return BOOKINGS[this.bookId].bookingsList[index];
   }
 
   openDialog(){
@@ -36,15 +36,15 @@ export class EditBookingService {
   }
   
   addBooking(): void{
-    let next_id: number = BOOKINGS[this.bookingsListId].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookingsListId].bookingsList.map(booking => booking.id)) + 1 : 0;
-    BOOKINGS[this.bookingsListId].bookingsList.push({id:next_id, date:"", description:"", amount:0});
+    let next_id: number = BOOKINGS[this.bookId].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookId].bookingsList.map(booking => booking.id)) + 1 : 0;
+    BOOKINGS[this.bookId].bookingsList.push({id:next_id, date:"", description:"", amount:0});
     this.current_id = next_id;
   }
 
   editBooking(id: number, date: string, description: string, amount: number): void {
-    for (let i = 0; i < BOOKINGS[this.bookingsListId].bookingsList.length; i++){
-      if (BOOKINGS[this.bookingsListId].bookingsList[i].id == id){
-        BOOKINGS[this.bookingsListId].bookingsList[i] = {
+    for (let i = 0; i < BOOKINGS[this.bookId].bookingsList.length; i++){
+      if (BOOKINGS[this.bookId].bookingsList[i].id == id){
+        BOOKINGS[this.bookId].bookingsList[i] = {
           id, date, description, amount
         };
         break;
@@ -53,7 +53,7 @@ export class EditBookingService {
   }
 
   deleteBooking(){
-    let index = BOOKINGS[this.bookingsListId].bookingsList.findIndex(booking => booking.id === this.current_id);
+    let index = BOOKINGS[this.bookId].bookingsList.findIndex(booking => booking.id === this.current_id);
     delete BOOKINGS[index];
   }
 

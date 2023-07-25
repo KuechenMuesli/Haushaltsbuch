@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookingsListService } from '../../services/books-service/books.service';
+import { BooksService } from '../../services/books-service/books.service';
 import { BookingsList } from '../../book';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
@@ -12,14 +12,14 @@ import { TotalAmountService } from '../../services/total-amount-service/total-am
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent {
-  bookingsList: BookingsList[] = this.bookingsListService.getBookingsList();
+  bookingsList: BookingsList[] = this.booksService.getBookingsList();
   accountBalance: number = 0;
   
-  constructor (private bookingsListService: BookingsListService, @Inject(DOCUMENT) private document: Document,
+  constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private booksDialogService: BooksDialogService, private totalAmountService: TotalAmountService) {}
 
   updateID(id: number){
-    this.bookingsListService.bookingsListId = id;
+    this.booksService.bookId = id;
   }
   addNewBook(): void{
     this.booksDialogService.openDialog(-1);
@@ -29,7 +29,7 @@ export class MainMenuComponent {
     this.booksDialogService.openDialog(id);
   }
   deleteBook(id: number){
-    let index: number = this.bookingsListService.deleteBook(id);
+    let index: number = this.booksService.deleteBook(id);
     let table = this.document.getElementById('table-list') as HTMLTableElement;
     table.deleteRow(index);
   }

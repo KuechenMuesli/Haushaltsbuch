@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BookingsListService } from '../books-service/books.service';
+import { BooksService } from '../books-service/books.service';
 
 
 @Injectable({
@@ -12,13 +12,13 @@ export class BooksDialogService {
   id: number = -1;
   name: string = "";
 
-  constructor(private bookingsListService: BookingsListService) { }
+  constructor(private booksService: BooksService) { }
 
   openDialog(id: number){
     this.id = id;
 
     if (this.id !== -1){
-      this.name = this.bookingsListService.getName(id);
+      this.name = this.booksService.getName(id);
     }else{
       this.name = "";
     }

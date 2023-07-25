@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { BookingsListService } from '../../services/books-service/books.service';
+import { BooksService } from '../../services/books-service/books.service';
 
 
 @Component({
@@ -23,15 +23,15 @@ export class BookingsTableComponent {
 
   constructor(private bookingsTableService: BookingsTableService, 
     @Inject(DOCUMENT) private document: Document, 
-    private bookingsListService: BookingsListService,
+    private booksService: BooksService,
     private editBookingService: EditBookingService,
     private route: ActivatedRoute, private location: Location,
    ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.bookName = this.bookingsListService.getName(this.id);
-    this.bookingsListService.setBookingsListId(this.id);
+    this.bookName = this.booksService.getName(this.id);
+    this.booksService.setBookingsListId(this.id);
     this.bookings = this.bookingsTableService.getBookings(this.id);
   }
 
