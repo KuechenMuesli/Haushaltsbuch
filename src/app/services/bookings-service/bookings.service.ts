@@ -36,7 +36,7 @@ export class BookingsService {
 
     let total_amount = 0;
     for (let i = bookings.length - 1; i >= 0; i--){
-      total_amount += bookings[i].amount;
+      total_amount += +bookings[i].amount;
     }
     return total_amount;
   }
