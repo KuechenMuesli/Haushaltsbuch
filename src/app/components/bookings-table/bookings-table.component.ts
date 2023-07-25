@@ -5,7 +5,6 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
 import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 import { BooksService } from '../../services/books-service/books.service';
 
 
@@ -25,7 +24,7 @@ export class BookingsTableComponent {
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
     private bookingsDialogService: BookingsDialogService,
-    private route: ActivatedRoute, private location: Location,
+    private route: ActivatedRoute
    ) {}
 
   ngOnInit(): void {
