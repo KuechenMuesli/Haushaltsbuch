@@ -72,13 +72,25 @@ table, th, td{
 #add_button{
   margin-top: 18px;
 }
+#sorting-icon{
+  float: right;
+  color: transparent;
+}
+
 
 #date-table-head{
   cursor: ns-resize;
 }
 
+#date-table-head:hover #sorting-icon{
+  color:black;
+}
+
 #amount-table-head{
   cursor: ns-resize;
+}
+#amount-table-head:hover #sorting-icon{
+  color:black;
 }
 
 #total-amount{
