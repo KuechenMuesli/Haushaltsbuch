@@ -3,7 +3,7 @@
     <div class="books">
         <h2 id="heading">Bücher</h2>
         <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
-        <app-books-dialog></app-books-dialog>
+        <app-books-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-books-dialog>
     </div>
 
     <table id="table-list">

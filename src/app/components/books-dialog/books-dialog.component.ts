@@ -1,32 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';
 import { BooksService } from '../../services/books-service/books.service';
+
 
 @Component({
   selector: 'app-books-dialog',
   templateUrl: './books-dialog.component.html',
   styleUrls: ['./books-dialog.component.css']
 })
-export class BooksDialogComponent implements OnInit{
+export class BooksDialogComponent implements OnInit, OnChanges{
   isdialogOpen: boolean = true;
   newBookForm!: FormGroup; 
   name: string = "";
   accountBalance: number = 0;
   id: number = -1;
+  @Input() openDialog!: boolean;
+  @Output() dialogIsOpen = new EventEmitter<boolean>();
 
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
-  private booksDialogService: BooksDialogService, private booksService: BooksService){
-    this.booksDialogService.dialogOpen$.subscribe((isOpen) => {
-      this.isdialogOpen = isOpen;
-      if (this.isdialogOpen){
-        this.name = this.booksDialogService.name;
-        this.showDialog();
-      }
-      })
+  private booksService: BooksService){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.openDialog){
+      this.showDialog();
+    }
   }
 
   ngOnInit(){
@@ -43,13 +43,13 @@ export class BooksDialogComponent implements OnInit{
     let formData;
     if(this.newBookForm.valid){
       formData = this.newBookForm.value; 
-      if (this.booksDialogService.id == -1){
+      if (this.booksService.bookId == -1){
         this.booksService.addBook(formData.name);
       }else{
-        this.booksService.editBook(this.booksDialogService.id, formData.name);
+        this.booksService.editBook(this.booksService.bookId, formData.name);
       }
     }
-    this.closeDialog()
+    this.closeDialog();
   }
 
   cancelEditing(){
@@ -57,13 +57,17 @@ export class BooksDialogComponent implements OnInit{
   }
 
   showDialog(){
-    this.name = this.booksDialogService.name;
+    this.name = "";
+    if(this.booksService.bookId != -1){
+      this.name = this.booksService.getName(this.booksService.bookId);
+    }
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
-    dia.show()
+    dia.show();
   }
 
   closeDialog(){
+    this.dialogIsOpen.emit(false);
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
-    dia.close()
+    dia.close();
   }
 }
