@@ -36,6 +36,7 @@ export class BookingsDialogService {
   }
   
   addBooking(): void{
+    this.bookId = this.booksService.bookId;
     let next_id: number = BOOKINGS[this.bookId].bookingsList.length > 0? Math.max(...BOOKINGS[this.bookId].bookingsList.map(booking => booking.id)) + 1 : 0;
     BOOKINGS[this.bookId].bookingsList.push({id:next_id, date:"", description:"", amount:0});
     this.current_id = next_id;
