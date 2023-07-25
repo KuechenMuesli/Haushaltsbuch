@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './components/app-component/app.component';
 import { BookingsTableComponent } from './components/bookings-table/bookings-table.component';
-import { AddBookingComplexComponent } from './components/new-booking-button/new-booking-button.component';
+import { NewBookingButtonComponent } from './components/new-booking-button/new-booking-button.component';
 import { TotalAmountComponent } from './components/total-amount/total-amount.component';
 import { MatIconModule } from '@angular/material/icon';
-import { AddEditBookingDialogComponent } from './components/bookings-table-dialog/bookings-table-dialog.component';
+import { BookingsTableDialogComponent } from './components/bookings-table-dialog/bookings-table-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
@@ -17,9 +17,9 @@ import { BookingsBookDialogComponent } from './components/bookings-book-dialog/b
   declarations: [
     AppComponent,
     BookingsTableComponent,
-    AddBookingComplexComponent,
+    NewBookingButtonComponent,
     TotalAmountComponent,
-    AddEditBookingDialogComponent,
+    BookingsTableDialogComponent,
     MainMenuComponent,
     BookingsBookDialogComponent
   ],

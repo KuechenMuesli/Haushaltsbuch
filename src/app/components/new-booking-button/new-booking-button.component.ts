@@ -7,7 +7,7 @@ import { BookingsDialogService } from '../../services/bookings-dialog-service/bo
   styleUrls: ['./new-booking-button.component.css']
 })
 
-export class AddBookingComplexComponent {
+export class NewBookingButtonComponent {
   constructor (private bookingsDialogService: BookingsDialogService){
     }
 

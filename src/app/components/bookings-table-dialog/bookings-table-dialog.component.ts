@@ -11,7 +11,7 @@ import { BookingsTableComponent } from '../bookings-table/bookings-table.compone
   styleUrls: ['./bookings-table-dialog.component.css']
 })
 
-export class AddEditBookingDialogComponent implements OnInit{
+export class BookingsTableDialogComponent implements OnInit{
   newBookingForm!: FormGroup; 
 
   id: number = -1;

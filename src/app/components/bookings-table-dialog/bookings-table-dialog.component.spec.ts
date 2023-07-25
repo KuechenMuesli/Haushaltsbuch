@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEditBookingDialogComponent } from './bookings-table-dialog.component';
+import { BookingsTableDialogComponent } from './bookings-table-dialog.component';
 
 describe('AddEditBookingDialogComponent', () => {
-  let component: AddEditBookingDialogComponent;
-  let fixture: ComponentFixture<AddEditBookingDialogComponent>;
+  let component: BookingsTableDialogComponent;
+  let fixture: ComponentFixture<BookingsTableDialogComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AddEditBookingDialogComponent]
+      declarations: [BookingsTableDialogComponent]
     });
-    fixture = TestBed.createComponent(AddEditBookingDialogComponent);
+    fixture = TestBed.createComponent(BookingsTableDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
