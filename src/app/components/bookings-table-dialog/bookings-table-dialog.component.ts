@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
+import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -22,10 +22,10 @@ export class AddEditBookingDialogComponent implements OnInit{
 
   isdialogOpen: boolean = true;
 
-  constructor(private editBookingService:EditBookingService, @Inject(DOCUMENT) private document: Document, 
+  constructor(private bookingsDialogService:BookingsDialogService, @Inject(DOCUMENT) private document: Document, 
   private formBuilder: FormBuilder, private bookingstableComponent: BookingsTableComponent
   ){
-    this.editBookingService.dialogOpen$.subscribe((isOpen) => {
+    this.bookingsDialogService.dialogOpen$.subscribe((isOpen) => {
     this.isdialogOpen = isOpen;
     if (this.isdialogOpen){
       this.showDialog();
@@ -49,18 +49,18 @@ export class AddEditBookingDialogComponent implements OnInit{
     let formData;
     if(this.newBookingForm.valid){
       formData = this.newBookingForm.value; 
-      this.id = this.editBookingService.current_id;
-      this.editBookingService.editBooking(this.id, formData.date, formData.description, formData.amount);
+      this.id = this.bookingsDialogService.current_id;
+      this.bookingsDialogService.editBooking(this.id, formData.date, formData.description, formData.amount);
     }
     this.closeDialog()
   }
 
   showDialog(){
-    let shown_booking = this.editBookingService.getValues();
+    let shown_booking = this.bookingsDialogService.getValues();
     this.id = shown_booking.id;
     this.date = shown_booking.date;
     if (this.date == ""){
-      this.date = this.editBookingService.getCurrentDate();
+      this.date = this.bookingsDialogService.getCurrentDate();
     }
     this.description = shown_booking.description;
     this.amount = shown_booking.amount;

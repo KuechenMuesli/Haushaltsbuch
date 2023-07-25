@@ -3,7 +3,7 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
-import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
+import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { BooksService } from '../../services/books-service/books.service';
@@ -24,7 +24,7 @@ export class BookingsTableComponent {
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
-    private editBookingService: EditBookingService,
+    private bookingsDialogService: BookingsDialogService,
     private route: ActivatedRoute, private location: Location,
    ) {}
 
@@ -45,8 +45,8 @@ export class BookingsTableComponent {
   }
 
   editBooking(id: number): void{
-    this.editBookingService.setCurrentId(id);
-    this.editBookingService.openDialog();
+    this.bookingsDialogService.setCurrentId(id);
+    this.bookingsDialogService.openDialog();
   }
 
   deleteBooking(id: number): void {

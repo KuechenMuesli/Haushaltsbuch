@@ -8,7 +8,7 @@ import { BooksService } from '../books-service/books.service';
   providedIn: 'root'
 })
 
-export class EditBookingService {
+export class BookingsDialogService {
   current_id: number = -1;
   private dialogOpenSubject = new Subject<boolean>();
   dialogOpen$: Observable<boolean> = this.dialogOpenSubject.asObservable();

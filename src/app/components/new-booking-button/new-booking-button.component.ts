@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
+import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
 
 @Component({
   selector: 'app-new-booking-button',
@@ -8,11 +8,11 @@ import { EditBookingService } from '../../services/edit-booking-service/edit-boo
 })
 
 export class AddBookingComplexComponent {
-  constructor (private editAddBookingsService: EditBookingService){
+  constructor (private bookingsDialogService: BookingsDialogService){
     }
 
   addBooking(): void{
-    this.editAddBookingsService.addBooking();
-    this.editAddBookingsService.openDialog();
+    this.bookingsDialogService.addBooking();
+    this.bookingsDialogService.openDialog();
   }
 }
