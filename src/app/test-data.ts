@@ -1,4 +1,4 @@
-import { BookingsList } from "./book-interface";
+import { BookingsList } from "./book";
 
 export const BOOKINGS: BookingsList[] = [
     {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../../booking';
 import { BOOKINGS } from '../../test-data';
-import { BookingsList } from '../../book-interface';
+import { BookingsList } from '../../book';
 
 @Injectable({
   providedIn: 'root'

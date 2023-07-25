@@ -26,8 +26,7 @@ export class BookingsTableComponent {
     private bookingsListService: BookingsListService,
     private editBookingService: EditBookingService,
     private route: ActivatedRoute, private location: Location,
-   ) {
-  }
+   ) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
