@@ -26,7 +26,6 @@ export class BookingsListService {
 
   addBook(name: string){
     let id: number = BOOKINGS.length > 0? Math.max(...BOOKINGS.map(bookingsList => bookingsList.id)) + 1 : 0;
-    let date: string = new Date().toISOString().split('T')[0];
     BOOKINGS.push({id:id, name: name, bookingsList:[]});
   }
 

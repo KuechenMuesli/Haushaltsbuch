@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BOOKINGS } from '../../test-data';
 import { Booking } from '../../booking';
-import { BookingsListService } from '../bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../books-service/books.service';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,4 @@ export class BookingsTableService {
     BOOKINGS[this.bookingsListId].bookingsList.splice(index, 1);
     return index;
   }
-
 }

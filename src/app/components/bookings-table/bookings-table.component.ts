@@ -6,7 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../../services/books-service/books.service';
 
 
 @Component({

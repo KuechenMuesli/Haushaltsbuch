@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../../booking';
-import { BookingsListService } from '../bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../books-service/books.service';
 
 @Injectable({
   providedIn: 'root'

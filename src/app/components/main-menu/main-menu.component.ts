@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../../services/books-service/books.service';
 import { BookingsList } from '../../book';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 

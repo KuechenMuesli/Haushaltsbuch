@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BookingsListService } from '../bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../books-service/books.service';
 
 
 @Injectable({

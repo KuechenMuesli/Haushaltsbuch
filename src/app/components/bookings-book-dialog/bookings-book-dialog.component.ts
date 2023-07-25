@@ -3,7 +3,7 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';
-import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
+import { BookingsListService } from '../../services/books-service/books.service';
 
 @Component({
   selector: 'app-bookings-book-dialog',
