@@ -7,7 +7,7 @@
                 <td><input type="text" id="name" formControlName="name" class="form-input" value="{{name}}"></td>
             </tr>
         </table>
-        <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
         <button type="submit" [disabled]="newBookForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
+        <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
     </form>
 </dialog>
