@@ -6,7 +6,7 @@ import { BooksService } from '../books-service/books.service';
 @Injectable({
   providedIn: 'root'
 })
-export class BookingsTableService {
+export class BookingsService {
   bookId: number = this.booksService.bookId;
   constructor(private booksService: BooksService) { }
 

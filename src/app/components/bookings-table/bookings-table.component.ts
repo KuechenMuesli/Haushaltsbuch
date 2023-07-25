@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BookingsTableService } from '../../services/bookings-table-service/bookings-table.service';
+import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
@@ -21,7 +21,7 @@ export class BookingsTableComponent {
   bookName: string = "";
   sorter: string = "date";
 
-  constructor(private bookingsTableService: BookingsTableService, 
+  constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
     private editBookingService: EditBookingService,
@@ -32,7 +32,7 @@ export class BookingsTableComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookName = this.booksService.getName(this.id);
     this.booksService.setBookingsListId(this.id);
-    this.bookings = this.bookingsTableService.getBookings(this.id);
+    this.bookings = this.bookingsService.getBookings(this.id);
   }
 
   displayDate(dateString: string){
@@ -41,7 +41,7 @@ export class BookingsTableComponent {
   }
 
   getBookings(): void {
-      this.bookings = this.bookingsTableService.getBookings(this.id);
+      this.bookings = this.bookingsService.getBookings(this.id);
   }
 
   editBooking(id: number): void{
@@ -50,7 +50,7 @@ export class BookingsTableComponent {
   }
 
   deleteBooking(id: number): void {
-    let index = this.bookingsTableService.deleteBooking(id);
+    let index = this.bookingsService.deleteBooking(id);
     let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
     table.deleteRow(index + 1);
   }
