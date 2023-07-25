@@ -11,7 +11,7 @@ import { BookingsTableDialogComponent } from './components/bookings-table-dialog
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { BookingsBookDialogComponent } from './components/bookings-book-dialog/bookings-book-dialog.component';
+import { BooksDialogComponent } from './components/books-dialog/books-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { BookingsBookDialogComponent } from './components/bookings-book-dialog/b
     TotalAmountComponent,
     BookingsTableDialogComponent,
     MainMenuComponent,
-    BookingsBookDialogComponent
+    BooksDialogComponent
   ],
   imports: [
     BrowserModule,

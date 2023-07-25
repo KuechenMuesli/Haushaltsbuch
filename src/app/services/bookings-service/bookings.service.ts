@@ -3,9 +3,8 @@ import { BOOKINGS } from '../../test-data';
 import { Booking } from '../../booking';
 import { BooksService } from '../books-service/books.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
+
 export class BookingsService {
   bookId: number = this.booksService.bookId;
   constructor(private booksService: BooksService) { }

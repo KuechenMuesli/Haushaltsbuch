@@ -6,11 +6,11 @@ import { BooksDialogService } from '../../services/books-dialog-service/books-di
 import { BooksService } from '../../services/books-service/books.service';
 
 @Component({
-  selector: 'app-bookings-book-dialog',
-  templateUrl: './bookings-book-dialog.component.html',
-  styleUrls: ['./bookings-book-dialog.component.css']
+  selector: 'app-books-dialog',
+  templateUrl: './books-dialog.component.html',
+  styleUrls: ['./books-dialog.component.css']
 })
-export class BookingsBookDialogComponent implements OnInit{
+export class BooksDialogComponent implements OnInit{
   isdialogOpen: boolean = true;
   newBookForm!: FormGroup; 
   name: string = "";

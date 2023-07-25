@@ -3,7 +3,7 @@
     <div class="books">
         <h2 id="heading">Bücher</h2>
         <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
-        <app-bookings-book-dialog></app-bookings-book-dialog>
+        <app-books-dialog></app-books-dialog>
     </div>
 
     <table id="table-list">
@@ -14,7 +14,7 @@
                 <button routerLink="/table/{{list.id}}" (click)="updateID(list.id)" id="open-book"><mat-icon>launch</mat-icon></button>
                 <button (click)="editBook(list.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
                 <button (click)="deleteBook(list.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
-
+ 
             </td>
         </tr>
     </table>

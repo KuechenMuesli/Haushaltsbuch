@@ -25,8 +25,8 @@ export class BooksService {
   }
 
   addBook(name: string){
-    let id: number = BOOKINGS.length > 0? Math.max(...BOOKINGS.map(bookingsList => bookingsList.id)) + 1 : 0;
-    BOOKINGS.push({id:id, name: name, bookingsList:[]});
+    this.bookId = BOOKINGS.length > 0? Math.max(...BOOKINGS.map(bookingsList => bookingsList.id)) + 1 : 0;
+    BOOKINGS.push({id:this.bookId, name: name, bookingsList:[]});
   }
 
   deleteBook(id: number): number{
