@@ -29,4 +29,15 @@ export class BookingsService {
     BOOKINGS[this.bookId].bookingsList.splice(index, 1);
     return index;
   }
+
+  calculateBookingsTotal(id: number): number{
+    this.bookId = this.booksService.bookId;
+    let bookings = this.booksService.getBookings(id);
+
+    let total_amount = 0;
+    for (let i = bookings.length - 1; i >= 0; i--){
+      total_amount += bookings[i].amount;
+    }
+    return total_amount;
+  }
 }
