@@ -9,11 +9,8 @@ import { TotalAmountComponent } from './components/total-amount/total-amount.com
 import { MatIconModule } from '@angular/material/icon';
 import { AddEditBookingDialogComponent } from './components/add-edit-booking-dialog/add-edit-booking-dialog.component';
 import { FormsModule } from '@angular/forms';
-import { EditBookingService } from './services/edit-booking-service/edit-booking.service';
 import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
-import { TotalAmountService } from './services/total-amount-service/total-amount.service';
-import { BookingsListService } from './services/bookings-list-service/bookings-list.service';
 import { BookingsBookDialogComponent } from './components/bookings-book-dialog/bookings-book-dialog.component';
 
 @NgModule({
