@@ -7,8 +7,8 @@ import { BookingsTableComponent } from '../bookings-table/bookings-table.compone
 
 @Component({
   selector: 'app-add-edit-booking-dialog',
-  templateUrl: './add-edit-booking-dialog.component.html',
-  styleUrls: ['./add-edit-booking-dialog.component.css']
+  templateUrl: './bookings-table-dialog.component.html',
+  styleUrls: ['./bookings-table-dialog.component.css']
 })
 
 export class AddEditBookingDialogComponent implements OnInit{

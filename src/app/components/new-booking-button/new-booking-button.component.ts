@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { EditBookingService } from '../../services/edit-booking-service/edit-booking.service';
 
 @Component({
-  selector: 'app-add-booking-complex',
-  templateUrl: './add-booking-complex.component.html',
-  styleUrls: ['./add-booking-complex.component.css']
+  selector: 'app-new-booking-button',
+  templateUrl: './new-booking-button.component.html',
+  styleUrls: ['./new-booking-button.component.css']
 })
 
 export class AddBookingComplexComponent {

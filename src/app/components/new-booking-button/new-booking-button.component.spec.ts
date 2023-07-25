@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddBookingComplexComponent } from './add-booking-complex.component';
+import { AddBookingComplexComponent } from './new-booking-button.component';
 
 describe('AddBookingComplexComponent', () => {
   let component: AddBookingComplexComponent;

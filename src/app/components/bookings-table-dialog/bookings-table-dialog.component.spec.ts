@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddEditBookingDialogComponent } from './add-edit-booking-dialog.component';
+import { AddEditBookingDialogComponent } from './bookings-table-dialog.component';
 
 describe('AddEditBookingDialogComponent', () => {
   let component: AddEditBookingDialogComponent;
