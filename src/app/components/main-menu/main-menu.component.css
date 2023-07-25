@@ -48,13 +48,15 @@
     border: none;
     color: green;
 }
-
+#add-new-book-button:hover{
+    background-color: rgb(200, 184, 163);
+}
 #table-list{
     margin-left: 10px;
 }
 
 #buttons{
-    width: 129x;
+    width: 115px;
     background-color: rgb(234, 216, 192);
     margin-right: 50px;
 }
@@ -65,15 +67,24 @@
     background-color: rgb(234, 216, 192);
     border: none;
 }
+#edit-button:hover{
+    background-color: rgb(200, 184, 163);
+}
 
 #delete-button{
     color:rgb(161, 142, 118);
     background-color: rgb(234, 216, 192);
     border: none;
 }
+#delete-button:hover{
+    background-color: rgb(200, 184, 163);
+}
 
 #open-book{
     color:rgb(161, 142, 118);
     background-color: rgb(234, 216, 192);
     border: none;
+}
+#open-book:hover{
+    background-color: rgb(200, 184, 163);
 }

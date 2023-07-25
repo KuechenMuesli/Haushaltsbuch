@@ -16,8 +16,22 @@
     color:green;
     margin-right:7px;
 }
+#submit-button:disabled{
+    color: rgb(99, 104, 99);
+    background-color: rgba(207, 197, 183, 0.385);
+}
+#submit-button:enabled{
+    background-color: antiquewhite;
+}
+#submit-button:enabled:hover{
+    background-color: rgb(207, 197, 183);
+    
+}
 #cancel-button{
     color:rgb(161, 142, 118);
+}
+#cancel-button:hover{
+    background-color: rgb(207, 197, 183);
 }
 .form-input{
     font-family: 'Courier New', Courier, monospace;

@@ -48,8 +48,6 @@ export class BookingsBookDialogComponent implements OnInit{
       }else{
         this.bookingsListService.editBook(this.booksDialogService.id, formData.name);
       }
-      
-      
     }
     this.closeDialog()
   }

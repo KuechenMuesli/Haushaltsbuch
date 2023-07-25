@@ -26,6 +26,4 @@ export class TotalAmountComponent implements AfterContentChecked{
     this.totalAmountService.calculate_total(this.bookingsListSerivce.bookingsListId);
     this.total_amount = this.totalAmountService.total_amount;
   }
-
-
 }
