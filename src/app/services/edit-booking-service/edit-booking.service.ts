@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { BOOKINGS } from '../../bookings-list';
+import { BOOKINGS } from '../../test-data';
 import { Booking } from '../../booking';
 import { BookingsListService } from '../bookings-list-service/bookings-list.service';
 

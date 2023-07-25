@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BookingsListService } from '../../services/bookings-list-service/bookings-list.service';
-import { BookingsList } from '../../bookings-list-interface';
+import { BookingsList } from '../../book-interface';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { BooksDialogService } from '../../services/books-dialog-service/books-dialog.service';

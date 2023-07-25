@@ -1,5 +1,4 @@
-import { Booking } from "./booking";
-import { BookingsList } from "./bookings-list-interface";
+import { BookingsList } from "./book-interface";
 
 export const BOOKINGS: BookingsList[] = [
     {
