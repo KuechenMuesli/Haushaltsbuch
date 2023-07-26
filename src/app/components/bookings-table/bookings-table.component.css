@@ -69,9 +69,20 @@ table, th, td{
   font-style: italic;
   color:rgb(161, 142, 118);
 }
-#add_button{
+
+#add_button-div{
   margin-top: 18px;
 }
+
+#add-button{
+  background-color: antiquewhite;
+  border: none;
+  color: green;
+}
+#add-button:hover{
+  background-color: rgb(200, 184, 163);
+}
+
 #sorting-icon{
   float: right;
   color: transparent;

@@ -20,7 +20,8 @@ export class BookingsService {
 
   getBooking(id: number): Booking{
     let bookings = this.getBookings(this.bookId);
-    return bookings[bookings.findIndex(booking => booking.id == id)];
+    let booking = bookings[bookings.findIndex(booking => booking.id == id)];
+    return booking;
 
   }
 

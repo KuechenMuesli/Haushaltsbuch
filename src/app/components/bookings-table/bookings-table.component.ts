@@ -3,7 +3,6 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
-import { BookingsDialogService } from '../../services/bookings-dialog-service/bookings-dialog.service';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
 
@@ -19,11 +18,11 @@ export class BookingsTableComponent {
   id: number = -1;
   bookName: string = "";
   sorter: string = "date";
+  openDialog: boolean = false;
 
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
-    private bookingsDialogService: BookingsDialogService,
     private route: ActivatedRoute
    ) {}
 
@@ -44,8 +43,8 @@ export class BookingsTableComponent {
   }
 
   editBooking(id: number): void{
-    this.bookingsDialogService.setCurrentId(id);
-    this.bookingsDialogService.openDialog();
+    this.bookingsService.bookingId = id;
+    this.openDialog = true;
   }
 
   deleteBooking(id: number): void {
@@ -72,6 +71,17 @@ export class BookingsTableComponent {
       this.sorter = "amount";
       this.bookings.sort((a, b) => a.amount - b.amount);
 
+    }
+  }
+
+  addBookingPressed(): void{
+    this.bookingsService.bookingId = -1;
+    this.openDialog = true;
+  }
+
+  closeDialog(isDialogOpen: boolean){
+    if(!isDialogOpen){
+      this.openDialog = false;
     }
   }
 }

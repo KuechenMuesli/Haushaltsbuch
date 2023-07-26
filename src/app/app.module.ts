@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './components/app-component/app.component';
 import { BookingsTableComponent } from './components/bookings-table/bookings-table.component';
-import { NewBookingButtonComponent } from './components/new-booking-button/new-booking-button.component';
 import { TotalAmountComponent } from './components/total-amount/total-amount.component';
 import { MatIconModule } from '@angular/material/icon';
 import { BookingsTableDialogComponent } from './components/bookings-table-dialog/bookings-table-dialog.component';
@@ -17,7 +16,6 @@ import { BooksDialogComponent } from './components/books-dialog/books-dialog.com
   declarations: [
     AppComponent,
     BookingsTableComponent,
-    NewBookingButtonComponent,
     TotalAmountComponent,
     BookingsTableDialogComponent,
     MainMenuComponent,
