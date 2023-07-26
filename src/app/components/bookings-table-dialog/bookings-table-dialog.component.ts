@@ -2,7 +2,6 @@ import { Component, OnInit, Input, OnChanges, EventEmitter, Output, SimpleChange
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BookingsTableComponent } from '../bookings-table/bookings-table.component';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 
@@ -24,8 +23,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   isdialogOpen: boolean = true;
 
   constructor(@Inject(DOCUMENT) private document: Document, 
-  private formBuilder: FormBuilder, private bookingstableComponent: BookingsTableComponent,
-  private bookingsService: BookingsService,
+  private formBuilder: FormBuilder, private bookingsService: BookingsService,
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
