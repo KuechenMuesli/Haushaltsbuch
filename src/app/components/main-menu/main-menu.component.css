@@ -94,3 +94,16 @@
     border-radius: 7px;
 
 }
+
+#bookings-list:last-child #table-element{
+    border-bottom-left-radius: 15px;
+}
+#bookings-list:last-child #buttons{
+    border-bottom-right-radius: 15px;
+}
+#bookings-list:first-child #table-element{
+    border-top-left-radius: 15px;
+}
+#bookings-list:first-child #buttons{
+    border-top-right-radius: 15px;
+}
