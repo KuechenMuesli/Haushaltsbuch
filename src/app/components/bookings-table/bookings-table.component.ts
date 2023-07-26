@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, Renderer2 } from '@angular/core';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
@@ -23,7 +23,7 @@ export class BookingsTableComponent {
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute, private renderer: Renderer2
    ) {}
 
   ngOnInit(): void {
@@ -31,6 +31,13 @@ export class BookingsTableComponent {
     this.bookName = this.booksService.getName(this.id);
     this.booksService.setBookingsListId(this.id);
     this.bookings = this.bookingsService.getBookings(this.id);
+  }
+
+  @HostListener('document:keypress', ['$event'])
+  handleAddBookingShortcut(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'n') {
+      this.addBookingPressed();
+    }
   }
 
   displayDate(dateString: string){
@@ -82,6 +89,8 @@ export class BookingsTableComponent {
   closeDialog(isDialogOpen: boolean){
     if(!isDialogOpen){
       this.openDialog = false;
+      let focusElement = this.renderer.selectRootElement(".focus");
+      focusElement.focus();
     }
   }
 }

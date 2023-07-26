@@ -5,7 +5,10 @@ table, th, td{
     border: none;
     text-align: center;
 }
-
+.focus{
+  background-color: transparent;
+  border: none;
+}
 .positive {
   color: green;
 }

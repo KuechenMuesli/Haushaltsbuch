@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output, SimpleChanges, Renderer2} from '@angular/core';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +23,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   isdialogOpen: boolean = true;
 
   constructor(@Inject(DOCUMENT) private document: Document, 
-  private formBuilder: FormBuilder, private bookingsService: BookingsService,
+  private formBuilder: FormBuilder, private bookingsService: BookingsService, private renderer: Renderer2
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,6 +57,8 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     }
     this.newBookingForm.patchValue({ date: this.date, description: this.description, amount: this.amount });
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
+    let descriptionElement = this.renderer.selectRootElement("#description");
+    descriptionElement.focus();
     dia.show();
   }
 
@@ -79,6 +81,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   closeDialog(){
     this.dialogIsOpen.emit(false);
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
+    
     dia.close();
   }
   
