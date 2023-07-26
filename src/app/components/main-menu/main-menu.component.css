@@ -50,6 +50,7 @@
 }
 #add-new-book-button:hover{
     background-color: rgb(200, 184, 163);
+    border-radius: 10px;
 }
 #table-list{
     margin-left: 10px;
@@ -69,6 +70,7 @@
 }
 #edit-button:hover{
     background-color: rgb(200, 184, 163);
+    border-radius: 7px;
 }
 
 #delete-button{
@@ -78,6 +80,8 @@
 }
 #delete-button:hover{
     background-color: rgb(200, 184, 163);
+    border-radius: 7px;
+
 }
 
 #open-book{
@@ -87,4 +91,6 @@
 }
 #open-book:hover{
     background-color: rgb(200, 184, 163);
+    border-radius: 7px;
+
 }

@@ -8,6 +8,7 @@
 }
 
 #cancel-button, #submit-button{
+    border-radius: 7px;
     float: right;
     background-color: antiquewhite;
     border: none;

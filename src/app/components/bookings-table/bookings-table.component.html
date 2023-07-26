@@ -8,7 +8,7 @@
 
 <ul class="bookings">
     <app-total-amount id="total-amount"></app-total-amount>
-    <table id="bookingsTable">
+    <table id="bookings-table">
         <tr>
             <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon id="sorting-icon">sort</mat-icon></th>
             <th class="table-head-elements" class="description">Beschreibung</th>
@@ -18,7 +18,7 @@
         <tr *ngFor="let booking of bookings" class="booking-cells">
             <td id="table-element" class="date">{{ displayDate(booking.date) }}</td>
             <td id="table-element" class="description">{{ booking.description }}</td>
-            <td id="table-element" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
+            <td id="table-element" class="amount-cell" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
                 {{ booking.amount }} €
             </td>
             <td id="buttons-cells">

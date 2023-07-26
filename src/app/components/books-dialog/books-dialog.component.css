@@ -10,6 +10,7 @@
     float: right;
     background-color: antiquewhite;
     border: none;
+    border-radius: 7px;
 }
 
 #submit-button{
@@ -19,8 +20,10 @@
 #submit-button:disabled{
     color: rgb(99, 104, 99);
     background-color: rgba(207, 197, 183, 0.385);
+
 }
 #submit-button:enabled{
+
     background-color: antiquewhite;
 }
 #submit-button:enabled:hover{

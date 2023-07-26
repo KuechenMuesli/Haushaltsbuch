@@ -25,6 +25,7 @@ body{
 }
 #home-icon:hover{
     background-color: rgb(200, 184, 163);
+    border-radius: 10px;
 }
 
 #elements{

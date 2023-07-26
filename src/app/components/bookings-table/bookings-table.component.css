@@ -30,7 +30,6 @@ table, th, td{
   border-width: 2px;
 }
 
-
 .description{
   background-color: rgb(234, 212, 182);
   border-style: solid;
@@ -64,6 +63,15 @@ table, th, td{
   transform: scale(1.01);
 }
 
+
+.booking-cells:last-child #table-element:nth-child(1){
+  border-bottom-left-radius: 15px;
+}
+
+.booking-cells:last-child #table-element:nth-child(3){
+  border-bottom-right-radius: 15px;
+}
+
 #book-name{
   margin-left: 3px;
   font-style: italic;
@@ -81,6 +89,8 @@ table, th, td{
 }
 #add-button:hover{
   background-color: rgb(200, 184, 163);
+  border-radius: 10px;
+
 }
 
 #sorting-icon{
@@ -91,6 +101,7 @@ table, th, td{
 
 #date-table-head{
   cursor: ns-resize;
+  border-top-left-radius: 15px;
 }
 
 #date-table-head:hover #sorting-icon{
@@ -99,6 +110,7 @@ table, th, td{
 
 #amount-table-head{
   cursor: ns-resize;
+  border-top-right-radius: 15px;
 }
 #amount-table-head:hover #sorting-icon{
   color:black;
@@ -117,6 +129,7 @@ table, th, td{
   color: green;
 }
 #edit-button:hover{
+  border-radius: 7px;
   background-color: rgb(200, 184, 163);
 }
 
@@ -128,6 +141,7 @@ table, th, td{
   color:rgb(161, 142, 118);
 }
 #delete-button:hover{
+  border-radius: 7px;
   background-color: rgb(200, 184, 163);
 }
 
