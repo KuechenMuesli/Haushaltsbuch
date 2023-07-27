@@ -22,6 +22,7 @@ export class UserService {
     this.localStorageService.deleteData(name);
     delete this.users[this.users.findIndex(user => user == name)];
     this.getUsers();
+    this.currentUser = this.users[0];
   }
 
   editUser(oldName: string, newName: string){
@@ -29,6 +30,6 @@ export class UserService {
     this.localStorageService.deleteData(oldName);
     this.localStorageService.saveData(newName, userData);
     this.getUsers();
-    this.currentUser = newName
+    this.currentUser = newName;
   }
 }

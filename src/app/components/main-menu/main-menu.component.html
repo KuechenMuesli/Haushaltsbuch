@@ -1,8 +1,8 @@
 
 <div class="all">
     <div class="user-select">
-        <select #userSelect (change)="userChanged(userSelect.value)">
-            <option *ngFor="let user of users" value="{{user}}">{{user}}</option>
+        <select id="select" #userSelect (change)="userChanged(userSelect.value)">
+            <option id="options" *ngFor="let user of users" value="{{user}}">{{user}}</option>
         </select>
         <button (click)="addUser()">Nutzer Hinzufügen</button>
         <button (click)="editUser()">Bearbeiten</button>

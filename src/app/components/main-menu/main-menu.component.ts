@@ -58,7 +58,7 @@ export class MainMenuComponent implements OnInit{
     if (!dialogIsOpen){
       this.openUserDialog = false;
       this.updateUsers();
-      this.bookingsList = this.booksService.getBookingsList();
+      this.userChanged(this.userService.currentUser);
     }
   }
   calculateAccountBalance(id:number){
@@ -76,7 +76,9 @@ export class MainMenuComponent implements OnInit{
   }
 
   addUser(){
-    this.userService.addUser("Test");
+    this.userService.addUser("Neuer Benutzer");
+    this.userService.currentUser = "Neuer Benutzer";
+    this.openUserDialog = true;
   }
 
   editUser(){
