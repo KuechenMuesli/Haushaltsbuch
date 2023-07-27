@@ -16,8 +16,4 @@ export class LocalStorageService {
     const array: Type[] = data !== null? JSON.parse(data) : []
     return array;
   }
-
-  removeData(key: string){
-    localStorage.removeItem(key);
-  }
 }
