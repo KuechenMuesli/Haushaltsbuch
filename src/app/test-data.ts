@@ -1,6 +1,6 @@
-import { BookingsList } from "./book";
+import { Book } from "./book";
 
-export const BOOKINGS: BookingsList[] = [
+export const BOOKINGS: Book[] = [
     {
         id: 0,
         name: "Geschäftlich",

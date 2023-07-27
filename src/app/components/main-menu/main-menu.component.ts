@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BooksService } from '../../services/books-service/books.service';
-import { BookingsList } from '../../book';
+import { Book } from '../../book';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { BookingsService } from '../../services/bookings-service/bookings.service';
@@ -11,7 +11,7 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
   styleUrls: ['./main-menu.component.css']
 })
 export class MainMenuComponent {
-  bookingsList: BookingsList[] = this.booksService.getBookingsList();
+  bookingsList: Book[] = this.booksService.getBookingsList();
   accountBalance: number = 0;
   openDialog: boolean = false;
   

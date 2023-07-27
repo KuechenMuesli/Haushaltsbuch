@@ -29,7 +29,7 @@ export class BookingsTableComponent {
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookName = this.booksService.getName(this.id);
-    this.booksService.setBookingsListId(this.id);
+    this.booksService.bookId = this.id;
     this.bookings = this.bookingsService.getBookings(this.id);
   }
 

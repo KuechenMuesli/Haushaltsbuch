@@ -1,6 +1,6 @@
 import { Booking } from "./booking";
 
-export interface BookingsList{
+export interface Book{
     id: number,
     name: string,
     bookingsList: Booking[]

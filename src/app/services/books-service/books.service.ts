@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../../booking';
 import { BOOKINGS } from '../../test-data';
-import { BookingsList } from '../../book';
+import { Book } from '../../book';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,7 @@ export class BooksService {
 
   constructor() { }
 
-  setBookingsListId(value: number): void{
-    this.bookId = value;
-  }
-
-  getBookingsList(): BookingsList[]{
+  getBookingsList(): Book[]{
       return BOOKINGS;
   }
 
@@ -44,7 +40,7 @@ export class BooksService {
     }
   }
 
-getBookings(id: number): Booking[] {
-  return BOOKINGS[BOOKINGS.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
-}
+  getBookings(id: number): Booking[] {
+    return BOOKINGS[BOOKINGS.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
+  }
 }
