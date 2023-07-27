@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Booking } from '../../booking';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
+import { UserService } from '../user-service/user.service';
 import { Book } from '../../book';
 
 @Injectable({
@@ -8,12 +9,13 @@ import { Book } from '../../book';
 })
 export class BooksService {
   bookId: number = 0;
-  data: Book[] = this.localStorageService.getData("books");
+  data: Book[] = this.localStorageService.getData(this.userService.currentUser);
   books: Book[] = this.data.length > 0? this.data : [{id:0, name:"", bookingsList:[]}]
-  constructor(private localStorageService: LocalStorageService) { }
+
+  constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
 
   getBookingsList(): Book[]{
-    this.books = this.localStorageService.getData("books");
+    this.books = this.localStorageService.getData(this.userService.currentUser);
     return this.books;
   }
 
@@ -25,7 +27,7 @@ export class BooksService {
   addBook(name: string){
     this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
     this.books.push({id:this.bookId, name: name, bookingsList:[]});
-    this.localStorageService.saveData("books", this.books);
+    this.localStorageService.saveData(this.userService.currentUser, this.books);
   }
 
   deleteBook(id: number): number{
@@ -33,7 +35,7 @@ export class BooksService {
     if (index !== -1) {
       this.books.splice(index, 1);
     }
-    this.localStorageService.saveData("books", this.books);
+    this.localStorageService.saveData(this.userService.currentUser, this.books);
     return index;
   }
 
@@ -42,7 +44,7 @@ export class BooksService {
     if (index !== -1){
       this.books[index].name = name;
     }
-    this.localStorageService.saveData("books", this.books);
+    this.localStorageService.saveData(this.userService.currentUser, this.books);
   }
 
   getBookings(id: number): Booking[] {
@@ -50,6 +52,6 @@ export class BooksService {
   }
 
   updateBooks(){
-    this.localStorageService.saveData("books", this.books);
+    this.localStorageService.saveData(this.userService.currentUser, this.books);
   }
 }

@@ -1,5 +1,12 @@
 
 <div class="all">
+    <div class="user-select">
+        <select #userSelect (change)="userChanged(userSelect.value)">
+            <option *ngFor="let user of users" value="{{user}}">{{user}}</option>
+        </select>
+        <button (click)="addUser()">Nutzer Hinzufügen</button>
+    </div>
+    
     <div class="books">
         <h2 id="heading">Bücher</h2>
         <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
@@ -18,5 +25,4 @@
             </td>
         </tr>
     </table>
-
 </div>
