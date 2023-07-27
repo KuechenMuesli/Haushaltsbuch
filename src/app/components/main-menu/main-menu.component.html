@@ -5,12 +5,14 @@
             <option *ngFor="let user of users" value="{{user}}">{{user}}</option>
         </select>
         <button (click)="addUser()">Nutzer Hinzufügen</button>
+        <button (click)="editUser()">Bearbeiten</button>
+        <app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeDialog($event)"></app-user-dialog>
     </div>
     
     <div class="books">
         <h2 id="heading">Bücher</h2>
         <button (click)="addNewBook()" id="add-new-book-button"><mat-icon>add_circle</mat-icon></button>
-        <app-books-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-books-dialog>
+        <app-books-dialog [openDialog]="openBooksDialog" (dialogIsOpen)="closeDialog($event)"></app-books-dialog>
     </div>
 
     <table id="table-list">

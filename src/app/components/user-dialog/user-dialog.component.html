@@ -1,0 +1,13 @@
+<dialog id="user-dialog" *ngIf="isdialogOpen">
+    <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+
+        <table>
+            <tr>
+                <td><label for="name">Name:</label></td> 
+                <td><input type="text" id="name" formControlName="name" class="form-input" value=""></td>
+            </tr>
+        </table>
+        <button type="submit" [disabled]="editUserForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
+        <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
+    </form>
+</dialog>

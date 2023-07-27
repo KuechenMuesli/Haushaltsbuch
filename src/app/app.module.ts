@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { BooksDialogComponent } from './components/books-dialog/books-dialog.component';
+import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { BooksDialogComponent } from './components/books-dialog/books-dialog.com
     TotalAmountComponent,
     BookingsTableDialogComponent,
     MainMenuComponent,
-    BooksDialogComponent
+    BooksDialogComponent,
+    UserDialogComponent
   ],
   imports: [
     BrowserModule,

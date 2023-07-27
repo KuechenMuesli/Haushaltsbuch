@@ -15,7 +15,9 @@ import { UserService } from '../../services/user-service/user.service';
 export class MainMenuComponent implements OnInit{
   bookingsList: Book[] = [];
   accountBalance: number = 0;
-  openDialog: boolean = false;
+  openBooksDialog: boolean = false;
+  openUserDialog: boolean = false;
+
   users: string[] = []
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
@@ -33,12 +35,12 @@ export class MainMenuComponent implements OnInit{
   }
   addNewBook(): void{
     this.booksService.bookId = -1;
-    this.openDialog = true;
+    this.openBooksDialog = true;
   }
 
   editBook(id: number){
     this.booksService.bookId = id;
-    this.openDialog = true;
+    this.openBooksDialog = true;
   }
   deleteBook(id: number){
     let index: number = this.booksService.deleteBook(id);
@@ -48,7 +50,10 @@ export class MainMenuComponent implements OnInit{
 
   closeDialog(dialogIsOpen: boolean){
     if (!dialogIsOpen){
-      this.openDialog = false;
+      this.openBooksDialog = false;
+      this.openUserDialog = false;
+      this.bookingsList = this.booksService.getBookingsList();
+      this.users = this.userService.users;
     }
   }
 
@@ -69,5 +74,9 @@ export class MainMenuComponent implements OnInit{
 
   addUser(){
     this.userService.addUser("Test");
+  }
+
+  editUser(){
+    this.openUserDialog = true;
   }
 }

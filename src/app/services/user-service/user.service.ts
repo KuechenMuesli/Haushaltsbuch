@@ -17,4 +17,17 @@ export class UserService {
     this.users.push(name);
     this.localStorageService.saveData(name, []);
   }
+
+  deleteUser(name: string){
+    this.localStorageService.deleteData(name);
+    this.getUsers();
+  }
+
+  editUser(oldName: string, newName: string){
+    let userData = this.localStorageService.getData(oldName);
+    this.localStorageService.deleteData(oldName);
+    this.localStorageService.saveData(newName, userData);
+    this.getUsers();
+    this.currentUser = newName
+  }
 }
