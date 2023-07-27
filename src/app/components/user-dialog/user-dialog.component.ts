@@ -42,6 +42,11 @@ export class UserDialogComponent implements OnInit{
     this.closeDialog();
   }
 
+  deleteUser(){
+    this.userService.deleteUser(this.userService.currentUser);
+    this.closeDialog();
+  }
+
   cancelEditing(){
     this.closeDialog();
   }

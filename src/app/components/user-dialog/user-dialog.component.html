@@ -9,5 +9,6 @@
         </table>
         <button type="submit" [disabled]="editUserForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
+        <button type="reset" id="delete-user-button" (click)="deleteUser()">Löschen</button>
     </form>
 </dialog>

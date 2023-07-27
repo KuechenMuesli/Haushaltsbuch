@@ -6,7 +6,7 @@ import { LocalStorageService } from '../local-storage-service/local-storage.serv
 })
 export class UserService {
   users: string[] = []
-  currentUser: string = this.users[0];
+  currentUser!: string;
   constructor(private localStorageService: LocalStorageService) { }
 
   getUsers(){
@@ -20,6 +20,7 @@ export class UserService {
 
   deleteUser(name: string){
     this.localStorageService.deleteData(name);
+    delete this.users[this.users.findIndex(user => user == name)];
     this.getUsers();
   }
 

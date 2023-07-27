@@ -6,7 +6,7 @@
         </select>
         <button (click)="addUser()">Nutzer Hinzufügen</button>
         <button (click)="editUser()">Bearbeiten</button>
-        <app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeDialog($event)"></app-user-dialog>
+        <app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeUserDialog($event)"></app-user-dialog>
     </div>
     
     <div class="books">

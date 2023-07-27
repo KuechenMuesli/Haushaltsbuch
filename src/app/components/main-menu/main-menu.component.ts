@@ -18,7 +18,7 @@ export class MainMenuComponent implements OnInit{
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
 
-  users: string[] = []
+  users!: string[];
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService) {}
@@ -26,8 +26,9 @@ export class MainMenuComponent implements OnInit{
   ngOnInit(): void {
     this.bookingsList = this.booksService.getBookingsList();
     this.userService.getUsers();
-    this.updateUsers();
     this.userService.currentUser = this.userService.users[0];
+    this.bookingsList = this.booksService.getBookingsList();
+    this.updateUsers();
   }
 
   updateID(id: number){
@@ -51,12 +52,15 @@ export class MainMenuComponent implements OnInit{
   closeDialog(dialogIsOpen: boolean){
     if (!dialogIsOpen){
       this.openBooksDialog = false;
-      this.openUserDialog = false;
-      this.bookingsList = this.booksService.getBookingsList();
-      this.users = this.userService.users;
     }
   }
-
+  closeUserDialog(dialogIsOpen: boolean){
+    if (!dialogIsOpen){
+      this.openUserDialog = false;
+      this.updateUsers();
+      this.bookingsList = this.booksService.getBookingsList();
+    }
+  }
   calculateAccountBalance(id:number){
     this.accountBalance = this.bookingsService.calculateBookingsTotal(id);
     return this.accountBalance;
@@ -69,7 +73,6 @@ export class MainMenuComponent implements OnInit{
 
   updateUsers(){
     this.users = this.userService.users;
-
   }
 
   addUser(){
