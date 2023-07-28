@@ -57,6 +57,9 @@ export class MainMenuComponent implements OnInit{
   closeUserDialog(dialogIsOpen: boolean){
     if (!dialogIsOpen){
       this.openUserDialog = false;
+      if (this.userService.currentUser === ""){
+        this.userService.deleteUser("");
+      }
       this.updateUsers();
       this.userChanged(this.userService.currentUser);
     }
@@ -76,8 +79,8 @@ export class MainMenuComponent implements OnInit{
   }
 
   addUser(){
-    this.userService.addUser("Neuer Benutzer");
-    this.userService.currentUser = "Neuer Benutzer";
+    this.userService.addUser("");
+    this.userService.currentUser = "";
     this.openUserDialog = true;
   }
 
