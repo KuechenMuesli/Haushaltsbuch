@@ -5,6 +5,7 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
+import { UserService } from '../../services/user-service/user.service';
 
 
 @Component({
@@ -19,11 +20,13 @@ export class BookingsTableComponent {
   bookName: string = "";
   sorter: string = "date";
   openDialog: boolean = false;
+  currentUser: string = "";
 
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
-    private route: ActivatedRoute, private renderer: Renderer2
+    private route: ActivatedRoute, private renderer: Renderer2,
+    private userService: UserService
    ) {}
 
   ngOnInit(): void {
@@ -31,6 +34,7 @@ export class BookingsTableComponent {
     this.bookName = this.booksService.getName(this.id);
     this.booksService.bookId = this.id;
     this.bookings = this.bookingsService.getBookings(this.id);
+    this.currentUser = this.userService.currentUser;
   }
 
   @HostListener('document:keypress', ['$event'])
