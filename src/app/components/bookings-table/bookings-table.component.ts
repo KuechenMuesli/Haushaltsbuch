@@ -61,6 +61,8 @@ export class BookingsTableComponent {
 
   deleteBooking(id: number): void {
     let index = this.bookingsService.deleteBooking(id);
+    this.expensesList = this.bookingsService.getExpenses(this.id);
+
     let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
     table.deleteRow(index + 1);
   }

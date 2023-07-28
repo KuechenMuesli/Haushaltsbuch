@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, Colors } from 'chart.js';
 import { Booking } from '../../booking';
 
 @Component({
@@ -15,14 +15,15 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   expensesLabels: string[] = [];
 
   ngOnChanges(){
-    this.updateChart();
+      this.updateChart();
   }
 
   ngOnInit(){
     this.createChart();
+    console.log("chart created");
   }
+
   createChart(){
-    this.totalExpenses = 0;
     let expensesValues: number[] = this.expensesValues;
     let expensesLabels: string[] = this.expensesLabels;
 
@@ -40,6 +41,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
       },
       options: {
         aspectRatio: 2.5,
+        borderColor: "#faebd7",
         plugins: {
             tooltip: {
                 callbacks: {
@@ -56,6 +58,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         },
     },
     });
+    this.updateChart();
   }
 
   updateDataLists(){
@@ -77,11 +80,23 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   }
 
   updateChart(){
+    this.totalExpenses = 0;
     this.updateDataLists();
     this.chart.data.labels = this.expensesLabels;
     this.chart.data.datasets.forEach((dataset) => {
       dataset.data = this.expensesValues;
+      dataset.backgroundColor = [
+        "rgb(220, 195, 162)",
+        "rgb(234, 212, 182)",
+        "rgb(157, 138, 115)",
+        "rgb(234, 216, 192)",
+        "rgb(200, 184, 163)",
+        "rgb(214, 191, 162)",
+        "rgb(202, 172, 135)",
+        "rgb(196, 157, 110)"
+      ]
     })
+    Chart.register(Colors);
     this.chart.update();
   }
 }
