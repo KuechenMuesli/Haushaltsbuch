@@ -71,4 +71,72 @@ export class BookingsService {
     }
     return expensesList;
   }
+
+  convertMonthsList(){
+
+  }
+
+  getMonths(id: number): string[]{
+    let bookings: Booking[] = this.booksService.getBookings(id);
+    bookings.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    let months: string[] = [];
+    let date: string[] = [];
+
+    let monthsRefactor = [
+      {numeral:"01", alpha:"Januar"},
+      {numeral:"02", alpha:"Februar"},
+      {numeral:"03", alpha:"März"},
+      {numeral:"04", alpha:"April"},
+      {numeral:"05", alpha:"Mai"},
+      {numeral:"06", alpha:"Juni"},
+      {numeral:"07", alpha:"Juli"},
+      {numeral:"08", alpha:"August"},
+      {numeral:"09", alpha:"September"},
+      {numeral:"10", alpha:"Oktober"},
+      {numeral:"11", alpha:"November"},
+      {numeral:"12", alpha:"Dezember"}
+    ];
+    for (let i: number = 0; i < bookings.length; i++){
+      date = bookings[i].date.split("-");
+      for (let month of monthsRefactor){
+        date[1] = date[1].replace(month.numeral, month.alpha);
+      }
+      let index = months.findIndex(month => month == `${date[1]} ${date[0]}`);
+      if (index == -1){
+        months.push(`${date[1]} ${date[0]}`);
+      }
+    }
+    return months;
+  }
+
+  filterMonth(id:number, month:string): Booking[]{
+    let bookings: Booking[] = this.booksService.getBookings(id);
+    let filteredBookings: Booking[] = [];
+    let monthsRefactor = [
+      {numeral:"01", alpha:"Januar"},
+      {numeral:"02", alpha:"Februar"},
+      {numeral:"03", alpha:"März"},
+      {numeral:"04", alpha:"April"},
+      {numeral:"05", alpha:"Mai"},
+      {numeral:"06", alpha:"Juni"},
+      {numeral:"07", alpha:"Juli"},
+      {numeral:"08", alpha:"August"},
+      {numeral:"09", alpha:"September"},
+      {numeral:"10", alpha:"Oktober"},
+      {numeral:"11", alpha:"November"},
+      {numeral:"12", alpha:"Dezember"}
+    ];
+    for (let i: number = 0; i < bookings.length; i++){
+      let splitDate: string[] = bookings[i].date.split("-");
+      for (let month of monthsRefactor){
+        splitDate[1] = splitDate[1].replace(month.numeral, month.alpha);
+      }
+
+      let monthYear: string = splitDate[1] + " " + splitDate[0];
+      if (monthYear == month){
+        filteredBookings.push(bookings[i]);
+      }
+    }
+    return filteredBookings;
+  }
 }

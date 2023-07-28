@@ -20,7 +20,6 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
 
   ngOnInit(){
     this.createChart();
-    console.log("chart created");
   }
 
   createChart(){
@@ -48,7 +47,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
                     label: function (context) {
                         let label = context.dataset.label || '';
                         if (label) {
-                            label += ': ';
+                            label += `: `;
                         }
                         label += context.parsed + ' €';
                         return label;
@@ -93,7 +92,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         "rgb(200, 184, 163)",
         "rgb(214, 191, 162)",
         "rgb(202, 172, 135)",
-        "rgb(196, 157, 110)"
+        "rgb(162, 150, 129)"
       ]
     })
     Chart.register(Colors);

@@ -22,6 +22,11 @@ export class BookingsTableComponent {
   openDialog: boolean = false;
   currentUser: string = "";
   expensesList: Booking[] = [];
+  months: string[] = [];
+  month: string = "";
+  monthSelect = this.document.getElementById("#monthSelect") as HTMLSelectElement;
+
+
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
@@ -33,8 +38,13 @@ export class BookingsTableComponent {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookName = this.booksService.getName(this.id);
     this.booksService.bookId = this.id;
-    this.bookings = this.bookingsService.getBookings(this.id);
+
+    this.months = this.bookingsService.getMonths(this.id);
+    this.month = this.months[0];
+    this.bookings = this.bookingsService.filterMonth(this.id, this.month);
+  
     this.currentUser = this.userService.currentUser;
+
     this.expensesList = this.bookingsService.getExpenses(this.id);
   }
 
@@ -99,6 +109,12 @@ export class BookingsTableComponent {
       this.expensesList = this.bookingsService.getExpenses(this.id);
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
+      this.bookings = this.bookingsService.filterMonth(this.id, this.month);
     }
+  }
+
+  dateChanged(month: string){
+    this.month = month;
+    this.bookings = this.bookingsService.filterMonth(this.id, this.month);
   }
 }
