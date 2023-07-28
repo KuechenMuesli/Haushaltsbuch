@@ -59,4 +59,16 @@ export class BookingsService {
     }
     return total_amount;
   }
+
+  getExpenses(id: number): Booking[]{
+    let bookings: Booking[] = this.getBookings(id);
+    let expensesList: Booking[] = [];
+    for(let i = 0; i < bookings.length; i++){
+      if (bookings[i].amount < 0){
+        let booking: Booking = {id:bookings[i].id, date:bookings[i].date, description:bookings[i].description, amount:bookings[i].amount *- 1}
+        expensesList.push(booking);
+      }
+    }
+    return expensesList;
+  }
 }

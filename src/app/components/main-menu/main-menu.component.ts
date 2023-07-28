@@ -17,7 +17,6 @@ export class MainMenuComponent implements OnInit{
   accountBalance: number = 0;
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
-
   users!: string[];
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
@@ -35,7 +34,7 @@ export class MainMenuComponent implements OnInit{
     this.booksService.bookId = id;
   }
   addNewBook(): void{
-    this.booksService.bookId = -1;
+    this.booksService.bookId = -1; 
     this.openBooksDialog = true;
   }
 

@@ -21,7 +21,7 @@ export class BookingsTableComponent {
   sorter: string = "date";
   openDialog: boolean = false;
   currentUser: string = "";
-
+  expensesList: Booking[] = [];
   constructor(private bookingsService: BookingsService, 
     @Inject(DOCUMENT) private document: Document, 
     private booksService: BooksService,
@@ -35,6 +35,7 @@ export class BookingsTableComponent {
     this.booksService.bookId = this.id;
     this.bookings = this.bookingsService.getBookings(this.id);
     this.currentUser = this.userService.currentUser;
+    this.expensesList = this.bookingsService.getExpenses(this.id);
   }
 
   @HostListener('document:keypress', ['$event'])
@@ -93,6 +94,7 @@ export class BookingsTableComponent {
   closeDialog(isDialogOpen: boolean){
     if(!isDialogOpen){
       this.openDialog = false;
+      this.expensesList = this.bookingsService.getExpenses(this.id);
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
     }

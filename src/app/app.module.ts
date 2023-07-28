@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { BooksDialogComponent } from './components/books-dialog/books-dialog.component';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
+import { BookingsPieChartComponent } from './components/bookings-pie-chart/bookings-pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserDialogComponent } from './components/user-dialog/user-dialog.compon
     BookingsTableDialogComponent,
     MainMenuComponent,
     BooksDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    BookingsPieChartComponent
   ],
   imports: [
     BrowserModule,
