@@ -24,4 +24,8 @@ export class LocalStorageService {
   getAllKeys(): string[]{
     return Object.keys(localStorage);
   }
+
+  getTags(): string[]{
+    return ["Gehalt", "Einkauf", "Miete", "Restaurant"];
+  }
 }

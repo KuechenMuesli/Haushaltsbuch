@@ -23,8 +23,8 @@ export class BookingsService {
     return booking;
   }
 
-  addBooking(date: string, description: string, amount: number): Booking[] {
-    this.booksService.books[this.bookId].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount});
+  addBooking(date: string, description: string, amount: number, tags: string[]): Booking[] {
+    this.booksService.books[this.bookId].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
     this.booksService.updateBooks();
     return this.booksService.books[this.bookId].bookingsList;
   }
@@ -37,11 +37,11 @@ export class BookingsService {
     return index;
   }
 
-  editBooking(id: number, date: string, description: string, amount: number): void {
+  editBooking(id: number, date: string, description: string, amount: number, tags: string[]): void {
     for (let i = 0; i < this.booksService.books[this.bookId].bookingsList.length; i++){
       if (this.booksService.books[this.bookId].bookingsList[i].id == id){
         this.booksService.books[this.bookId].bookingsList[i] = {
-          id, date, description, amount
+          id, date, description, amount, tags
         };
         break;
       }
@@ -63,7 +63,7 @@ export class BookingsService {
     let expensesList: Booking[] = [];
     for(let i = 0; i < bookingsList.length; i++){
       if (bookingsList[i].amount < 0){
-        let booking: Booking = {id:bookingsList[i].id, date:bookingsList[i].date, description:bookingsList[i].description, amount:bookingsList[i].amount *- 1}
+        let booking: Booking = {id:bookingsList[i].id, date:bookingsList[i].date, description:bookingsList[i].description, amount:bookingsList[i].amount *- 1, tags:bookingsList[i].tags}
         expensesList.push(booking);
       }
     }
@@ -136,4 +136,21 @@ export class BookingsService {
     }
     return filteredBookings;
   }
+
+  getTagsOfBooking(id: number): string[]{
+    if(id >= 0){
+      return this.getBooking(id).tags;
+    }
+    return [];
+  }
+
+  deleteTag(id:number, name:string){
+    let booking = this.getBooking(id);
+    let index: number = booking.tags.findIndex(tagName => tagName == name);
+    if (index != -1){
+      booking.tags.splice(index, 1);
+    }
+  }
 }
+
+

@@ -17,7 +17,16 @@
                 <td><input type="number" id="amount" formControlName="amount" class="form-input"></td>
             </tr>
         </table>
+
+        <div class="tags">
+            <div id="tags-label">Tags: </div>
+            <div id="tag" *ngFor="let tag of getTags()"><div>{{tag}}</div><button type="button" id="delete-tag-button" (click)="deleteTagPressed(tag)"><mat-icon id="delete-tag-icon">close</mat-icon></button></div>
+            <button type="button" id="add-tag-button" (click)="addTagPressed()"><mat-icon>add_circle</mat-icon></button>
+        </div>
+
+
         <button type="submit" [disabled]="newBookingForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
     </form>
 </dialog>
+<app-add-tag-dialog [openDialog]="addTagDialogOpen" (dialogIsOpen)="closeTagsDialog($event)"></app-add-tag-dialog>

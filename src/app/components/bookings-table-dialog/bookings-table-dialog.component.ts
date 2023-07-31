@@ -4,6 +4,7 @@ import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
+import { TagsService } from '../../services/tags-service/tags.service';
 
 @Component({
   selector: 'app-bookings-table-dialog',
@@ -15,15 +16,18 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   newBookingForm!: FormGroup; 
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
+
   
   date: string = "";
   description: string = "";
   amount: number = 0;
 
   isdialogOpen: boolean = true;
+  addTagDialogOpen: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document, 
-  private formBuilder: FormBuilder, private bookingsService: BookingsService, private renderer: Renderer2
+  private formBuilder: FormBuilder, private bookingsService: BookingsService, private renderer: Renderer2,
+  private tagsService: TagsService
   ){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -66,9 +70,9 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     if(this.newBookingForm.valid){
       let formData = this.newBookingForm.value; 
       if (this.bookingsService.bookingId == -1){
-        this.bookingsService.addBooking(formData.date, formData.description, formData.amount);
+        this.bookingsService.addBooking(formData.date, formData.description, formData.amount, []);
       }else{
-        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount);
+        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId));
       }
     }
     this.closeDialog();
@@ -84,5 +88,27 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     
     dia.close();
   }
-  
+
+  getTags(): string[]{
+    return this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId);
+  }
+
+  addTagPressed(){
+    this.addTagDialogOpen = true;
+  }
+
+  deleteTagPressed(name: string){
+    this.bookingsService.deleteTag(this.bookingsService.bookingId, name);
+  }
+
+  closeTagsDialog(dialogIsOpen: boolean){
+    if(!dialogIsOpen){
+      this.addTagDialogOpen = false;
+      if(this.tagsService.addedTag !== ""){
+        let bookingTags = this.bookingsService.getBooking(this.bookingsService.bookingId).tags
+        bookingTags.push(this.tagsService.addedTag);
+        this.bookingsService.getBooking(this.bookingsService.bookingId).tags = bookingTags;
+      }
+    }
+  }
 }

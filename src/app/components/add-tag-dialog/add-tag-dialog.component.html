@@ -1,0 +1,19 @@
+
+<dialog id="tag-dialog">
+    <form [formGroup]="addTagForm" (ngSubmit)="onSubmit()">
+
+        <table>
+            <tr>
+                <td><label for="name">Tag-Name:</label></td> 
+                <td>
+                    <input type="text" id="name" formControlName="name" class="form-input" list="tags">
+                        <datalist id="tags">
+                            <option *ngFor="let tag of tagsList" value="{{tag}}"></option>
+                        </datalist>
+                </td>
+            </tr>
+        </table>
+        <button type="submit" [disabled]="addTagForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
+        <button type="reset" (click)="cancelAddingTag()" id="cancel-button"><mat-icon>close</mat-icon></button>
+    </form>
+</dialog>

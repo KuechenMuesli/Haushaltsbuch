@@ -13,6 +13,7 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { BooksDialogComponent } from './components/books-dialog/books-dialog.component';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { BookingsPieChartComponent } from './components/bookings-pie-chart/bookings-pie-chart.component';
+import { AddTagDialogComponent } from './components/add-tag-dialog/add-tag-dialog.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BookingsPieChartComponent } from './components/bookings-pie-chart/booki
     MainMenuComponent,
     BooksDialogComponent,
     UserDialogComponent,
-    BookingsPieChartComponent
+    BookingsPieChartComponent,
+    AddTagDialogComponent
   ],
   imports: [
     BrowserModule,
