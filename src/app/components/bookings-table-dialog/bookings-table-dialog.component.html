@@ -20,7 +20,7 @@
 
         <div class="tags">
             <div id="tags-label">Tags: </div>
-            <div id="tag" *ngFor="let tag of getTags()"><div>{{tag}}</div><button type="button" id="delete-tag-button" (click)="deleteTagPressed(tag)"><mat-icon id="delete-tag-icon">close</mat-icon></button></div>
+            <div id="tag" *ngFor="let tag of tags"><div>{{tag}}</div><button type="button" id="delete-tag-button" (click)="deleteTagPressed(tag)"><mat-icon id="delete-tag-icon">close</mat-icon></button></div>
             <button type="button" id="add-tag-button" (click)="addTagPressed()"><mat-icon>add_circle</mat-icon></button>
         </div>
 

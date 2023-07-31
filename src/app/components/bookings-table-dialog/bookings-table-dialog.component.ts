@@ -17,11 +17,12 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
-  
+  tags: string[] = this.getTags();
+  addedTags: string[] = [];
   date: string = "";
   description: string = "";
   amount: number = 0;
-
+  
   isdialogOpen: boolean = true;
   addTagDialogOpen: boolean = false;
 
@@ -30,9 +31,10 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   private tagsService: TagsService
   ){}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.openDialog){
       this.showDialog();
+      this.tags = this.getTags();
     }
   }
   
@@ -70,10 +72,12 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     if(this.newBookingForm.valid){
       let formData = this.newBookingForm.value; 
       if (this.bookingsService.bookingId == -1){
-        this.bookingsService.addBooking(formData.date, formData.description, formData.amount, []);
+        this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags);
       }else{
-        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId));
+        this.tags = this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).concat(this.addedTags);
+        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags);
       }
+      this.addedTags = [];
     }
     this.closeDialog();
   }
@@ -90,6 +94,9 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   }
 
   getTags(): string[]{
+    if (this.bookingsService.bookingId == -1){
+      return [];
+    }
     return this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId);
   }
 
@@ -105,9 +112,8 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     if(!dialogIsOpen){
       this.addTagDialogOpen = false;
       if(this.tagsService.addedTag !== ""){
-        let bookingTags = this.bookingsService.getBooking(this.bookingsService.bookingId).tags
-        bookingTags.push(this.tagsService.addedTag);
-        this.bookingsService.getBooking(this.bookingsService.bookingId).tags = bookingTags;
+        this.addedTags.push(this.tagsService.addedTag);
+        this.tags = this.getTags().concat(this.addedTags);
       }
     }
   }
