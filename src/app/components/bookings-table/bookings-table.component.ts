@@ -41,11 +41,11 @@ export class BookingsTableComponent {
 
     this.months = this.bookingsService.getMonths(this.id);
     this.month = this.months[0];
-    this.bookings = this.bookingsService.filterMonth(this.id, this.month);
+    this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
   
     this.currentUser = this.userService.currentUser;
 
-    this.expensesList = this.bookingsService.getExpenses(this.id);
+    this.expensesList = this.bookingsService.getExpenses(this.bookings);
   }
 
   @HostListener('document:keypress', ['$event'])
@@ -60,10 +60,6 @@ export class BookingsTableComponent {
     return date.getDate()+"."+(date.getMonth() + 1 + "." + date.getFullYear())
   }
 
-  getBookings(): void {
-      this.bookings = this.bookingsService.getBookings(this.id);
-  }
-
   editBooking(id: number): void{
     this.bookingsService.bookingId = id;
     this.openDialog = true;
@@ -71,7 +67,8 @@ export class BookingsTableComponent {
 
   deleteBooking(id: number): void {
     let index = this.bookingsService.deleteBooking(id);
-    this.expensesList = this.bookingsService.getExpenses(this.id);
+    this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
+    this.expensesList = this.bookingsService.getExpenses(this.bookings);
 
     let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
     table.deleteRow(index + 1);
@@ -94,7 +91,6 @@ export class BookingsTableComponent {
     }else{
       this.sorter = "amount";
       this.bookings.sort((a, b) => a.amount - b.amount);
-
     }
   }
 
@@ -106,15 +102,18 @@ export class BookingsTableComponent {
   closeDialog(isDialogOpen: boolean){
     if(!isDialogOpen){
       this.openDialog = false;
-      this.expensesList = this.bookingsService.getExpenses(this.id);
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
-      this.bookings = this.bookingsService.filterMonth(this.id, this.month);
+
+      this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
+      this.expensesList = this.bookingsService.getExpenses(this.bookings);
     }
   }
 
   dateChanged(month: string){
     this.month = month;
-    this.bookings = this.bookingsService.filterMonth(this.id, this.month);
+    this.bookings = this.bookingsService.getBookings(this.id);
+    this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
+    this.expensesList = this.bookingsService.getExpenses(this.bookings);
   }
 }

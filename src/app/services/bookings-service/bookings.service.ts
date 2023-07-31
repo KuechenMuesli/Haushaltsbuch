@@ -60,12 +60,11 @@ export class BookingsService {
     return total_amount;
   }
 
-  getExpenses(id: number): Booking[]{
-    let bookings: Booking[] = this.getBookings(id);
+  getExpenses(bookingsList: Booking[]): Booking[]{
     let expensesList: Booking[] = [];
-    for(let i = 0; i < bookings.length; i++){
-      if (bookings[i].amount < 0){
-        let booking: Booking = {id:bookings[i].id, date:bookings[i].date, description:bookings[i].description, amount:bookings[i].amount *- 1}
+    for(let i = 0; i < bookingsList.length; i++){
+      if (bookingsList[i].amount < 0){
+        let booking: Booking = {id:bookingsList[i].id, date:bookingsList[i].date, description:bookingsList[i].description, amount:bookingsList[i].amount *- 1}
         expensesList.push(booking);
       }
     }
@@ -109,8 +108,7 @@ export class BookingsService {
     return months;
   }
 
-  filterMonth(id:number, month:string): Booking[]{
-    let bookings: Booking[] = this.booksService.getBookings(id);
+  filterMonth(bookingsList: Booking[], month:string): Booking[]{
     let filteredBookings: Booking[] = [];
     let monthsRefactor = [
       {numeral:"01", alpha:"Januar"},
@@ -126,15 +124,15 @@ export class BookingsService {
       {numeral:"11", alpha:"November"},
       {numeral:"12", alpha:"Dezember"}
     ];
-    for (let i: number = 0; i < bookings.length; i++){
-      let splitDate: string[] = bookings[i].date.split("-");
+    for (let i: number = 0; i < bookingsList.length; i++){
+      let splitDate: string[] = bookingsList[i].date.split("-");
       for (let month of monthsRefactor){
         splitDate[1] = splitDate[1].replace(month.numeral, month.alpha);
       }
 
       let monthYear: string = splitDate[1] + " " + splitDate[0];
       if (monthYear == month){
-        filteredBookings.push(bookings[i]);
+        filteredBookings.push(bookingsList[i]);
       }
     }
     return filteredBookings;
