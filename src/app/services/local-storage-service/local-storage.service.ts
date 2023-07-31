@@ -22,10 +22,8 @@ export class LocalStorageService {
   }
 
   getAllKeys(): string[]{
-    return Object.keys(localStorage);
-  }
-
-  getTags(): string[]{
-    return ["Gehalt", "Einkauf", "Miete", "Restaurant"];
+    let keys: string[] = Object.keys(localStorage);
+    keys.splice(keys.findIndex(key => key == "Tags") ,1);
+    return keys;
   }
 }
