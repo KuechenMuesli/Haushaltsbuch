@@ -49,9 +49,8 @@ export class BookingsService {
     this.booksService.updateBooks();
   }
 
-  calculateBookingsTotal(id: number): number{
+  calculateBookingsTotal(bookings: Booking[]): number{
     this.bookId = this.booksService.bookId;
-    let bookings = this.booksService.getBookings(id);
 
     let total_amount = 0;
     for (let i = bookings.length - 1; i >= 0; i--){

@@ -13,7 +13,7 @@
 </div>
 
 <ul class="bookings">
-    <app-total-amount id="total-amount"></app-total-amount>
+    <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
     <table id="bookings-table">
         <tr>
             <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon id="sorting-icon">sort</mat-icon></th>
