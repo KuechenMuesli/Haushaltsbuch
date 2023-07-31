@@ -69,7 +69,7 @@ export class BookingsTableComponent {
     let index = this.bookingsService.deleteBooking(id);
     this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
-
+    this.months = this.bookingsService.getMonths(this.id);
     let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
     table.deleteRow(index + 1);
   }
@@ -107,6 +107,7 @@ export class BookingsTableComponent {
 
       this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
+      this.months = this.bookingsService.getMonths(this.id);
     }
   }
 

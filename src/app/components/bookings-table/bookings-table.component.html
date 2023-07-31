@@ -6,9 +6,11 @@
     <button (click)="addBookingPressed()" id="add-button"><mat-icon>add_circle</mat-icon></button>
     <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 </div>
+
 <div id="time-select">
+    <h3 id="time-select-heading">Buchungen aus </h3>
     <select id="monthSelect" #dateSelect (change)="dateChanged(dateSelect.value)">
-        <option *ngFor="let month of months" [value]="month">{{month}}</option>
+        <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>
     </select>
 </div>
 
