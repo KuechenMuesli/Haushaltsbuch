@@ -17,7 +17,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   expensesValues: number[] = [];
   expensesLabels: string[] = [];
 
-  tagsList: string[] = [];
+  tagsList: string[] = [""];
   tagDialogOpen: boolean = false;
 
   constructor(private tagsService: TagsService,){}
@@ -74,8 +74,8 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   updateDataLists(){
     let expensesValues: number[] = new Array(this.tagsList.length).fill(0);
     let allowAllTags: boolean = false;
-    console.log(this.tagsList.length)
-    if(this.tagsList.length == 0){
+    if(this.tagsList[0] == ""){
+      this.tagsList.pop();
       allowAllTags = true;
     }
 
