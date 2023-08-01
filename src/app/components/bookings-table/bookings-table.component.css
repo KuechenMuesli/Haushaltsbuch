@@ -191,3 +191,10 @@ th{
 #expenses-chart{
   display: flex;
 }
+
+#bottom{
+  background-color: rgb(234, 212, 182);
+  margin-top: 100px;
+  height: 200px;
+  width: 100%;
+}

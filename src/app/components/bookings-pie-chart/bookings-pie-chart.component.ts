@@ -94,8 +94,8 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         }
       }
     } 
-      this.expensesValues = expensesValues;
-      this.expensesLabels = this.tagsList;
+    this.expensesValues = expensesValues;
+    this.expensesLabels = this.tagsList;
   }
 
 
