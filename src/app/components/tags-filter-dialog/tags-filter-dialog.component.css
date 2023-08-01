@@ -1,0 +1,43 @@
+.form-input{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+#filter-tag-dialog{
+    z-index: 2;
+    background-color: antiquewhite;
+    border-radius: 9px;
+    border-color: rgb(220, 195, 162);
+    font-size: medium;
+    position:fixed;
+    margin-top: -10%;
+    margin-right: 50%;
+}
+
+#cancel-button, #submit-button{
+    border-radius: 7px;
+    float: right;
+    background-color: antiquewhite;
+    border: none;
+}
+
+#cancel-button{
+    color:rgb(161, 142, 118);
+}
+#cancel-button:hover{
+    background-color: rgb(207, 197, 183);
+}
+
+#submit-button{
+    color:green;
+    margin-right:7px;
+}
+#submit-button:disabled{
+    color: rgb(99, 104, 99);
+    background-color: rgba(207, 197, 183, 0.385);
+}
+#submit-button:enabled{
+    background-color: antiquewhite;
+}
+#submit-button:enabled:hover{
+    background-color: rgb(207, 197, 183);
+}

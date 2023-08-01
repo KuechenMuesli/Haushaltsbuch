@@ -14,6 +14,7 @@ import { BooksDialogComponent } from './components/books-dialog/books-dialog.com
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { BookingsPieChartComponent } from './components/bookings-pie-chart/bookings-pie-chart.component';
 import { TagDialogComponent } from './components/tag-dialog/tag-dialog.component';
+import { TagsFilterDialogComponent } from './components/tags-filter-dialog/tags-filter-dialog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TagDialogComponent } from './components/tag-dialog/tag-dialog.component
     BooksDialogComponent,
     UserDialogComponent,
     BookingsPieChartComponent,
-    TagDialogComponent
+    TagDialogComponent,
+    TagsFilterDialogComponent
   ],
   imports: [
     BrowserModule,

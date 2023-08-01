@@ -5,20 +5,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TagsService } from '../../services/tags-service/tags.service';
 
 @Component({
-  selector: 'app-tag-dialog',
-  templateUrl: './tag-dialog.component.html',
-  styleUrls: ['./tag-dialog.component.css']
+  selector: 'app-tags-filter-dialog',
+  templateUrl: './tags-filter-dialog.component.html',
+  styleUrls: ['./tags-filter-dialog.component.css']
 })
-export class TagDialogComponent implements OnInit, OnChanges{
+export class TagsFilterDialogComponent implements OnInit, OnChanges{
   addTagForm: FormGroup;
   name: string = "";
   tagsList: string[] = this.tagsService.getTags();
 
-  @Input() openDialog: boolean = false;
-  @Input() openFilterTagDialog = false;
-  filterTags: boolean = false;
+  @Input() openFilterDialog: boolean = false;
   @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
-  @Output() dialogIsOpen = new EventEmitter<boolean>();
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
   private tagsService: TagsService){
@@ -28,13 +25,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
   }
 
   ngOnChanges(changes: SimpleChanges): void{
-    if(this.openDialog){
-      this.tagsList = this.tagsService.getTags();
-      this.name = "";
-      this.showDialog();
-    }
-    if(this.openFilterTagDialog){
-      this.filterTags = true;
+    if(this.openFilterDialog){
       this.tagsList = this.tagsService.getTags();
       this.name = "";
       this.showDialog();
@@ -51,6 +42,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
 
   onSubmit(){
     this.tagsService.addTag(this.addTagForm.value.name);
+
     this.closeDialog();
   }
 
@@ -61,18 +53,14 @@ export class TagDialogComponent implements OnInit, OnChanges{
 
   showDialog(){
     this.name = "";
-    let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
+    let dia = this.document.getElementById("filter-tag-dialog") as HTMLDialogElement;
     dia.show();
   }
 
   closeDialog(){
-    if(this.filterTags){
-      this.filterTags = false;
-      this.filterTagsDialogOpen.emit(false);
-    }else{
-      this.dialogIsOpen.emit(false);
-    }
-    let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
+    this.filterTagsDialogOpen.emit(false);
+    let dia = this.document.getElementById("filter-tag-dialog") as HTMLDialogElement;
+    (this.document.getElementById("name-input") as HTMLInputElement).value = "";
     dia.close();
   }
 }

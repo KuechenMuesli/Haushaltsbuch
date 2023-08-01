@@ -1,8 +1,12 @@
 <div>
-    <button (click)="openTagDialog()"><mat-icon>add_circle</mat-icon></button>
-    <app-tag-dialog [openDialog]="tagDialogOpen" (filterTagsDialogOpen)="closeTagsDialog($event)"></app-tag-dialog>
+    <h3>Gefilterte Tags: </h3>
+    <div id="tag" *ngFor="let tag of tagsList"><div>{{tag}}</div><button type="button" id="delete-tag-button" (click)="deleteTagPressed(tag)"><mat-icon id="delete-tag-icon">close</mat-icon></button></div>
+    <button id="add-tag-button" (click)="openTagDialog()"><mat-icon>add_circle</mat-icon></button>
+    
     <div class="chart-container">
-        <h2>Gesamtausgaben: {{totalExpenses}} €</h2>
-        <canvas  id="BookingsChart">{{ chart }}</canvas>
+        <h2>Gesamtausgaben mit diesen Tags: {{totalExpenses}} €</h2>
+        <canvas id="BookingsChart">{{ chart }}</canvas>
     </div>
 </div>
+
+<app-tags-filter-dialog [openFilterDialog]="tagDialogOpen" (filterTagsDialogOpen)="closeTagsDialog($event)"></app-tags-filter-dialog>

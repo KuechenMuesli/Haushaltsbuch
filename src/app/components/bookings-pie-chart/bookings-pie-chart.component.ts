@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChange, Output, EventEmitter } from '@angular/core';
 import { Chart, registerables, Colors } from 'chart.js';
 
 import { Booking } from '../../booking';
@@ -12,9 +12,11 @@ import { TagsService } from '../../services/tags-service/tags.service';
 export class BookingsPieChartComponent implements OnInit, OnChanges{
   public chart!: Chart<"pie", number[], string>;
   @Input() expenses!: Booking[];
+
   totalExpenses: number = 0;
   expensesValues: number[] = [];
   expensesLabels: string[] = [];
+
   tagsList: string[] = [];
   tagDialogOpen: boolean = false;
 
@@ -70,22 +72,32 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   }
 
   updateDataLists(){
-    let expensesValues: number[] = [];
-    let expensesLabels: string[] = [];
-    let expensesLabelsIndex;
-    for(let i = 0; i < this.expenses.length; i++){
-      this.totalExpenses += this.expenses[i].amount;
-      expensesLabelsIndex = expensesLabels.findIndex(description => this.expenses[i].description == description);
-      if(expensesLabelsIndex != -1){
-        expensesValues[expensesLabelsIndex] += this.expenses[i].amount;
-      }else{
-        expensesValues.push(this.expenses[i].amount);
-        expensesLabels.push(this.expenses[i].description);
-      }
+    let expensesValues: number[] = new Array(this.tagsList.length).fill(0);
+    let allowAllTags: boolean = false;
+    console.log(this.tagsList.length)
+    if(this.tagsList.length == 0){
+      allowAllTags = true;
     }
-    this.expensesLabels = expensesLabels;
-    this.expensesValues = expensesValues;
+
+    for(let expense of this.expenses){
+      for(let tag of expense.tags){
+        let tagIndex = this.tagsList.findIndex(name => name == tag);
+        if(tagIndex !== -1){
+          expensesValues[tagIndex] += expense.amount;
+          this.totalExpenses += expense.amount;
+          break;
+        } else if(allowAllTags){
+          this.tagsList.push(tag);
+          expensesValues.push(expense.amount);
+          this.totalExpenses += expense.amount;
+          break;
+        }
+      }
+    } 
+      this.expensesValues = expensesValues;
+      this.expensesLabels = this.tagsList;
   }
+
 
   updateChart(){
     this.totalExpenses = 0;
@@ -107,12 +119,20 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
     Chart.register(Colors);
     this.chart.update();
   }
+
   closeTagsDialog(dialogIsOpen: boolean){
-    console.log(dialogIsOpen);
     if(!dialogIsOpen){
       this.tagDialogOpen = false;
-      this.tagsList.push(this.tagsService.addedTag);
-      console.log(this.tagsList);
+      if(this.tagsService.addedTag !== ""){
+        this.tagsList.push(this.tagsService.addedTag);
+      }
+      this.updateChart();
     }
+  }
+
+  deleteTagPressed(tagName: string){
+    let index: number = this.tagsList.findIndex(name => name == tagName);
+    this.tagsList.splice(index, 1);
+    this.updateChart();
   }
 }
