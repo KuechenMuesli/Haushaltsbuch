@@ -23,7 +23,10 @@ export class LocalStorageService {
 
   getAllKeys(): string[]{
     let keys: string[] = Object.keys(localStorage);
-    keys.splice(keys.findIndex(key => key == "Tags") ,1);
+    let excludedKeys: string[] = ["Tags", "Passwords", "undefined"];
+    for(let excludedKey of excludedKeys){
+      keys.splice(keys.findIndex(key => key == excludedKey), 1);
+    }
     return keys;
   }
 }
