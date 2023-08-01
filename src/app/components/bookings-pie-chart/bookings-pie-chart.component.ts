@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChange } from '@angular/core';
 import { Chart, registerables, Colors } from 'chart.js';
+
 import { Booking } from '../../booking';
+import { TagsService } from '../../services/tags-service/tags.service';
 
 @Component({
   selector: 'app-bookings-pie-chart',
@@ -13,13 +15,20 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   totalExpenses: number = 0;
   expensesValues: number[] = [];
   expensesLabels: string[] = [];
+  tagsList: string[] = [];
+  tagDialogOpen: boolean = false;
 
+  constructor(private tagsService: TagsService,){}
   ngOnChanges(){
-      this.updateChart();
+    this.updateChart();
   }
 
   ngOnInit(){
     this.createChart();
+  }
+
+  openTagDialog(){
+    this.tagDialogOpen = true;
   }
 
   createChart(){
@@ -97,5 +106,13 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
     })
     Chart.register(Colors);
     this.chart.update();
+  }
+  closeTagsDialog(dialogIsOpen: boolean){
+    console.log(dialogIsOpen);
+    if(!dialogIsOpen){
+      this.tagDialogOpen = false;
+      this.tagsList.push(this.tagsService.addedTag);
+      console.log(this.tagsList);
+    }
   }
 }

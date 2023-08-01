@@ -1,4 +1,8 @@
-<div class="chart-container">
-    <h2>Gesamtausgaben: {{totalExpenses}} €</h2>
-    <canvas  id="BookingsChart">{{ chart }}</canvas>
+<div>
+    <button (click)="openTagDialog()"><mat-icon>add_circle</mat-icon></button>
+    <app-tag-dialog [openDialog]="tagDialogOpen" (filterTagsDialogOpen)="closeTagsDialog($event)"></app-tag-dialog>
+    <div class="chart-container">
+        <h2>Gesamtausgaben: {{totalExpenses}} €</h2>
+        <canvas  id="BookingsChart">{{ chart }}</canvas>
+    </div>
 </div>

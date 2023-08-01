@@ -29,4 +29,4 @@
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
     </form>
 </dialog>
-<app-add-tag-dialog [openDialog]="addTagDialogOpen" (dialogIsOpen)="closeTagsDialog($event)"></app-add-tag-dialog>
+<app-tag-dialog [openDialog]="addTagDialogOpen" (dialogIsOpen)="closeTagsDialog($event)"></app-tag-dialog>

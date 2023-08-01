@@ -8,22 +8,24 @@ import { LocalStorageService } from '../../services/local-storage-service/local-
 import { TagsService } from '../../services/tags-service/tags.service';
 
 @Component({
-  selector: 'app-add-tag-dialog',
-  templateUrl: './add-tag-dialog.component.html',
-  styleUrls: ['./add-tag-dialog.component.css']
+  selector: 'app-tag-dialog',
+  templateUrl: './tag-dialog.component.html',
+  styleUrls: ['./tag-dialog.component.css']
 })
-export class AddTagDialogComponent implements OnInit, OnChanges{
-  isDialogOpen!: boolean;
-  addTagForm!: FormGroup;
+export class TagDialogComponent implements OnInit, OnChanges{
+  addTagForm: FormGroup;
   name: string = "";
   tagsList: string[] = this.tagsService.getTags();
 
-  @Input() openDialog!: boolean;
+  @Input() openDialog: boolean = false;
+  @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
-  private bookingsService: BookingsService, private localStorageService: LocalStorageService,
   private tagsService: TagsService){
+    this.addTagForm = this.formBuilder.group({
+      name:[`${this.name}`, Validators.required]
+    })
   }
 
   ngOnChanges(changes: SimpleChanges): void{
@@ -39,9 +41,7 @@ export class AddTagDialogComponent implements OnInit, OnChanges{
   }
 
   createAddTagForm(){
-    this.addTagForm = this.formBuilder.group({
-      name:[`${this.name}`, Validators.required]
-    })
+
   }
 
   onSubmit(){
@@ -61,6 +61,8 @@ export class AddTagDialogComponent implements OnInit, OnChanges{
   }
 
   closeDialog(){
+    console.log("HERE")
+    this.filterTagsDialogOpen.emit(false);
     this.dialogIsOpen.emit(false);
     let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
     dia.close();
