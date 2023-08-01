@@ -8,9 +8,6 @@
     border-radius: 9px;
     border-color: rgb(220, 195, 162);
     font-size: medium;
-    position:fixed;
-    margin-top: -10%;
-    margin-right: 50%;
 }
 
 #cancel-button, #submit-button{
