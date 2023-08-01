@@ -42,11 +42,6 @@ export class TagDialogComponent implements OnInit, OnChanges{
   }
 
   ngOnInit(): void {
-    this.createAddTagForm();
-  }
-
-  createAddTagForm(){
-    
   }
 
   onSubmit(){

@@ -1,0 +1,31 @@
+
+.form-input{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+}
+
+#login-dialog{
+    z-index: 2;
+    background-color: antiquewhite;
+    border-radius: 9px;
+    border-color: rgb(220, 195, 162);
+    font-size: medium;
+}
+
+#submit-button{
+    border-radius: 7px;
+    float: right;
+    background-color: antiquewhite;
+    border: none;
+    color: green;
+}
+#submit-button:disabled{
+    color: rgb(99, 104, 99);
+    background-color: rgba(207, 197, 183, 0.385);
+}
+#submit-button:enabled{
+    background-color: antiquewhite;
+}
+#submit-button:enabled:hover{
+    background-color: rgb(207, 197, 183);
+}

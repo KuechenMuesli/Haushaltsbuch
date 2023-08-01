@@ -32,4 +32,8 @@ export class UserService {
     this.getUsers();
     this.currentUser = newName;
   }
+
+  checkPassword(username: string, password: string){
+    return password == "test";
+  }
 }

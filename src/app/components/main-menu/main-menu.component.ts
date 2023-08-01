@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BooksService } from '../../services/books-service/books.service';
 import { Book } from '../../book';
 import { Inject }  from '@angular/core';
@@ -18,6 +18,7 @@ export class MainMenuComponent implements OnInit{
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
   users!: string[];
+  loggedIn: boolean = false;
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService) {}
@@ -85,5 +86,11 @@ export class MainMenuComponent implements OnInit{
 
   editUser(){
     this.openUserDialog = true;
+  }
+
+  loginDialogClosed(loginStatus: boolean){
+    if(loginStatus){
+      this.loggedIn = true;
+    }
   }
 }

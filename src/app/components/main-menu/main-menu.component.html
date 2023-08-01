@@ -1,5 +1,5 @@
-
-<div class="all">
+<app-login-dialog [loggedIn]="loggedIn" (loginStatus)="loginDialogClosed($event)"></app-login-dialog>
+<div class="all" *ngIf="loggedIn">
     <div class="user-select">
         <h4 id="user-heading">Benutzer: </h4>
         <select id="select" #userSelect (change)="userChanged(userSelect.value)">
