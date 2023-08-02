@@ -48,6 +48,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   if(this.userService.checkPassword(username, password)){
     this.loggedIn = true;
     this.localStorageService.writeSessionStorage("LoggedIn", [username]);
+    this.userService.currentUser = username;
     this.userAlreadyExists = false;
     this.wrongUsernamePassword = false;
     this.closeDialog();

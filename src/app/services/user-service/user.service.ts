@@ -50,8 +50,8 @@ export class UserService {
     let userIndex = passwordList.findIndex(pair => pair.username == name);
     passwordList.splice(userIndex, 1);
     this.localStorageService.saveData("Passwords", passwordList);
+    this.logOut();
     this.getUsers();
-    this.currentUser = this.users[0];
   }
 
   editUser(oldName: string, newName: string){

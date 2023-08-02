@@ -97,6 +97,7 @@ export class MainMenuComponent implements OnInit, OnChanges{
     if(loginStatus){
       this.userChanged();
       this.loggedIn = true;
+      this.currentUser = this.userService.currentUser;
     }
   }
 }
