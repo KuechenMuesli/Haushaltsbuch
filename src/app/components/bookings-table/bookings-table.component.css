@@ -102,6 +102,8 @@ th{
   background-color: antiquewhite;
   border: none;
   color: green;
+  margin-top: 15px;
+  height: 35px;
 }
 #add-button:hover{
   background-color: rgb(200, 184, 163);

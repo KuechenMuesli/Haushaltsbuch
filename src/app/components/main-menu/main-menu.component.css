@@ -41,6 +41,8 @@
     color: green;
     background-color: antiquewhite;
     border: none;
+    margin-top: 20px;
+    height: 35px;
 }
 #edit-user-button:hover{
     background-color: rgb(200, 184, 163);
@@ -80,6 +82,8 @@
     background-color: antiquewhite;
     border: none;
     color: green;
+    margin-top: 25px;
+    height: 35px;
 }
 #add-new-book-button:hover{
     background-color: rgb(200, 184, 163);
