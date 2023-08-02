@@ -41,7 +41,15 @@ export class UserService {
 
   deleteUser(name: string){
     this.localStorageService.deleteData(name);
-    delete this.users[this.users.findIndex(user => user == name)];
+    this.users.splice(this.users.findIndex(user => user == name), 1);
+    interface userPassword{
+      username: string,
+      password: string
+    }
+    let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
+    let userIndex = passwordList.findIndex(pair => pair.username == name);
+    passwordList.splice(userIndex, 1);
+    this.localStorageService.saveData("Passwords", passwordList);
     this.getUsers();
     this.currentUser = this.users[0];
   }
@@ -82,6 +90,7 @@ export class UserService {
     this.loggedInSubject.next(true);
   }
   logOut(){
+    this.localStorageService.writeSessionStorage("LoggedIn", []);
     this.loggedInSubject.next(false);
   }
 }
