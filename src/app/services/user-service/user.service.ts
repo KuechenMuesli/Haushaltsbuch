@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 })
 export class UserService {
   users: string[] = []
-  currentUser!: string;
+  currentUser: string = String(this.localStorageService.getSessionStorage("LoggedIn")[0]);
   public loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public loggedIn: Observable<boolean> = this.loggedInSubject.asObservable();
 
