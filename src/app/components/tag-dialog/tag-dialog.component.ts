@@ -67,6 +67,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
     }else{
       this.dialogIsOpen.emit(false);
     }
+    (this.document.getElementById("name") as HTMLInputElement).value = "";
     let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
     dia.close();
   }

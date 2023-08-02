@@ -6,6 +6,18 @@
                 <td><label for="name">Name:</label></td> 
                 <td><input type="text" id="name" formControlName="name" class="form-input" value=""></td>
             </tr>
+            <tr>
+                <button type="button" (click)="changePasswordClicked()">Passwort ändern</button>
+            </tr>
+            <tr *ngIf="changePassword">
+                <td><label for="old-password-input">Altes Passwort: </label></td>
+                <td><input type="password" formControlName="oldPassword" id="old-password-input"></td>
+            </tr>
+            <tr *ngIf="changePassword">
+                <td><label for="new-password-input">Neues Passwort: </label></td>
+                <td><input type="password" formControlName="newPassword" id="new-password-input"></td>
+            </tr>
+
         </table>
         <button type="submit" [disabled]="editUserForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>

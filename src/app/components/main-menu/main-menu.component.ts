@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
-export class MainMenuComponent implements OnInit, OnChanges{
+export class MainMenuComponent implements OnInit{
   bookingsList: Book[] = [];
   accountBalance: number = 0;
   openBooksDialog: boolean = false;
@@ -28,10 +28,6 @@ export class MainMenuComponent implements OnInit, OnChanges{
     this.loggedInSubscription = this.userService.loggedIn.subscribe((value) => {
       this.loggedIn = value;
     })
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    
   }
 
   ngOnInit(): void {

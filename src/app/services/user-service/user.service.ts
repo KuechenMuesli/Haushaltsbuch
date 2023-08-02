@@ -86,6 +86,17 @@ export class UserService {
     return false;
   }
 
+  changePassword(username: string, password: string){
+    interface userPassword {
+      username: string,
+      password: string
+    }
+    let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
+    let userIndex = passwordList.findIndex(pair => pair.username == username);
+    passwordList[userIndex].password = Md5.hashStr(password);
+    this.localStorageService.saveData("Passwords", passwordList);
+  }
+
   logIn(){
     this.loggedInSubject.next(true);
   }

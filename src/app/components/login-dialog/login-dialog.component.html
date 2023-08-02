@@ -1,6 +1,6 @@
 <dialog id="login-dialog">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <table>
+        <table id="input-table">
             <tr>
                 <td><label for="username-input" class="form-input">Nutzername: </label></td>
                 <td><input type="text" name="username" id="username-input" formControlName="username" class="form-input"></td>

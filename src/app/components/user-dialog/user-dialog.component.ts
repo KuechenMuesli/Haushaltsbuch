@@ -14,6 +14,7 @@ export class UserDialogComponent implements OnInit{
   editUserForm!: FormGroup; 
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
+  changePassword: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){}
 
@@ -29,7 +30,9 @@ export class UserDialogComponent implements OnInit{
 
   newEditUserForm(){
     this.editUserForm = this.formBuilder.group({
-      name:[`${this.userService.currentUser}`, Validators.required]
+      name:[`${this.userService.currentUser}`, Validators.required],
+      oldPassword:[],
+      newPassword:[]
     })
   }
 
@@ -39,7 +42,16 @@ export class UserDialogComponent implements OnInit{
       formData = this.editUserForm.value; 
       this.userService.editUser(this.userService.currentUser, formData.name);
     }
+    if(this.changePassword){
+      if(this.userService.checkPassword(this.userService.currentUser, formData.oldPassword)){
+        this.userService.changePassword(this.userService.currentUser, formData.newPassword);
+      }
+    }
     this.closeDialog();
+  }
+
+  changePasswordClicked(){
+    this.changePassword = !this.changePassword;
   }
 
   deleteUser(){

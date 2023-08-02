@@ -10,6 +10,7 @@
     border-radius: 9px;
     border-color: rgb(220, 195, 162);
     font-size: medium;
+    width: 413px;
 }
 
 #add-user-button{
@@ -52,3 +53,6 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
+#input-table{
+    margin-bottom: 20px;
+}
