@@ -22,7 +22,9 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
 
   constructor(private tagsService: TagsService,){}
   ngOnChanges(){
-    this.updateChart();
+    if (this.chart){
+      this.updateChart();
+    }
   }
 
   ngOnInit(){
@@ -100,6 +102,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
 
 
   updateChart(){
+    Chart.register(Colors);
     this.totalExpenses = 0;
     this.updateDataLists();
     this.chart.data.labels = this.expensesLabels;

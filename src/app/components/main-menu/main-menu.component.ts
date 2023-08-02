@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { BooksService } from '../../services/books-service/books.service';
 import { Book } from '../../book';
 import { Inject }  from '@angular/core';
@@ -24,7 +24,7 @@ export class MainMenuComponent implements OnInit{
   loggedInSubscription: Subscription;
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
-  private bookingsService: BookingsService, private userService: UserService) {
+  private bookingsService: BookingsService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef) {
     this.loggedInSubscription = this.userService.loggedIn.subscribe((value) => {
       this.loggedIn = value;
     })
@@ -93,6 +93,7 @@ export class MainMenuComponent implements OnInit{
     if(loginStatus){
       this.userChanged();
       this.loggedIn = true;
+      this.changeDetectorRef.detectChanges();
       this.currentUser = this.userService.currentUser;
     }
   }
