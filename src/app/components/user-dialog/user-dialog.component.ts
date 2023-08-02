@@ -15,6 +15,7 @@ export class UserDialogComponent implements OnInit{
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
   changePassword: boolean = false;
+  incorrectPassword: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){}
 
@@ -45,9 +46,14 @@ export class UserDialogComponent implements OnInit{
     if(this.changePassword){
       if(this.userService.checkPassword(this.userService.currentUser, formData.oldPassword)){
         this.userService.changePassword(this.userService.currentUser, formData.newPassword);
+        this.incorrectPassword = false;
+      }else{
+        this.incorrectPassword = true;
       }
     }
-    this.closeDialog();
+    if(!this.incorrectPassword){
+      this.closeDialog();
+    }
   }
 
   changePasswordClicked(){

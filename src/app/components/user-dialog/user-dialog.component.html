@@ -7,18 +7,19 @@
                 <td><input type="text" id="name" formControlName="name" class="form-input" value=""></td>
             </tr>
             <tr>
-                <button type="button" (click)="changePasswordClicked()">Passwort ändern</button>
+                <td><label for="change-password-button">Passwort ändern: </label></td>
+                <td><button type="button" (click)="changePasswordClicked()" id="change-password-button"><mat-icon>lock_reset</mat-icon></button></td>
             </tr>
             <tr *ngIf="changePassword">
                 <td><label for="old-password-input">Altes Passwort: </label></td>
-                <td><input type="password" formControlName="oldPassword" id="old-password-input"></td>
+                <td><input type="password" formControlName="oldPassword" id="old-password-input" class="form-input"></td>
             </tr>
             <tr *ngIf="changePassword">
                 <td><label for="new-password-input">Neues Passwort: </label></td>
-                <td><input type="password" formControlName="newPassword" id="new-password-input"></td>
+                <td><input type="password" formControlName="newPassword" id="new-password-input" class="form-input"></td>
             </tr>
-
         </table>
+        <p *ngIf="incorrectPassword && changePassword" id="incorrect-password">Altes Passwort ist nicht korrekt!</p>
         <button type="submit" [disabled]="editUserForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
         <button type="reset" id="delete-user-button" (click)="deleteUser()"><mat-icon>delete_forever</mat-icon></button>

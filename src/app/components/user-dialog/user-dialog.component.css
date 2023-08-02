@@ -50,3 +50,20 @@
 #delete-user-button:hover{
     background-color: rgb(207, 197, 183);
 }
+
+#change-password-button{
+    border-radius: 7px;
+    float: right;
+    background-color: antiquewhite;
+    border: none;
+    color: blue;
+    float: left;
+}
+
+#change-password-button:hover{
+    background-color: rgb(207, 197, 183);
+}
+
+#incorrect-password{
+    color: red;
+}
