@@ -8,10 +8,13 @@ import { Md5 } from 'ts-md5';
 export class UserService {
   users: string[] = []
   currentUser!: string;
-  constructor(private localStorageService: LocalStorageService) { }
+
+  constructor(private localStorageService: LocalStorageService) { 
+  }
 
   getUsers(){
     this.users = this.localStorageService.getAllKeys();
+    console.log(this.users);
   }
   
   addUser(name: string, password: string){
@@ -23,8 +26,15 @@ export class UserService {
       password: string
     }
     let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
-    passwordList.push({username:name, password:password});
-    this.localStorageService.saveData("Passwords", passwordList)
+    passwordList.push({username:name, password:Md5.hashStr(password)});
+    this.localStorageService.saveData("Passwords", passwordList);
+  }
+
+  userExists(username: string): boolean{
+    if (this.users.findIndex(user => user == username) == -1){
+      return false; 
+    }
+    return true;
   }
 
   deleteUser(name: string){
@@ -42,8 +52,19 @@ export class UserService {
     this.currentUser = newName;
   }
 
-  checkPassword(username: string, password: string){
+  checkPassword(username: string, password: string): boolean{
     console.log(Md5.hashStr(password));
-    return password == "test";
+    interface userPassword {
+      username: string,
+      password: string
+    }
+    let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
+    let userIndex = passwordList.findIndex(pair => pair.username == username);
+    if(userIndex !== -1){
+      if (passwordList[userIndex].password == Md5.hashStr(password)){
+        return true;
+      }
+    }
+    return false;
   }
 }
