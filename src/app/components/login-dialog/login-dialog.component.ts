@@ -14,6 +14,8 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   @Input() loggedIn: boolean = false;
   @Output() loginStatus= new EventEmitter<boolean>;
   loginForm!: FormGroup;
+  userAlreadyExists: boolean = false;
+  wrongUsernamePassword: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){
     this.loginForm = this.formBuilder.group({username:["", Validators.required], password:["", Validators.required]});
@@ -37,7 +39,12 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   let password = this.loginForm.value.password;
   if(this.userService.checkPassword(username, password)){
     this.loggedIn = true;
+    this.userAlreadyExists = false;
+    this.wrongUsernamePassword = false;
     this.closeDialog();
+  }else{
+    this.userAlreadyExists = false;
+    this.wrongUsernamePassword = true;
   }
   }
   
@@ -53,7 +60,12 @@ export class LoginDialogComponent implements OnChanges, OnInit{
       this.userService.addUser(data.username, data.password);
       this.userService.currentUser = data.username;
       this.loggedIn = true;
+      this.userAlreadyExists = false;
+      this.wrongUsernamePassword = false;
       this.closeDialog();
+    }else{
+      this.wrongUsernamePassword = false;
+      this.userAlreadyExists = true;
     }
     
   }
