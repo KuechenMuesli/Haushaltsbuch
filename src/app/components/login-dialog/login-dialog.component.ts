@@ -34,6 +34,8 @@ export class LoginDialogComponent implements OnChanges, OnInit{
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!this.loggedIn){
+      this.loginForm.value.username = "";
+      this.loginForm.value.password = "";
       this.showDialog();
     }
   }
@@ -69,17 +71,19 @@ export class LoginDialogComponent implements OnChanges, OnInit{
 
   addNewUserClicked(){
     let data = this.loginForm.value;
-    if (!this.userService.userExists(data.username)){
-      this.userService.addUser(data.username, data.password);
-      this.userService.currentUser = data.username;
-      this.localStorageService.writeSessionStorage("LoggedIn", [data.username]);
-      this.loggedIn = true;
-      this.userAlreadyExists = false;
-      this.wrongUsernamePassword = false;
-      this.closeDialog();
-    }else{
-      this.wrongUsernamePassword = false;
-      this.userAlreadyExists = true;
+    if (this.loginForm.valid){
+      if (!this.userService.userExists(data.username)){
+        this.userService.addUser(data.username, data.password);
+        this.userService.currentUser = data.username;
+        this.localStorageService.writeSessionStorage("LoggedIn", [data.username]);
+        this.loggedIn = true;
+        this.userAlreadyExists = false;
+        this.wrongUsernamePassword = false;
+        this.closeDialog();
+      }else{
+        this.wrongUsernamePassword = false;
+        this.userAlreadyExists = true;
+      }
     }
   }
 }
