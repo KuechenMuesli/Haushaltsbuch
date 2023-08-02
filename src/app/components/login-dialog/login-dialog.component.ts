@@ -26,6 +26,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     let loggedInUser: string[] = this.localStorageService.getSessionStorage("LoggedIn"); 
     if (loggedInUser.length !== 0){
       this.loggedIn = true;
+      this.userService.logIn();
       this.userService.currentUser = loggedInUser[0];
       this.closeDialog();
     }
@@ -58,6 +59,9 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   
   closeDialog(){
     let dialog = this.document.getElementById("login-dialog") as HTMLDialogElement;
+    (this.document.getElementById("username-input") as HTMLInputElement).value = "";
+    (this.document.getElementById("password-input") as HTMLInputElement).value = "";
+
     dialog.close();
     this.loginStatus.emit(this.loggedIn);
   }

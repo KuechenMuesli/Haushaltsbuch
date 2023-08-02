@@ -5,6 +5,7 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common'; 
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { UserService } from '../../services/user-service/user.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { UserService } from '../../services/user-service/user.service';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.css']
 })
-export class MainMenuComponent implements OnInit{
+export class MainMenuComponent implements OnInit, OnChanges{
   bookingsList: Book[] = [];
   accountBalance: number = 0;
   openBooksDialog: boolean = false;
@@ -20,9 +21,18 @@ export class MainMenuComponent implements OnInit{
   users!: string[];
   loggedIn: boolean = false;
   currentUser: string = this.userService.currentUser;
+  loggedInSubscription: Subscription;
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
-  private bookingsService: BookingsService, private userService: UserService) {}
+  private bookingsService: BookingsService, private userService: UserService) {
+    this.loggedInSubscription = this.userService.loggedIn.subscribe((value) => {
+      this.loggedIn = value;
+    })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 
   ngOnInit(): void {
     this.bookingsList = this.booksService.getBookingsList();

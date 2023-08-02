@@ -2,7 +2,7 @@
 <div id="header">
     <a routerLink="/main-menu" id="home-menu"><mat-icon id="home-icon">home</mat-icon></a>
     <h1 id="title" routerLink="/main-menu">{{title}}</h1>
-    <button id="logout-button"><mat-icon id="logout-icon">logout</mat-icon></button>
+    <button id="logout-button" (click)="logOut()"><mat-icon id="logout-icon">logout</mat-icon></button>
 </div><br><br><br><br><br>
 </div>
 <router-outlet></router-outlet>

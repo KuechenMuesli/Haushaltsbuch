@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from '../../services/user-service/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Haushaltsbuch';
+
+  constructor(private userService: UserService, private router: Router){}
+  async logOut(){
+    this.router.navigate(["main-menu"]);
+    await new Promise(resolve => setTimeout(resolve, 10));
+    this.userService.logOut();
+  }
 }

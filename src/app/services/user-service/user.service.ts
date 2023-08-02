@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { Md5 } from 'ts-md5';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,8 @@ import { Md5 } from 'ts-md5';
 export class UserService {
   users: string[] = []
   currentUser!: string;
+  public loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public loggedIn: Observable<boolean> = this.loggedInSubject.asObservable();
 
   constructor(private localStorageService: LocalStorageService) { 
   }
@@ -73,5 +76,12 @@ export class UserService {
       }
     }
     return false;
+  }
+
+  logIn(){
+    this.loggedInSubject.next(true);
+  }
+  logOut(){
+    this.loggedInSubject.next(false);
   }
 }
