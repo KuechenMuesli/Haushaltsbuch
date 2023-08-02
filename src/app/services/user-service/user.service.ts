@@ -14,9 +14,17 @@ export class UserService {
     this.users = this.localStorageService.getAllKeys();
   }
   
-  addUser(name: string){
+  addUser(name: string, password: string){
     this.users.push(name);
+
     this.localStorageService.saveData(name, []);
+    interface userPassword {
+      username: string,
+      password: string
+    }
+    let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
+    passwordList.push({username:name, password:password});
+    this.localStorageService.saveData("Passwords", passwordList)
   }
 
   deleteUser(name: string){

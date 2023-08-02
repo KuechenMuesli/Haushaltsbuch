@@ -46,4 +46,9 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     dialog.close();
     this.loginStatus.emit(this.loggedIn);
   }
+
+  addNewUserClicked(){
+    let data = this.loginForm.value;
+    this.userService.addUser(data.username, data.password);
+  }
 }

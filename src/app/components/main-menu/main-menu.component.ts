@@ -79,7 +79,7 @@ export class MainMenuComponent implements OnInit{
   }
 
   addUser(){
-    this.userService.addUser("");
+    //this.userService.addUser("");
     this.userService.currentUser = "";
     this.openUserDialog = true;
   }
