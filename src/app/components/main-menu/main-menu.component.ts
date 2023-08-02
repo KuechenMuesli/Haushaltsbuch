@@ -19,6 +19,7 @@ export class MainMenuComponent implements OnInit{
   openUserDialog: boolean = false;
   users!: string[];
   loggedIn: boolean = false;
+  currentUser: string = this.userService.currentUser;
   
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService) {}
@@ -61,7 +62,7 @@ export class MainMenuComponent implements OnInit{
         this.userService.deleteUser("");
       }
       this.updateUsers();
-      this.userChanged(this.userService.currentUser);
+      this.userChanged();
     }
   }
   calculateAccountBalance(id:number){
@@ -69,19 +70,13 @@ export class MainMenuComponent implements OnInit{
     return this.accountBalance;
   }
 
-  userChanged(selectedUser: string){
-    this.userService.currentUser = selectedUser;
+  userChanged(){
+    this.currentUser = this.userService.currentUser;
     this.bookingsList = this.booksService.getBookingsList();
   }
 
   updateUsers(){
     this.users = this.userService.users;
-  }
-
-  addUser(){
-    //this.userService.addUser("");
-    this.userService.currentUser = "";
-    this.openUserDialog = true;
   }
 
   editUser(){
@@ -90,6 +85,7 @@ export class MainMenuComponent implements OnInit{
 
   loginDialogClosed(loginStatus: boolean){
     if(loginStatus){
+      this.userChanged();
       this.loggedIn = true;
     }
   }

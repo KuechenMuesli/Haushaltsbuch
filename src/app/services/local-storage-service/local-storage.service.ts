@@ -24,10 +24,19 @@ export class LocalStorageService {
   getAllKeys(): string[]{
     let keys: string[] = Object.keys(localStorage);
     let excludedKeys: string[] = ["Tags", "Passwords"];
-    console.log(keys);
     for(let excludedKey of excludedKeys){
       keys.splice(keys.findIndex(key => key == excludedKey), 1);
     }
     return keys;
+  }
+
+  getSessionStorage <Type>(key: string): Type[]{
+    const data = sessionStorage.getItem(key);
+    const array: Type[] = data !== null? JSON.parse(data) : [];
+    return array;
+  }
+
+  writeSessionStorage <Type>(key: string, value:Type){
+    sessionStorage.setItem(key, JSON.stringify(value));
   }
 }

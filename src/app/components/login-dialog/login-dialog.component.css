@@ -12,6 +12,24 @@
     font-size: medium;
 }
 
+#add-user-button{
+    border-radius: 7px;
+    float: right;
+    background-color: antiquewhite;
+    border: none;
+    color: blue;
+}
+#add-user-button:disabled{
+    color: rgb(99, 104, 99);
+    background-color: rgba(207, 197, 183, 0.385);
+}
+#add-user-button:enabled{
+    background-color: antiquewhite;
+}
+#add-user-button:enabled:hover{
+    background-color: rgb(207, 197, 183);
+}
+
 #submit-button{
     border-radius: 7px;
     float: right;
@@ -33,3 +51,4 @@
     color: red;
     font-family: 'Courier New', Courier, monospace;
 }
+

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { Md5 } from 'ts-md5';
 import { UserService } from '../../services/user-service/user.service';
+import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -17,11 +18,17 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   userAlreadyExists: boolean = false;
   wrongUsernamePassword: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){
+  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService, private localStorageService: LocalStorageService){
     this.loginForm = this.formBuilder.group({username:["", Validators.required], password:["", Validators.required]});
   }
 
   ngOnInit(): void {
+    let loggedInUser: string[] = this.localStorageService.getSessionStorage("LoggedIn"); 
+    if (loggedInUser.length !== 0){
+      this.loggedIn = true;
+      this.userService.currentUser = loggedInUser[0];
+      this.closeDialog();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +46,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   let password = this.loginForm.value.password;
   if(this.userService.checkPassword(username, password)){
     this.loggedIn = true;
+    this.localStorageService.writeSessionStorage("LoggedIn", [username]);
     this.userAlreadyExists = false;
     this.wrongUsernamePassword = false;
     this.closeDialog();
@@ -59,6 +67,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     if (!this.userService.userExists(data.username)){
       this.userService.addUser(data.username, data.password);
       this.userService.currentUser = data.username;
+      this.localStorageService.writeSessionStorage("LoggedIn", [data.username]);
       this.loggedIn = true;
       this.userAlreadyExists = false;
       this.wrongUsernamePassword = false;
@@ -67,6 +76,5 @@ export class LoginDialogComponent implements OnChanges, OnInit{
       this.wrongUsernamePassword = false;
       this.userAlreadyExists = true;
     }
-    
   }
 }

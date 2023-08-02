@@ -1,11 +1,7 @@
 <app-login-dialog [loggedIn]="loggedIn" (loginStatus)="loginDialogClosed($event)"></app-login-dialog>
 <div class="all" *ngIf="loggedIn">
     <div class="user-select">
-        <h4 id="user-heading">Benutzer: </h4>
-        <select id="select" #userSelect (change)="userChanged(userSelect.value)">
-            <option id="options" *ngFor="let user of users" value="{{user}}">{{user}}</option>
-        </select>
-        <button id="add-new-book-button"(click)="addUser()"><mat-icon>add_circle</mat-icon></button>
+        <h4 id="user-heading">Benutzer: {{currentUser}}</h4>
         <button id="edit-user-button" (click)="editUser()"><mat-icon>border_color</mat-icon></button>
         <app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeUserDialog($event)"></app-user-dialog>
     </div>

@@ -12,6 +12,7 @@ body{
     background-color: rgb(234, 212, 182);
     position: fixed;
     width: 100%;
+    justify-content: space-between;
 }
 
 #home-icon{
@@ -40,4 +41,22 @@ body{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    margin-right:auto;
+}
+
+#logout-button{
+    margin-right: 10px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+    color:rgb(161, 142, 118);
+}
+#logout-button:hover{
+    background-color: rgb(182, 167, 146);
+}
+
+#logout-icon{
+    font-size: 30px;
+    height: 30px;
+    width: 30px;
 }

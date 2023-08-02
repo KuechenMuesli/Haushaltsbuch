@@ -14,7 +14,6 @@ export class UserService {
 
   getUsers(){
     this.users = this.localStorageService.getAllKeys();
-    console.log(this.users);
   }
   
   addUser(name: string, password: string){
@@ -48,12 +47,20 @@ export class UserService {
     let userData = this.localStorageService.getData(oldName);
     this.localStorageService.deleteData(oldName);
     this.localStorageService.saveData(newName, userData);
+
+    interface userPassword{
+      username: string,
+      password: string
+    }
+    let passwordList: userPassword[] = this.localStorageService.getData("Passwords");
+    let userIndex = passwordList.findIndex(pair => pair.username == oldName);
+    passwordList[userIndex] = {username:newName, password:passwordList[userIndex].password};
+    this.localStorageService.saveData("Passwords", passwordList);
     this.getUsers();
     this.currentUser = newName;
   }
 
   checkPassword(username: string, password: string): boolean{
-    console.log(Md5.hashStr(password));
     interface userPassword {
       username: string,
       password: string
