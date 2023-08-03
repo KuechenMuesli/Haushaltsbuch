@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private userService: UserService, private router: Router){}
   async logOut(){
     this.router.navigate(["main-menu"]);
-    await new Promise(resolve => setTimeout(resolve, 10));
+    await new Promise(resolve => setTimeout(resolve, 0));
     this.userService.logOut();
   }
 }
