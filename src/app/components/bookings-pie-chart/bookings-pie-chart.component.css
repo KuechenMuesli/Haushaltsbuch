@@ -1,8 +1,8 @@
 .chart-container{
-    width: 750px;
-    height: 750px;
+    width: 700px;
+    height: 1000px;
     max-height: fit-content;
-    margin-left: 10px;
+    margin-left: 0%;
 }
 
 #tag{

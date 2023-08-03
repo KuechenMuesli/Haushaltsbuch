@@ -17,13 +17,13 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   expensesValues: number[] = [];
   expensesLabels: string[] = [];
 
-  tagsList: string[] = [""];
+  tagsList: string[] = [];
   tagDialogOpen: boolean = false;
 
   constructor(private tagsService: TagsService,){}
   ngOnChanges(){
     if (this.chart){
-      this.tagsList = [""];
+      this.tagsList = [];
       this.updateChart();
     }
   }
@@ -56,6 +56,10 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         aspectRatio: 2.5,
         borderColor: "#faebd7",
         plugins: {
+            legend:{
+              display: true,
+              position: "right"
+            },
             tooltip: {
                 callbacks: {
                     label: function (context) {
@@ -77,7 +81,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   updateDataLists(){
     let expensesValues: number[] = new Array(this.tagsList.length).fill(0);
     let allowAllTags: boolean = false;
-    if(this.tagsList[0] == ""){
+    if(this.tagsList.length == 0){
       this.tagsList.pop();
       allowAllTags = true;
     }
