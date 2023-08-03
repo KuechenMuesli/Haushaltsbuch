@@ -19,7 +19,8 @@ export class LineGraphChartComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void {
     this.amountValues = this.bookings.map(booking => booking.amount);
-    this.amountLabels = this.bookings.map(booking => booking.date);
+    this.amountLabels = this.bookings.map(booking => new Date(booking.date).toLocaleDateString("de"));
+    console.log(this.amountLabels);
     this.calculateAmounts();
     if(this.chart){
       this.updateChart();
