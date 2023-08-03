@@ -74,6 +74,22 @@ export class BookingsService {
 
   }
 
+  calculateExpensesAmount(id: number): number[]{
+    let totalExpenses: number = 0;
+    let totalEarnings: number = 0;
+    let bookings: Booking[] = this.getBookings(id);
+    for(let booking of bookings){
+      let amount: number = booking.amount;
+      if(amount < 0) {
+          amount *= -1;
+          totalExpenses += amount;
+      }else {
+          totalEarnings += amount;
+      }
+    }
+    return [totalExpenses, totalEarnings];
+  }
+
   getMonths(id: number): string[]{
     let bookings: Booking[] = this.booksService.getBookings(id);
     bookings.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());

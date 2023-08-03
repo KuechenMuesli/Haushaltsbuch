@@ -1,43 +1,44 @@
+<div class="all">
+    <button class="focus" (click)="addBookingPressed()"></button>
+    <div class = "all-table">
+    <div class="heading">
+        <h2>Buchungen von {{currentUser}}: </h2><h2 id="book-name">{{bookName}}</h2>
+        <button routerLink="dashboard" id="dashboard-button"><mat-icon>insert_chart</mat-icon></button>
+        <button (click)="addBookingPressed()" id="add-button"><mat-icon>add_circle</mat-icon></button>
+        <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
+    </div>
 
-<button class="focus" (click)="addBookingPressed()"></button>
-<div class = "all-table">
-<div class="heading">
-    <h2>Buchungen von {{currentUser}}: </h2><h2 id="book-name">{{bookName}}</h2>
-    <button routerLink="dashboard" id="dashboard-button"><mat-icon>insert_chart</mat-icon></button>
-    <button (click)="addBookingPressed()" id="add-button"><mat-icon>add_circle</mat-icon></button>
+    <div id="time-select">
+        <h3 id="time-select-heading">Buchungen aus </h3>
+        <select id="monthSelect" #dateSelect (change)="dateChanged(dateSelect.value)">
+            <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>
+        </select>
+    </div>
+
+    <div class="bookings">
+        <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
+        <table id="bookings-table">
+            <tr>
+                <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon id="sorting-icon">sort</mat-icon></th>
+                <th class="table-head-elements" class="description">Beschreibung</th>
+                <th class="table-head-elements" class="amount" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag <mat-icon id="sorting-icon">sort</mat-icon></th>
+            </tr>
+            
+            <tr *ngFor="let booking of bookings" class="booking-cells">
+                <td id="table-element" class="date">{{ displayDate(booking.date) }}</td>
+                <td id="table-element" class="description">{{ booking.description }}</td>
+                <td id="table-element" class="amount-cell" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
+                    {{ booking.amount }} €
+                </td>
+                <td id="buttons-cells">
+                    <button (click)="editBooking(booking.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
+                    <button (click)="deleteBooking(booking.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </div>
+    <br><br><br>
     <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 </div>
-
-<div id="time-select">
-    <h3 id="time-select-heading">Buchungen aus </h3>
-    <select id="monthSelect" #dateSelect (change)="dateChanged(dateSelect.value)">
-        <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>
-    </select>
-</div>
-
-<ul class="bookings">
-    <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
-    <table id="bookings-table">
-        <tr>
-            <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon id="sorting-icon">sort</mat-icon></th>
-            <th class="table-head-elements" class="description">Beschreibung</th>
-            <th class="table-head-elements" class="amount" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag <mat-icon id="sorting-icon">sort</mat-icon></th>
-        </tr>
-        
-        <tr *ngFor="let booking of bookings" class="booking-cells">
-            <td id="table-element" class="date">{{ displayDate(booking.date) }}</td>
-            <td id="table-element" class="description">{{ booking.description }}</td>
-            <td id="table-element" class="amount-cell" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
-                {{ booking.amount }} €
-            </td>
-            <td id="buttons-cells">
-                <button (click)="editBooking(booking.id)" id="edit-button"><mat-icon>border_color</mat-icon></button>
-                <button (click)="deleteBooking(booking.id)" id="delete-button"><mat-icon>delete_forever</mat-icon></button>
-            </td>
-        </tr>
-    </table>
-</ul>
-</div>
-<br><br><br>
-<app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 <div id="bottom"></div>

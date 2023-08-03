@@ -4,7 +4,25 @@
         <h1 id="username-heading">{{currentUser}} -</h1>
         <h1 id="bookname-heading">{{bookName}}</h1>
     </div>
+    <div id="dashboard-table-div">
+        <h2>Gesamt-Überblick</h2>
+        <table id="dashboard-table">
+            <tr>
+                <td>Einnahmen</td>
+                <td><div id="earnings">{{totalEarnings}} €</div></td>
+            </tr>
+            <tr>
+                <td>Ausgaben</td>
+                <td ><div id="expenses">{{totalExpenses}} €</div></td>
+            </tr>
+            <tr>
+                <td>Restbetrag</td>
+                <td><div id="total-amount">{{totalAmount}} €</div></td>
+            </tr>
+        </table>
+    </div>
     <div id="time-select">
+        <h2>Zeitraum</h2>
         <form [formGroup]="dateSelectForm" (ngSubmit)="onSubmit()">
             <input type="date" id="starting-date" formControlName="startingDate" value="{{firstBookingDate}}">
             <p id="between-select">bis</p>

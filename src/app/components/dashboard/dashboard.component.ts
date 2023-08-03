@@ -14,6 +14,10 @@ import { BooksService } from '../../services/books-service/books.service';
 export class DashboardComponent implements OnInit{
   id: number = -1;
   bookName: string = "";
+  totalAmount: number = 0;
+  totalExpenses: number = 0;
+  totalEarnings: number = 0;
+
   expensesList: Booking[] = [];
   bookings: Booking[] = [];
   currentUser: string = "";
@@ -33,6 +37,9 @@ export class DashboardComponent implements OnInit{
     this.firstBookingDate = this.bookings[0].date;
     this.lastBookingDate = this.bookings[this.bookings.length - 1].date;
     this.createForm();
+
+    this.totalAmount = this.bookingsService.calculateBookingsTotal(this.bookings);
+    [this.totalExpenses, this.totalEarnings] = this.bookingsService.calculateExpensesAmount(this.id);
     this.onSubmit();
   }
 
@@ -47,6 +54,5 @@ export class DashboardComponent implements OnInit{
     let data = this.dateSelectForm.value;
     this.bookings = this.bookingsService.filterTimespan(this.bookingsService.getBookings(this.id), data.startingDate, data.endingDate);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
-    console.log(this.expensesList);
   }
 }

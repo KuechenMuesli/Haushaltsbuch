@@ -1,7 +1,33 @@
 .all{
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    margin-left: 13px;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+td {
+    font-size: 23px;
+    width: 200px;
+}
+#earnings, #expenses, #total-amount{
+    float: right;
+}
+
+#earnings{
+    color: green;
+}
+
+#expenses{
+    color: red;
+}
+
+#dashboard-table-div{
+    margin-top: 40px;
+    width: 800px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(231, 217, 194);
 }
 
 #heading{
@@ -23,15 +49,19 @@
 }
 
 #time-select{
-    margin-top: 30px;
+    margin-top: 20px;
     white-space: nowrap;
+    background-color: rgb(231, 217, 194);
+    width: 800px;
+    padding: 10px;
+    border-radius: 10px;
 }
 
 #starting-date, #ending-date{
     display: inline;
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
-    background-color: antiquewhite;
+    background-color: transparent;
     border-style: solid;
     border-radius: 7px;
     padding-top: 4px;
@@ -45,9 +75,21 @@
     vertical-align:super;
 }
 
+#bookings-pie-chart{
+    margin-top: 20px;
+    background-color: rgb(231, 217, 194);
+    width: 800px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 #bookings-line-chart{
-    margin-top: 100px;
-    height: 1000px;
+    margin-top: 20px;
+    padding: 10px;
+    padding-bottom: 100px;
+    background-color: rgb(231, 217, 194);
+    width: 800px;
+    border-radius: 10px;
 }
 
 #change-date-button{

@@ -10,6 +10,22 @@ th{
   width: 230px;
   max-width: 230px;
 }
+
+.all{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 10px;
+  background-color: rgb(231, 217, 194);
+}
+
+.all-table{
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 300px;
+}
+
 .focus{
   background-color: transparent;
   border: none;
@@ -22,12 +38,6 @@ th{
   color: red;
 }
 
-.all-table{
-  margin-left: 13px;
-  font-family: 'Courier New', Courier, monospace;
-  margin-bottom: 300px;
-}
-
 .heading{
   display: flex;
 } 
@@ -35,21 +45,21 @@ th{
 .date{
   background-color:rgb(220, 195, 162);
   border-style: solid;
-  border-color: antiquewhite;
+  border-color: rgb(231, 217, 194);
   border-width: 2px;
 }
 
 .description{
   background-color: rgb(234, 212, 182);
   border-style: solid;
-  border-color: antiquewhite;
+  border-color: rgb(231, 217, 194);
   border-width: 2px;
 }
 
 .amount{
-  background-color: rgb(234, 216, 192);
+  background-color: rgb(226, 203, 176);
   border-style: solid;
-  border-color: antiquewhite;
+  border-color: rgb(231, 217, 194);
   border-width: 2px;
 }
 
@@ -100,7 +110,7 @@ th{
 }
 
 #add-button{
-  background-color: antiquewhite;
+  background-color: transparent;
   border: none;
   color: green;
   margin-top: 15px;
@@ -125,7 +135,7 @@ th{
   width: 175px;
   height: 30px;
   font-size: large;
-  background-color: antiquewhite;
+  background-color: transparent;
 
   font-family: 'Courier New', Courier, monospace;
 }
@@ -184,7 +194,7 @@ th{
 
 #table-element{
   border-style: solid;
-  border-color: antiquewhite;
+  border-color: rgb(231, 217, 194);
   border-width: 2px;
   width: 10em;
   word-break: break-all;
