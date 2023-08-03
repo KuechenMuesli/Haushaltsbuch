@@ -201,3 +201,17 @@ th{
   height: 200px;
   width: 100%;
 }
+
+#dashboard-button{
+  color: rgb(95, 135, 209);
+  background-color: transparent;
+  border-radius: 7px;
+  border: none;
+  margin-top: 15px;
+  height: 35px;
+  margin-left: 2px;
+
+}
+#dashboard-button:hover{
+  background-color: rgb(200, 184, 163);
+}

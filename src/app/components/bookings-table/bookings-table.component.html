@@ -3,7 +3,7 @@
 <div class = "all-table">
 <div class="heading">
     <h2>Buchungen von {{currentUser}}: </h2><h2 id="book-name">{{bookName}}</h2>
-    <button routerLink="dashboard"><mat-icon>insert_chart</mat-icon></button>
+    <button routerLink="dashboard" id="dashboard-button"><mat-icon>insert_chart</mat-icon></button>
     <button (click)="addBookingPressed()" id="add-button"><mat-icon>add_circle</mat-icon></button>
     <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 </div>

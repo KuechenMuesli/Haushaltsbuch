@@ -46,8 +46,37 @@ export class LineGraphChartComponent implements OnInit, OnChanges{
         }],
       },
       options: {
+        scales:{
+          y:{
+            ticks:{
+              callback: function(value, index, ticks){
+                return value + "€"
+              },
+              font: {
+                family: "'Courier New', 'Courier', monospace",
+                weight: "bold",
+              }
+            }
+          },
+          x:{
+            ticks:{
+              font:{
+                family: "'Courier New', 'Courier', monospace",
+                weight: "bold",
+              }
+            }
+          }
+        },
         responsive: true,
         plugins: {
+          tooltip:{
+            titleFont:{
+              family: "'Courier New', 'Courier', monospace",
+            },
+            bodyFont:{
+              family:"'Courier New', 'Courier', monospace",
+            }
+          },
           legend: {
             display: false,
           }

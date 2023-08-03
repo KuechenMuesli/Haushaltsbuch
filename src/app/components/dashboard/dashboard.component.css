@@ -4,7 +4,40 @@
     margin-left: 13px;
 }
 
+#time-select{
+    white-space: nowrap;
+}
+
+#starting-date, #ending-date{
+    display: inline;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    background-color: antiquewhite;
+    border-style: solid;
+    border-radius: 7px;
+    padding-top: 4px;
+    border-width: 1px;
+}
+
+#between-select{
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+    vertical-align:super;
+}
+
 #bookings-line-chart{
     margin-top: 100px;
     height: 1000px;
+}
+
+#change-date-button{
+    background-color: transparent;
+    border: none;
+    color: green;
+    margin-left: 5px;
+    border-radius: 7px;
+}
+#change-date-button:hover{
+    background-color: rgb(207, 197, 183);
 }

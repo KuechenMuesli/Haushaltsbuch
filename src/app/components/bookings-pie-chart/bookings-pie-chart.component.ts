@@ -58,9 +58,20 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         plugins: {
             legend:{
               display: true,
-              position: "right"
+              position: "right",
+              labels:{
+                font:{
+                  family:"'Courier New', 'Courier', monospace",
+                }
+              }
             },
             tooltip: {
+              titleFont:{
+                family:"'Courier New', 'Courier', monospace"
+              },
+              bodyFont:{
+                family:"'Courier New', 'Courier', monospace"
+              },
                 callbacks: {
                     label: function (context) {
                         let label = context.dataset.label || '';
