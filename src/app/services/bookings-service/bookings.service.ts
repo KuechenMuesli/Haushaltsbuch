@@ -137,6 +137,20 @@ export class BookingsService {
     return filteredBookings;
   }
 
+  filterTimespan(bookings: Booking[], startingDate: string, endingDate: string): Booking[]{
+    let filteredBookings: Booking[] = [];
+    let startingUnix: number = new Date(startingDate).getTime();
+    let endingUnix: number = new Date(endingDate).getTime();
+    bookings.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    for(let booking of bookings){
+      let bookingDateTime: number = new Date(booking.date).getTime();
+      if (bookingDateTime >= startingUnix && bookingDateTime <= endingUnix){
+        filteredBookings.push(booking);
+      }
+    }
+    return filteredBookings;
+  }
+
   getTagsOfBooking(id: number): string[]{
     if(id >= 0){
       return this.getBooking(id).tags;

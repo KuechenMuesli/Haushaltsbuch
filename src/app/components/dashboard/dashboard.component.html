@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<div class="all">
+    <h1>Dashboard von {{currentUser}}</h1>
+    <div id="time-select">
+        <form [formGroup]="dateSelectForm" (ngSubmit)="onSubmit()">
+            <input type="date" id="starting-date" formControlName="startingDate">
+            <mat-icon>arrow_forward</mat-icon>
+            <input type="date" id="end-date" formControlName="endingDate">
+            <button type="submit"><mat-icon>done</mat-icon></button>
+        </form>
+    </div>
+    <div id="bookings-pie-chart">
+        <app-bookings-pie-chart id="expenses-chart" [expenses]="expensesList"></app-bookings-pie-chart>
+    </div>
+</div>
