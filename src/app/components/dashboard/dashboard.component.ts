@@ -15,22 +15,29 @@ export class DashboardComponent implements OnInit{
   expensesList: Booking[] = [];
   bookings: Booking[] = [];
   currentUser: string = "";
-  firstBookingDate: string = "2023-08-01";
-  lastBookingDate: string = "2023-08-02";
+  firstBookingDate: string = "";
+  lastBookingDate: string = "";
   dateSelectForm!: FormGroup;
 
   constructor(private bookingsService: BookingsService, private route: ActivatedRoute, private userService: UserService,
     private formBuilder: FormBuilder,){
-      this.dateSelectForm = this.formBuilder.group({
-        startingDate: [this.firstBookingDate, Validators.required],
-        endingDate:      [this.lastBookingDate, Validators.required]
-      })
   }
 
   ngOnInit(){
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.currentUser = this.userService.currentUser;
+    this.bookings = this.bookingsService.getBookings(this.id).sort((a, b) => (new Date(a.date).getTime()) - (new Date(b.date).getTime()));
+    this.firstBookingDate = this.bookings[0].date;
+    this.lastBookingDate = this.bookings[this.bookings.length - 1].date;
+    this.createForm();
     this.onSubmit();
+  }
+
+  createForm(){
+    this.dateSelectForm = this.formBuilder.group({
+      startingDate: [this.firstBookingDate, Validators.required],
+      endingDate:   [this.lastBookingDate, Validators.required]
+    })
   }
 
   onSubmit(){

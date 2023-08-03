@@ -2,9 +2,9 @@
     <h1>Dashboard von {{currentUser}}</h1>
     <div id="time-select">
         <form [formGroup]="dateSelectForm" (ngSubmit)="onSubmit()">
-            <input type="date" id="starting-date" formControlName="startingDate">
+            <input type="date" id="starting-date" formControlName="startingDate" value="{{firstBookingDate}}">
             <p id="between-select">bis</p>
-            <input type="date" id="ending-date" formControlName="endingDate">
+            <input type="date" id="ending-date" formControlName="endingDate" value="{{lastBookingDate}}">
             <button type="submit" id="change-date-button"><mat-icon>done</mat-icon></button>
         </form>
     </div>

@@ -22,6 +22,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
 
   constructor(private tagsService: TagsService,){}
   ngOnChanges(){
+    this.expenses.sort((a, b) => a.amount - b.amount);
     if (this.chart){
       this.tagsList = [];
       this.updateChart();
