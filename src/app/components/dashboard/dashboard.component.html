@@ -8,7 +8,12 @@
             <button type="submit"><mat-icon>done</mat-icon></button>
         </form>
     </div>
+
     <div id="bookings-pie-chart">
         <app-bookings-pie-chart id="expenses-chart" [expenses]="expensesList"></app-bookings-pie-chart>
+    </div>
+
+    <div id="bookings-line-chart">
+        <app-line-graph-chart [bookings]="bookings"></app-line-graph-chart>
     </div>
 </div>

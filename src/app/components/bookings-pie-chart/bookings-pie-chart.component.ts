@@ -23,6 +23,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   constructor(private tagsService: TagsService,){}
   ngOnChanges(){
     if (this.chart){
+      this.tagsList = [""];
       this.updateChart();
     }
   }
