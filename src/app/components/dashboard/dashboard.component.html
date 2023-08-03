@@ -1,5 +1,9 @@
 <div class="all">
-    <h1>Dashboard von {{currentUser}}</h1>
+    <div id="heading">
+        <h1 id="dashboard-heading">Dashboard von:</h1>
+        <h1 id="username-heading">{{currentUser}} -</h1>
+        <h1 id="bookname-heading">{{bookName}}</h1>
+    </div>
     <div id="time-select">
         <form [formGroup]="dateSelectForm" (ngSubmit)="onSubmit()">
             <input type="date" id="starting-date" formControlName="startingDate" value="{{firstBookingDate}}">

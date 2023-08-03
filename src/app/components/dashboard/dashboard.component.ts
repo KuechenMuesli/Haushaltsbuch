@@ -4,6 +4,7 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user-service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BooksService } from '../../services/books-service/books.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class DashboardComponent implements OnInit{
   id: number = -1;
+  bookName: string = "";
   expensesList: Booking[] = [];
   bookings: Booking[] = [];
   currentUser: string = "";
@@ -20,11 +22,12 @@ export class DashboardComponent implements OnInit{
   dateSelectForm!: FormGroup;
 
   constructor(private bookingsService: BookingsService, private route: ActivatedRoute, private userService: UserService,
-    private formBuilder: FormBuilder,){
+    private formBuilder: FormBuilder, private booksService: BooksService){
   }
 
   ngOnInit(){
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.bookName = this.booksService.getName(this.id);
     this.currentUser = this.userService.currentUser;
     this.bookings = this.bookingsService.getBookings(this.id).sort((a, b) => (new Date(a.date).getTime()) - (new Date(b.date).getTime()));
     this.firstBookingDate = this.bookings[0].date;
