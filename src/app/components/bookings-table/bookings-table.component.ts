@@ -71,7 +71,6 @@ export class BookingsTableComponent {
     this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
     this.months = this.bookingsService.getMonths(this.id);
-    console.log(index);
   }
 
   sortTableByDate(): void{

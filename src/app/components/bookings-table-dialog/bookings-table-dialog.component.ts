@@ -72,7 +72,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     if(this.newBookingForm.valid){
       let formData = this.newBookingForm.value; 
       if (this.bookingsService.bookingId == -1){
-        this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags);
+        this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags).subscribe();
       }else{
         this.tags = this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).concat(this.addedTags);
         this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags);

@@ -29,15 +29,23 @@ export class BookingsService {
     return booking;
   }
 
-  addBooking(date: string, description: string, amount: number, tags: string[]): Booking[] {
-    let books: Book[] = [];
-    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => books = booksList);
-    console.log("id: " + books.findIndex(book => book.id == this.bookId));
-    books[books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
-    this.localStorageService.saveData(this.userService.currentUser, books);
-    
-    this.booksService.books[books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
-    return books[books.findIndex(book => book.id == this.bookId)].bookingsList;
+  addBooking(date: string, description: string, amount: number, tags: string[]){
+    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+      .pipe(
+        map(books => {
+          let bookIndex = books.findIndex(book => book.id == this.bookId);
+          books[bookIndex].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
+          return{
+            books
+          }
+        })
+      )
+      .pipe(
+        tap(allBooks =>{
+          this.localStorageService.saveData(this.userService.currentUser, allBooks.books);
+          this.booksService.books[allBooks.books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
+        })
+      )
   }
 
   deleteBooking(id: number): Observable<number>{
