@@ -2,19 +2,25 @@ import { Injectable } from '@angular/core';
 import { Booking } from '../../booking';
 import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
+import { LocalStorageService } from '../local-storage-service/local-storage.service';
+import { UserService } from '../user-service/user.service';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
 export class BookingsService {
   bookId: number = this.booksService.bookId;
   bookingId!: number;
-  constructor(private booksService: BooksService) { }
+  constructor(private booksService: BooksService, private localStorageService: LocalStorageService, private userService: UserService) { }
+
   getBookings(id: number): Booking[] {
-    return this.booksService.books[this.booksService.books.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
+    return this.booksService.getBookings(id);
   }
 
   new_id(): number {
-    return this.booksService.books[this.bookId].bookingsList.length > 0? Math.max(...this.booksService.books[this.bookId].bookingsList.map(booking => booking.id)) + 1 : 0;
+    let books: Book[] = [];
+    this.booksService.getBookingsList().subscribe(booksList => books = booksList);
+    return books[books.findIndex(book => book.id == this.bookId)].bookingsList.length > 0? Math.max(...books[books.findIndex(book => book.id == this.bookId)].bookingsList.map(booking => booking.id)) + 1 : 0;
   }
 
   getBooking(id: number): Booking{
@@ -24,9 +30,14 @@ export class BookingsService {
   }
 
   addBooking(date: string, description: string, amount: number, tags: string[]): Booking[] {
-    this.booksService.books[this.bookId].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
-    this.booksService.updateBooks();
-    return this.booksService.books[this.bookId].bookingsList;
+    let books: Book[] = [];
+    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => books = booksList);
+    console.log("id: " + books.findIndex(book => book.id == this.bookId));
+    books[books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
+    this.localStorageService.saveData(this.userService.currentUser, books);
+    
+    this.booksService.books[books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
+    return books[books.findIndex(book => book.id == this.bookId)].bookingsList;
   }
 
   deleteBooking(id: number): number{

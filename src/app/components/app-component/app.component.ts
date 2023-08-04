@@ -11,8 +11,7 @@ import { LocalStorageService } from '../../services/local-storage-service/local-
 export class AppComponent {
   title = 'Haushaltsbuch';
 
-  constructor(private userService: UserService, private router: Router, private readonly storageService: LocalStorageService){
-    storageService.getDataObservable("Tags", "test").subscribe(next => console.log(next));
+  constructor(private userService: UserService, private router: Router){
   }
 
   async logOut(){

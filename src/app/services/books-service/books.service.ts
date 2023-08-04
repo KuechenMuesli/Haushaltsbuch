@@ -72,8 +72,10 @@ export class BooksService {
       );
   }
 
-  getBookings(id: number): Booking[] {
-    return this.books[this.books.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
+  getBookings(id: number): Booking[]{
+    let books!: Book[];
+    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => books = booksList);
+    return books[books.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
   }
 
   updateBooks(){
