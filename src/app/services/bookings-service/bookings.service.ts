@@ -4,7 +4,7 @@ import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
-import { Observable, findIndex, map, tap } from 'rxjs';
+import { Observable, findIndex, map, retry, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -28,11 +28,13 @@ export class BookingsService {
     return books[books.findIndex(book => book.id == this.bookId)].bookingsList.length > 0? Math.max(...books[books.findIndex(book => book.id == this.bookId)].bookingsList.map(booking => booking.id)) + 1 : 0;
   }
 
-  getBooking(id: number): Booking{
-    let bookings: Booking[] = []; 
-    this.getBookings(this.bookId).subscribe(bookingsList => bookings = bookingsList);
-    let booking = bookings[bookings.findIndex(booking => booking.id == id)];
-    return booking;
+  getBooking(id: number): Observable<Booking>{
+    return this.getBookings(this.bookId)
+      .pipe(
+        map(bookings => {
+          return bookings[bookings.findIndex(booking => booking.id == id)];
+        })
+      )
   }
 
   addBooking(date: string, description: string, amount: number, tags: string[]){
@@ -215,13 +217,16 @@ export class BookingsService {
 
   getTagsOfBooking(id: number): string[]{
     if(id >= 0){
-      return this.getBooking(id).tags;
+      let booking!: Booking;
+      this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
+      return booking.tags;
     }
     return [];
   }
 
   deleteTag(id:number, name:string){
-    let booking = this.getBooking(id);
+    let booking!: Booking;
+      this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
     let index: number = booking.tags.findIndex(tagName => tagName == name);
     if (index != -1){
       booking.tags.splice(index, 1);

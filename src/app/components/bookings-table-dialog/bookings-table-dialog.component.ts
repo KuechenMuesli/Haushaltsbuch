@@ -56,7 +56,8 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
       this.description = "";
       this.amount = 0;
     }else{
-      let booking: Booking = this.bookingsService.getBooking(this.bookingsService.bookingId);
+      let booking!: Booking;
+      this.bookingsService.getBooking(this.bookingsService.bookingId).subscribe(returnedBooking => booking = returnedBooking);
       this.date= booking.date;
       this.description = booking.description;
       this.amount = booking.amount;
