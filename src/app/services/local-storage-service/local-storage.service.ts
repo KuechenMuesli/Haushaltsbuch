@@ -10,7 +10,7 @@ export class LocalStorageService {
 
   saveData<Type>(key: string, value:Type){
     localStorage.setItem(key, JSON.stringify(value));
-  } 
+  }
 
   getDataObservable<T>(key: string, defaultValue: T): Observable<T> {
     return new Observable(observer => {
@@ -34,10 +34,13 @@ export class LocalStorageService {
     return keys;
   }
 
-  getSessionStorage <Type>(key: string): Type[]{
-    const data = sessionStorage.getItem(key);
-    const array: Type[] = data !== null? JSON.parse(data) : [];
-    return array;
+  getSessionStorage <T>(key: string, defaultValue: T): Observable<T>{
+    return new Observable(observer => {
+      const storageString = sessionStorage.getItem(key);
+      const data: T = storageString !== null ? JSON.parse(storageString) : defaultValue;
+      observer.next(data);
+      observer.complete();
+    })
   }
 
   writeSessionStorage <Type>(key: string, value:Type){

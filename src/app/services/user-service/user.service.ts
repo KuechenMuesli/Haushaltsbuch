@@ -9,11 +9,17 @@ import { Book } from '../../book';
 })
 export class UserService {
   users: string[] = []
-  currentUser: string = String(this.localStorageService.getSessionStorage("LoggedIn")[0]);
+  currentUser: string = this.getLoggedInUser();
   public loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public loggedIn: Observable<boolean> = this.loggedInSubject.asObservable();
 
   constructor(private localStorageService: LocalStorageService) { 
+  }
+
+  getLoggedInUser(): string{
+    let user: string = "";
+    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => user = loggedInUsers[0])
+    return user;
   }
 
   getUsers(){
