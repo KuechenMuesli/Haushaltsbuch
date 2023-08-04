@@ -40,12 +40,32 @@ export class BookingsService {
     return books[books.findIndex(book => book.id == this.bookId)].bookingsList;
   }
 
-  deleteBooking(id: number): number{
-    this.bookId = this.booksService.bookId;
-    let index = this.booksService.books[this.bookId].bookingsList.findIndex(booking => booking.id === id);
-    this.booksService.books[this.bookId].bookingsList.splice(index, 1);
-    this.booksService.updateBooks();
-    return index;
+  deleteBooking(id: number): Observable<number>{
+    return this.booksService.getBookingsList()
+      .pipe(
+        map(books => {
+          const bookIndex = books.findIndex(book => book.id == this.bookId);
+          let bookings = books[bookIndex].bookingsList;
+          let bookingIndex = bookings.findIndex(booking => booking.id == id);
+          bookingIndex !== -1 ? bookings.splice(bookingIndex, 1) : null;
+          return {
+            bookIndex,
+            bookings
+          }
+        })
+      )
+      .pipe(
+        tap(bookingsAndIndex => {
+          let newBooksList: Book[] = [];
+          this.booksService.getBookingsList().subscribe(booksList => newBooksList = booksList);
+          newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
+          this.localStorageService.saveData(this.userService.currentUser, newBooksList);
+        }
+        )
+      )
+      .pipe(
+        map(bookingsAndIndex => bookingsAndIndex.bookIndex)
+      )
   }
 
   editBooking(id: number, date: string, description: string, amount: number, tags: string[]): void {

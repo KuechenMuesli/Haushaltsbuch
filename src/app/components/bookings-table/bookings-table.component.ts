@@ -66,12 +66,12 @@ export class BookingsTableComponent {
   }
 
   deleteBooking(id: number): void {
-    let index = this.bookingsService.deleteBooking(id);
+    let index = -1;
+    this.bookingsService.deleteBooking(id).subscribe(bookingsIndex => index = bookingsIndex);
     this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
     this.months = this.bookingsService.getMonths(this.id);
-    let table = this.document.getElementById('bookingsTable') as HTMLTableElement;
-    table.deleteRow(index + 1);
+    console.log(index);
   }
 
   sortTableByDate(): void{
