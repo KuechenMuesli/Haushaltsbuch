@@ -10,10 +10,16 @@ import { Observable, map, tap } from 'rxjs';
 })
 export class BooksService {
   bookId: number = 0;
-  data: Book[] = this.localStorageService.getData(this.userService.currentUser);
+  data: Book[] = this.setBooks();
   books: Book[] = this.data.length > 0? this.data : [{id:0, name:"", bookingsList:[]}]
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
+  
+  setBooks(): Book[]{
+    let booksList: Book[] = [];
+    this.localStorageService.getDataObservable(this.userService.currentUser, []).subscribe(books => booksList = books);
+    return booksList;
+  }
 
   getBooksList(): Observable<Book[]> {
     return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []);

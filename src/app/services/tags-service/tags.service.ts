@@ -11,7 +11,7 @@ export class TagsService {
   constructor(private localStorageService: LocalStorageService) { }
   
   getTags(){
-    this.tags = this.localStorageService.getData("Tags");
+    this.localStorageService.getDataObservable("Tags", []).subscribe(tagsList => this.tags = tagsList);
     return this.tags
   }
 

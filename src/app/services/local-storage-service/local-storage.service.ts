@@ -10,13 +10,7 @@ export class LocalStorageService {
 
   saveData<Type>(key: string, value:Type){
     localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  getData <Type>(key: string): Type[]{
-    const data = localStorage.getItem(key);
-    const array: Type[] = data !== null? JSON.parse(data) : []
-    return array;
-  }
+  } 
 
   getDataObservable<T>(key: string, defaultValue: T): Observable<T> {
     return new Observable(observer => {
