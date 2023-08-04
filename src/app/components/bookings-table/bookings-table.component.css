@@ -225,3 +225,9 @@ th{
 #dashboard-button:hover{
   background-color: rgb(200, 184, 163);
 }
+
+#dashboard-icon, #add-icon{
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+}
