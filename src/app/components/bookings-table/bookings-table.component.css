@@ -17,13 +17,13 @@ th{
   padding: 10px;
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 30px;
   border-radius: 10px;
   background-color: rgb(231, 217, 194);
 }
 
 .all-table{
   font-family: 'Courier New', Courier, monospace;
-  margin-bottom: 300px;
 }
 
 .focus{

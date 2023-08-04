@@ -2,7 +2,7 @@
     <button class="focus" (click)="addBookingPressed()"></button>
     <div class = "all-table">
     <div class="heading">
-        <h2>Buchungen von {{currentUser}}: </h2><h2 id="book-name">{{bookName}}</h2>
+        <h1>Buchungen von {{currentUser}}: </h1><h1 id="book-name">{{bookName}}</h1>
         <button routerLink="dashboard" id="dashboard-button"><mat-icon>insert_chart</mat-icon></button>
         <button (click)="addBookingPressed()" id="add-button"><mat-icon>add_circle</mat-icon></button>
         <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
@@ -38,7 +38,7 @@
         </table>
     </div>
     </div>
-    <br><br><br>
-    <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
+
 </div>
+<app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 <div id="bottom"></div>
