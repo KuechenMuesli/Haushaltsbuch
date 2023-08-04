@@ -226,12 +226,10 @@ export class BookingsService {
 
   deleteTag(id:number, name:string){
     let booking!: Booking;
-      this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
+    this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
     let index: number = booking.tags.findIndex(tagName => tagName == name);
     if (index != -1){
       booking.tags.splice(index, 1);
     }
   }
 }
-
-
