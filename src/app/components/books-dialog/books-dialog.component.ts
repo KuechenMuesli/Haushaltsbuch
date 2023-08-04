@@ -46,7 +46,7 @@ export class BooksDialogComponent implements OnInit, OnChanges{
       if (this.booksService.bookId == -1){
         this.booksService.addBook(formData.name);
       }else{
-        this.booksService.editBook(this.booksService.bookId, formData.name);
+        this.booksService.editBook(this.booksService.bookId, formData.name).subscribe(books => this.booksService.books = books.books);
       }
     }
     this.closeDialog();

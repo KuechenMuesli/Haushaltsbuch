@@ -35,9 +35,10 @@ export class BooksService {
       .pipe(
         map(books => {
           const index = books.findIndex(book => book.id == id);
+          index !== -1 ? books.splice(index, 1) : null;
           return {
             index,
-            books: index !== -1 ? books.slice(index, 1) : books
+            books: books
           };
         })
       )
@@ -52,11 +53,23 @@ export class BooksService {
   }
 
   editBook(id:number, name: string){
-    let index = this.books.findIndex(book => book.id == id);
-    if (index !== -1){
-      this.books[index].name = name;
-    }
-    this.localStorageService.saveData(this.userService.currentUser, this.books);
+    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+      .pipe(
+        map(books => {
+          const index = books.findIndex(book => book.id == id);
+          if (index !== -1){
+            books[index].name = name;
+          }
+          return{
+            books: books
+          }
+        })
+      )
+      .pipe(
+        tap(books => {
+          this.localStorageService.saveData(this.userService.currentUser, books.books);
+        })
+      );
   }
 
   getBookings(id: number): Booking[] {
