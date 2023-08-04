@@ -15,7 +15,7 @@ export class BooksService {
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
 
-  getBookingsList(): Observable<Book[]> {
+  getBooksList(): Observable<Book[]> {
     return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []);
   }
 

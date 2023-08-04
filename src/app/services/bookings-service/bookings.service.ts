@@ -4,7 +4,7 @@ import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, findIndex, map, tap } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -13,18 +13,24 @@ export class BookingsService {
   bookingId!: number;
   constructor(private booksService: BooksService, private localStorageService: LocalStorageService, private userService: UserService) { }
 
-  getBookings(id: number): Booking[] {
-    return this.booksService.getBookings(id);
+  getBookings(id: number): Observable<Booking[]> {
+    return this.booksService.getBooksList()
+      .pipe(
+        map(books => {
+          let bookings = books[books.findIndex(book => book.id == id)].bookingsList;
+          return bookings;
+      }))
   }
 
   new_id(): number {
     let books: Book[] = [];
-    this.booksService.getBookingsList().subscribe(booksList => books = booksList);
+    this.booksService.getBooksList().subscribe(booksList => books = booksList);
     return books[books.findIndex(book => book.id == this.bookId)].bookingsList.length > 0? Math.max(...books[books.findIndex(book => book.id == this.bookId)].bookingsList.map(booking => booking.id)) + 1 : 0;
   }
 
   getBooking(id: number): Booking{
-    let bookings = this.getBookings(this.bookId);
+    let bookings: Booking[] = []; 
+    this.getBookings(this.bookId).subscribe(bookingsList => bookings = bookingsList);
     let booking = bookings[bookings.findIndex(booking => booking.id == id)];
     return booking;
   }
@@ -49,7 +55,7 @@ export class BookingsService {
   }
 
   deleteBooking(id: number): Observable<number>{
-    return this.booksService.getBookingsList()
+    return this.booksService.getBooksList()
       .pipe(
         map(books => {
           const bookIndex = books.findIndex(book => book.id == this.bookId);
@@ -65,7 +71,7 @@ export class BookingsService {
       .pipe(
         tap(bookingsAndIndex => {
           let newBooksList: Book[] = [];
-          this.booksService.getBookingsList().subscribe(booksList => newBooksList = booksList);
+          this.booksService.getBooksList().subscribe(booksList => newBooksList = booksList);
           newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
           this.localStorageService.saveData(this.userService.currentUser, newBooksList);
         }
@@ -116,7 +122,8 @@ export class BookingsService {
   calculateExpensesAmount(id: number): number[]{
     let totalExpenses: number = 0;
     let totalEarnings: number = 0;
-    let bookings: Booking[] = this.getBookings(id);
+    let bookings: Booking[] = []
+    this.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
     for(let booking of bookings){
       let amount: number = booking.amount;
       if(amount < 0) {

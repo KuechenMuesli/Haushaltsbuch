@@ -33,7 +33,9 @@ export class DashboardComponent implements OnInit{
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.bookName = this.booksService.getName(this.id);
     this.currentUser = this.userService.currentUser;
-    this.bookings = this.bookingsService.getBookings(this.id).sort((a, b) => (new Date(a.date).getTime()) - (new Date(b.date).getTime()));
+    let bookings: Booking[] = [];
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+    this.bookings = bookings.sort((a, b) => (new Date(a.date).getTime()) - (new Date(b.date).getTime()));
     this.firstBookingDate = this.bookings[0].date;
     this.lastBookingDate = this.bookings[this.bookings.length - 1].date;
     this.createForm();
@@ -52,7 +54,9 @@ export class DashboardComponent implements OnInit{
 
   onSubmit(){
     let data = this.dateSelectForm.value;
-    this.bookings = this.bookingsService.filterTimespan(this.bookingsService.getBookings(this.id), data.startingDate, data.endingDate);
+    let bookings: Booking[] = [];
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+    this.bookings = this.bookingsService.filterTimespan(bookings, data.startingDate, data.endingDate);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
   }
 }

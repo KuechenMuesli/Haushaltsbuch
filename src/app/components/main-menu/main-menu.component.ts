@@ -6,6 +6,7 @@ import { DOCUMENT } from '@angular/common';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { UserService } from '../../services/user-service/user.service';
 import { Subscription } from 'rxjs';
+import { Booking } from '../../booking';
 
 
 @Component({
@@ -31,11 +32,11 @@ export class MainMenuComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.booksService.getBookingsList()
+    this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
     this.userService.getUsers();
     this.userService.currentUser = this.userService.users[0];
-    this.booksService.getBookingsList()
+    this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
     this.updateUsers();
   }
@@ -76,13 +77,15 @@ export class MainMenuComponent implements OnInit{
     }
   }
   calculateAccountBalance(id:number){
-    this.accountBalance = this.bookingsService.calculateBookingsTotal(this.bookingsService.getBookings(id));
+    let bookings: Booking[] = [];
+    this.bookingsService.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
+    this.accountBalance = this.bookingsService.calculateBookingsTotal(bookings);
     return this.accountBalance;
   }
 
   userChanged(){
     this.currentUser = this.userService.currentUser;
-    this.booksService.getBookingsList()
+    this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
   }
 

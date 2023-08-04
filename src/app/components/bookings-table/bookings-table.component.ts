@@ -41,7 +41,9 @@ export class BookingsTableComponent {
 
     this.months = this.bookingsService.getMonths(this.id);
     this.month = this.months[0];
-    this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
+    let bookings: Booking[] = []
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList)
+    this.bookings = this.bookingsService.filterMonth(bookings, this.month);
   
     this.currentUser = this.userService.currentUser;
 
@@ -67,8 +69,10 @@ export class BookingsTableComponent {
 
   deleteBooking(id: number): void {
     let index = -1;
+    let bookings: Booking[] = [];
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookingsService.deleteBooking(id).subscribe(bookingsIndex => index = bookingsIndex);
-    this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
+    this.bookings = this.bookingsService.filterMonth(bookings, this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
     this.months = this.bookingsService.getMonths(this.id);
   }
@@ -104,7 +108,10 @@ export class BookingsTableComponent {
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
 
-      this.bookings = this.bookingsService.filterMonth(this.bookingsService.getBookings(this.id), this.month);
+      let bookings: Booking[] = [];
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+
+      this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.id);
 
@@ -113,7 +120,7 @@ export class BookingsTableComponent {
 
   dateChanged(month: string){
     this.month = month;
-    this.bookings = this.bookingsService.getBookings(this.id);
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
     this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
   }
