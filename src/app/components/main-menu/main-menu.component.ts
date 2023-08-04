@@ -31,10 +31,12 @@ export class MainMenuComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.bookingsList = this.booksService.getBookingsList();
+    this.booksService.getBookingsList()
+      .subscribe(list => this.bookingsList = list);
     this.userService.getUsers();
     this.userService.currentUser = this.userService.users[0];
-    this.bookingsList = this.booksService.getBookingsList();
+    this.booksService.getBookingsList()
+      .subscribe(list => this.bookingsList = list);
     this.updateUsers();
   }
 
@@ -51,9 +53,11 @@ export class MainMenuComponent implements OnInit{
     this.openBooksDialog = true;
   }
   deleteBook(id: number){
-    let index: number = this.booksService.deleteBook(id);
-    let table = this.document.getElementById('table-list') as HTMLTableElement;
-    table.deleteRow(index);
+    this.booksService.deleteBook(id)
+      .subscribe(index => {
+        let table = this.document.getElementById('table-list') as HTMLTableElement;
+        table.deleteRow(index);
+      });
   }
 
   closeDialog(dialogIsOpen: boolean){
@@ -78,7 +82,8 @@ export class MainMenuComponent implements OnInit{
 
   userChanged(){
     this.currentUser = this.userService.currentUser;
-    this.bookingsList = this.booksService.getBookingsList();
+    this.booksService.getBookingsList()
+      .subscribe(list => this.bookingsList = list);
   }
 
   updateUsers(){

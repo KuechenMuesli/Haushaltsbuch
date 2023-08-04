@@ -3,6 +3,7 @@ import { Booking } from '../../booking';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
 import { Book } from '../../book';
+import { Observable, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,8 @@ export class BooksService {
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
 
-  getBookingsList(): Book[]{
-    this.books = this.localStorageService.getData(this.userService.currentUser);
-    return this.books;
+  getBookingsList(): Observable<Book[]> {
+    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []);
   }
 
   getName(id: number): string{
@@ -30,13 +30,25 @@ export class BooksService {
     this.localStorageService.saveData(this.userService.currentUser, this.books);
   }
 
-  deleteBook(id: number): number{
-    let index = this.books.findIndex(book => book.id == id);
-    if (index !== -1) {
-      this.books.splice(index, 1);
-    }
-    this.localStorageService.saveData(this.userService.currentUser, this.books);
-    return index;
+  deleteBook(id: number): Observable<number> {
+    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+      .pipe(
+        map(books => {
+          const index = books.findIndex(book => book.id == id);
+          return {
+            index,
+            books: index !== -1 ? books.slice(index, 1) : books
+          };
+        })
+      )
+      .pipe(
+        tap(bookingsWithIndex => {
+          this.localStorageService.saveData(this.userService.currentUser, bookingsWithIndex.books);
+        })
+      )
+      .pipe(
+        map(bookingsWithIndex => bookingsWithIndex.index)
+      );
   }
 
   editBook(id:number, name: string){

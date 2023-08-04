@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user-service/user.service';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,10 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Haushaltsbuch';
 
-  constructor(private userService: UserService, private router: Router){}
+  constructor(private userService: UserService, private router: Router, private readonly storageService: LocalStorageService){
+    storageService.getDataObservable("Tags", "test").subscribe(next => console.log(next));
+  }
+
   async logOut(){
     this.router.navigate(["main-menu"]);
     await new Promise(resolve => setTimeout(resolve, 0));

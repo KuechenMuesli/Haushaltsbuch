@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,15 @@ export class LocalStorageService {
     const data = localStorage.getItem(key);
     const array: Type[] = data !== null? JSON.parse(data) : []
     return array;
+  }
+
+  getDataObservable<T>(key: string, defaultValue: T): Observable<T> {
+    return new Observable(observer => {
+      const storageString = localStorage.getItem(key);
+      const data: T = storageString !== null? JSON.parse(storageString) : defaultValue;
+      observer.next(data);
+      observer.complete();
+    });
   }
 
   deleteData(key: string){
