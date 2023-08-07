@@ -2,7 +2,7 @@ import { Component, HostListener, Renderer2 } from '@angular/core';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
 import { UserService } from '../../services/user-service/user.service';
@@ -27,8 +27,8 @@ export class BookingsTableComponent {
   monthSelect = this.document.getElementById("#monthSelect") as HTMLSelectElement;
 
 
-  constructor(private bookingsService: BookingsService, 
-    @Inject(DOCUMENT) private document: Document, 
+  constructor(private bookingsService: BookingsService,
+    @Inject(DOCUMENT) private document: Document,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
     private userService: UserService
@@ -44,7 +44,7 @@ export class BookingsTableComponent {
     let bookings: Booking[] = []
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList)
     this.bookings = this.bookingsService.filterMonth(bookings, this.month);
-  
+
     this.currentUser = this.userService.currentUser;
 
     this.expensesList = this.bookingsService.getExpenses(this.bookings);

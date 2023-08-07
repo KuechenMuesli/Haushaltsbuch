@@ -24,11 +24,11 @@ export class LoginDialogComponent implements OnChanges, OnInit{
 
   ngOnInit(): void {
     let loggedInUser: string = "";
-    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => loggedInUser = loggedInUsers[0]); 
+    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => loggedInUser = loggedInUsers[0]);
     if (loggedInUser.length !== 0){
       this.loggedIn = true;
       this.userService.logIn();
-      this.userService.currentUser = loggedInUser[0];
+      this.userService.currentUser = loggedInUser;
       this.closeDialog();
     }
   }
@@ -60,7 +60,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     this.wrongUsernamePassword = true;
   }
   }
-  
+
   closeDialog(){
     let dialog = this.document.getElementById("login-dialog") as HTMLDialogElement;
     (this.document.getElementById("username-input") as HTMLInputElement).value = "";

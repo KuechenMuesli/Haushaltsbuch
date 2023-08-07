@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '
 import { BooksService } from '../../services/books-service/books.service';
 import { Book } from '../../book';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { UserService } from '../../services/user-service/user.service';
 import { Subscription } from 'rxjs';
@@ -23,7 +23,7 @@ export class MainMenuComponent implements OnInit{
   loggedIn: boolean = false;
   currentUser: string = this.userService.currentUser;
   loggedInSubscription: Subscription;
-  
+
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef) {
     this.loggedInSubscription = this.userService.loggedIn.subscribe((value) => {
@@ -38,14 +38,13 @@ export class MainMenuComponent implements OnInit{
     this.userService.currentUser = this.userService.users[0];
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
-    this.updateUsers();
   }
 
   updateID(id: number){
     this.booksService.bookId = id;
   }
   addNewBook(): void{
-    this.booksService.bookId = -1; 
+    this.booksService.bookId = -1;
     this.openBooksDialog = true;
   }
 
@@ -72,7 +71,6 @@ export class MainMenuComponent implements OnInit{
       if (this.userService.currentUser === ""){
         this.userService.deleteUser("");
       }
-      this.updateUsers();
       this.userChanged();
     }
   }
@@ -87,10 +85,6 @@ export class MainMenuComponent implements OnInit{
     this.currentUser = this.userService.currentUser;
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
-  }
-
-  updateUsers(){
-    this.users = this.userService.users;
   }
 
   editUser(){

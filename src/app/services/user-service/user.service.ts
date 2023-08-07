@@ -13,19 +13,19 @@ export class UserService {
   public loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public loggedIn: Observable<boolean> = this.loggedInSubject.asObservable();
 
-  constructor(private localStorageService: LocalStorageService) { 
+  constructor(private localStorageService: LocalStorageService) {
   }
 
   getLoggedInUser(): string{
     let user: string = "";
-    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => user = loggedInUsers[0])
+    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => user = loggedInUsers[0]);
     return user;
   }
 
   getUsers(){
     this.users = this.localStorageService.getAllKeys();
   }
-  
+
   addUser(name: string, password: string){
     this.users.push(name);
 
@@ -42,7 +42,7 @@ export class UserService {
 
   userExists(username: string): boolean{
     if (this.users.findIndex(user => user == username) == -1){
-      return false; 
+      return false;
     }
     return true;
   }
