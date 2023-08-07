@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { Md5 } from 'ts-md5';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {BehaviorSubject, map, Observable, tap} from 'rxjs';
 import { Book } from '../../book';
 
 @Injectable({
@@ -9,17 +9,32 @@ import { Book } from '../../book';
 })
 export class UserService {
   users: string[] = []
-  currentUser: string = this.getLoggedInUser();
+  currentUser: string = this.initiateCurrentUser();
   public loggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public loggedIn: Observable<boolean> = this.loggedInSubject.asObservable();
 
   constructor(private localStorageService: LocalStorageService) {
   }
-
-  getLoggedInUser(): string{
-    let user: string = "";
-    this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => user = loggedInUsers[0]);
+  initiateCurrentUser(): string{
+    let user = "";
+    this.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
     return user;
+  }
+
+  getLoggedInUser(): Observable<string>{
+    return this.localStorageService.getSessionStorage("LoggedIn", [])
+      .pipe(
+        map(loggedInUsers => {
+          let user : string = loggedInUsers[0];
+          return {
+            user
+          }
+          }
+        )
+      )
+      .pipe(
+        map(returnedUser => returnedUser.user)
+      )
   }
 
   getUsers(){
