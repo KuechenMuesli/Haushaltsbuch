@@ -14,7 +14,7 @@ export class BooksService {
   books: Book[] = this.data.length > 0? this.data : [{id:0, name:"", bookingsList:[]}]
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
-  
+
   setBooks(): Book[]{
     let booksList: Book[] = [];
     this.localStorageService.getDataObservable(this.userService.currentUser, []).subscribe(books => booksList = books);
@@ -32,6 +32,8 @@ export class BooksService {
 
   addBook(name: string){
     this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
+    console.log(this.books.length, this.bookId);
+
     this.books.push({id:this.bookId, name: name, bookingsList:[]});
     this.localStorageService.saveData(this.userService.currentUser, this.books);
   }

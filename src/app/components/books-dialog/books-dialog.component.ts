@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksService } from '../../services/books-service/books.service';
 
@@ -12,7 +12,7 @@ import { BooksService } from '../../services/books-service/books.service';
 })
 export class BooksDialogComponent implements OnInit, OnChanges{
   isdialogOpen: boolean = true;
-  newBookForm!: FormGroup; 
+  newBookForm!: FormGroup;
   name: string = "";
   accountBalance: number = 0;
   id: number = -1;
@@ -20,7 +20,7 @@ export class BooksDialogComponent implements OnInit, OnChanges{
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
 
-  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
+  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private booksService: BooksService){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,8 +42,9 @@ export class BooksDialogComponent implements OnInit, OnChanges{
   onSubmit(){
     let formData;
     if(this.newBookForm.valid){
-      formData = this.newBookForm.value; 
+      formData = this.newBookForm.value;
       if (this.booksService.bookId == -1){
+        console.log("HERE")
         this.booksService.addBook(formData.name);
       }else{
         this.booksService.editBook(this.booksService.bookId, formData.name).subscribe(books => this.booksService.books = books.books);

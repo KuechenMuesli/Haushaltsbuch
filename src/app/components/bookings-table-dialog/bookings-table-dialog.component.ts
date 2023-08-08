@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, EventEmitter, Output, SimpleChanges, Renderer2} from '@angular/core';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
@@ -13,7 +13,7 @@ import { TagsService } from '../../services/tags-service/tags.service';
 })
 
 export class BookingsTableDialogComponent implements OnInit, OnChanges{
-  newBookingForm!: FormGroup; 
+  newBookingForm!: FormGroup;
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
@@ -22,11 +22,11 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   date: string = "";
   description: string = "";
   amount: number = 0;
-  
+
   isdialogOpen: boolean = true;
   addTagDialogOpen: boolean = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document, 
+  constructor(@Inject(DOCUMENT) private document: Document,
   private formBuilder: FormBuilder, private bookingsService: BookingsService, private renderer: Renderer2,
   private tagsService: TagsService
   ){}
@@ -37,7 +37,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
       this.tags = this.getTags();
     }
   }
-  
+
   ngOnInit(){
     this.createNewBookingForm();
   }
@@ -71,7 +71,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
 
   onSubmit(){
     if(this.newBookingForm.valid){
-      let formData = this.newBookingForm.value; 
+      let formData = this.newBookingForm.value;
       if (this.bookingsService.bookingId == -1){
         this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags).subscribe();
       }else{
@@ -90,7 +90,6 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   closeDialog(){
     this.dialogIsOpen.emit(false);
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
-    
     dia.close();
   }
 

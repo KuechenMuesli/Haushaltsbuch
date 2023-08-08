@@ -17,7 +17,10 @@ export class BookingsService {
     return this.booksService.getBooksList()
       .pipe(
         map(books => {
-          let bookings = books[books.findIndex(book => book.id == id)].bookingsList;
+          let bookings: Booking[] = [];
+          if (books[books.findIndex(book => book.id == id)]){
+            bookings = books[books.findIndex(book => book.id == id)].bookingsList;
+          }
           return bookings;
       }))
   }
@@ -29,7 +32,7 @@ export class BookingsService {
   }
 
   getBooking(id: number): Observable<Booking>{
-    return this.getBookings(this.bookId)
+    return this.getBookings(this.booksService.bookId)
       .pipe(
         map(bookings => {
           return bookings[bookings.findIndex(booking => booking.id == id)];
@@ -60,11 +63,12 @@ export class BookingsService {
     return this.booksService.getBooksList()
       .pipe(
         map(books => {
-          const bookIndex = books.findIndex(book => book.id == this.bookId);
-          let bookings = books[bookIndex].bookingsList;
-          let bookingIndex = bookings.findIndex(booking => booking.id == id);
+          const bookIndex: number = books.findIndex(book => book.id == this.bookId);
+          let bookings: Booking[] = books[bookIndex].bookingsList;
+          let bookingIndex: number = bookings.findIndex(booking => booking.id == id);
           bookingIndex !== -1 ? bookings.splice(bookingIndex, 1) : null;
           return {
+            bookingIndex,
             bookIndex,
             bookings
           }
@@ -80,20 +84,19 @@ export class BookingsService {
         )
       )
       .pipe(
-        map(bookingsAndIndex => bookingsAndIndex.bookIndex)
+        map(bookingsAndIndex => bookingsAndIndex.bookingIndex)
       )
   }
 
   editBooking(id: number, date: string, description: string, amount: number, tags: string[]): void {
-    for (let i = 0; i < this.booksService.books[this.bookId].bookingsList.length; i++){
-      if (this.booksService.books[this.bookId].bookingsList[i].id == id){
-        this.booksService.books[this.bookId].bookingsList[i] = {
-          id, date, description, amount, tags
-        };
-        break;
-      }
+    let bookings: Booking[] = this.booksService.getBookings(this.booksService.bookId);
+    let bookingsIndex: number = bookings.findIndex(booking => id == booking.id);
+    if (bookingsIndex !== -1){
+      this.booksService.books[this.booksService.bookId].bookingsList[bookingsIndex] = {id, date, description, amount, tags};
     }
-    this.booksService.updateBooks();
+    this.localStorageService.saveData(this.userService.currentUser, this.booksService.books);
+    this.booksService.books[this.booksService.bookId].bookingsList.forEach(booking => {console.log(booking)});
+    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => booksList[this.bookId].bookingsList.forEach(booking => console.log(booking)))
   }
 
   calculateBookingsTotal(bookings: Booking[]): number{
