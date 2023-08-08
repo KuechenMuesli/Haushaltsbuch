@@ -59,7 +59,7 @@ export class BookingsService {
       )
   }
 
-  deleteBooking(id: number): Observable<number>{
+  deleteBooking(id: number): Observable<any>{
     return this.booksService.getBooksList()
       .pipe(
         map(books => {
@@ -68,7 +68,7 @@ export class BookingsService {
           let bookingIndex: number = bookings.findIndex(booking => booking.id == id);
           bookingIndex !== -1 ? bookings.splice(bookingIndex, 1) : null;
           return {
-            bookingIndex,
+
             bookIndex,
             bookings
           }
@@ -82,9 +82,6 @@ export class BookingsService {
           this.localStorageService.saveData(this.userService.currentUser, newBooksList);
         }
         )
-      )
-      .pipe(
-        map(bookingsAndIndex => bookingsAndIndex.bookingIndex)
       )
   }
 

@@ -1,8 +1,6 @@
 import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
-import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
 import { UserService } from '../../services/user-service/user.service';
@@ -24,11 +22,8 @@ export class BookingsTableComponent implements OnInit{
   expensesList: Booking[] = [];
   months: string[] = [];
   month: string = "";
-  monthSelect = this.document.getElementById("#monthSelect") as HTMLSelectElement;
-
 
   constructor(private bookingsService: BookingsService,
-    @Inject(DOCUMENT) private document: Document,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
     private userService: UserService
@@ -68,10 +63,9 @@ export class BookingsTableComponent implements OnInit{
   }
 
   deleteBooking(id: number): void {
-    let index = -1;
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-    this.bookingsService.deleteBooking(id).subscribe(bookingsIndex => index = bookingsIndex);
+    this.bookingsService.deleteBooking(id).subscribe();
     this.bookings = this.bookingsService.filterMonth(bookings, this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
     this.months = this.bookingsService.getMonths(this.id);
@@ -97,7 +91,7 @@ export class BookingsTableComponent implements OnInit{
     }
   }
 
-  addBookingPressed(): void{
+  addBookingPressed(): void {
     this.bookingsService.bookingId = -1;
     this.openDialog = true;
   }
@@ -110,7 +104,6 @@ export class BookingsTableComponent implements OnInit{
 
       let bookings: Booking[] = [];
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.id);

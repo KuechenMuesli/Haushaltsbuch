@@ -9,7 +9,7 @@ export class TagsService {
   addedTag!: string;
 
   constructor(private localStorageService: LocalStorageService) { }
-  
+
   getTags(){
     this.localStorageService.getDataObservable("Tags", []).subscribe(tagsList => this.tags = tagsList);
     return this.tags
@@ -25,5 +25,4 @@ export class TagsService {
     }
     this.addedTag = name;
   }
-  removeTag(){}
 }
