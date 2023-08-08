@@ -11,7 +11,7 @@ import { Observable, map, tap } from 'rxjs';
 export class BooksService {
   bookId: number = 0;
   data: Book[] = this.setBooks();
-  books: Book[] = this.data.length > 0? this.data : [{id:0, name:"", bookingsList:[]}]
+  books: Book[] = this.data.length > 0? this.data : []
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
 
@@ -31,6 +31,7 @@ export class BooksService {
   }
 
   addBook(name: string){
+    console.log(this.books);
     this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
     console.log(this.books.length, this.bookId);
 
@@ -53,6 +54,7 @@ export class BooksService {
       .pipe(
         tap(bookingsWithIndex => {
           this.localStorageService.saveData(this.userService.currentUser, bookingsWithIndex.books);
+          this.setBooks();
         })
       )
       .pipe(

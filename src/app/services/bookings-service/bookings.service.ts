@@ -95,8 +95,6 @@ export class BookingsService {
       this.booksService.books[this.booksService.bookId].bookingsList[bookingsIndex] = {id, date, description, amount, tags};
     }
     this.localStorageService.saveData(this.userService.currentUser, this.booksService.books);
-    this.booksService.books[this.booksService.bookId].bookingsList.forEach(booking => {console.log(booking)});
-    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => booksList[this.bookId].bookingsList.forEach(booking => console.log(booking)))
   }
 
   calculateBookingsTotal(bookings: Booking[]): number{

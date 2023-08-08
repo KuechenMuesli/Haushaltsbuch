@@ -82,7 +82,7 @@ export class UserService {
     let userData: Book[] = []
     this.localStorageService.getDataObservable(oldName, []).subscribe(returnedData => userData = returnedData);
     this.localStorageService.deleteData(oldName);
-    this.localStorageService.saveData(newName, userData);
+    //this.localStorageService.saveData(newName, userData);
 
     interface userPassword{
       username: string,
