@@ -5,6 +5,7 @@
     margin-left: 0%;
 }
 
+
 #tag{
     margin-top: 5px;
     max-height: 20px;
@@ -16,7 +17,7 @@
     align-items: center;
 }
 #delete-tag-icon{
-    display: flex; 
+    display: flex;
     font-size: 15px;
     width: 15px;
     height: 15px;

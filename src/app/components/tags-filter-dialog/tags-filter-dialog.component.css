@@ -3,6 +3,7 @@
     font-size: medium;
 }
 #filter-tag-dialog{
+  margin-top: -400px;
     z-index: 2;
     background-color: antiquewhite;
     border-radius: 9px;
