@@ -26,12 +26,12 @@ export class BooksService {
   }
 
   getName(id: number): string{
+    this.books = this.setBooks();
     let index = this.books.findIndex(book => book.id == id);
     return this.books[index].name;
   }
 
   addBook(name: string){
-    console.log(this.books);
     this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
     console.log(this.books.length, this.bookId);
 

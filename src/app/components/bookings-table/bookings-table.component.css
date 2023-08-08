@@ -140,7 +140,7 @@ th{
   font-family: 'Courier New', Courier, monospace;
 }
 
-#sorting-icon{
+.sorting-icon{
   float: right;
   color: transparent;
 }
@@ -151,7 +151,7 @@ th{
   border-top-left-radius: 15px;
 }
 
-#date-table-head:hover #sorting-icon{
+#date-table-head:hover .sorting-icon{
   color:black;
 }
 
@@ -159,7 +159,7 @@ th{
   cursor: ns-resize;
   border-top-right-radius: 15px;
 }
-#amount-table-head:hover #sorting-icon{
+#amount-table-head:hover .sorting-icon{
   color:black;
 }
 

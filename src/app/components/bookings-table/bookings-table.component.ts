@@ -1,4 +1,4 @@
-import { Component, HostListener, Renderer2 } from '@angular/core';
+import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 import { Inject }  from '@angular/core';
@@ -14,7 +14,7 @@ import { UserService } from '../../services/user-service/user.service';
   styleUrls: ['./bookings-table.component.css']
 })
 
-export class BookingsTableComponent {
+export class BookingsTableComponent implements OnInit{
   bookings: Booking[] = [];
   id: number = -1;
   bookName: string = "";
@@ -36,6 +36,7 @@ export class BookingsTableComponent {
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(this.id)
     this.bookName = this.booksService.getName(this.id);
     this.booksService.bookId = this.id;
 

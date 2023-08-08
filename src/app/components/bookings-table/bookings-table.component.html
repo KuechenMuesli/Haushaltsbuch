@@ -19,9 +19,9 @@
         <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
         <table id="bookings-table">
             <tr>
-                <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon id="sorting-icon">sort</mat-icon></th>
+                <th class="table-head-elements" class="date" (click)="sortTableByDate()" id="date-table-head">Datum <mat-icon class="sorting-icon">sort</mat-icon></th>
                 <th class="table-head-elements" class="description">Beschreibung</th>
-                <th class="table-head-elements" class="amount" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag <mat-icon id="sorting-icon">sort</mat-icon></th>
+                <th class="table-head-elements" class="amount" (click)="sortBookingsByAmount()" id="amount-table-head">Betrag <mat-icon class="sorting-icon">sort</mat-icon></th>
             </tr>
 
             <tr *ngFor="let booking of bookings" class="booking-cells">
