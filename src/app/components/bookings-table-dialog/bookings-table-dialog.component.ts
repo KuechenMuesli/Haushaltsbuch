@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, EventEmitter, Output, SimpleChanges, Renderer2} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, EventEmitter, Output,  Renderer2} from '@angular/core';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,7 +23,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   description: string = "";
   amount: number = 0;
 
-  isdialogOpen: boolean = true;
+  dialogOpen: boolean = true;
   addTagDialogOpen: boolean = false;
 
   constructor(@Inject(DOCUMENT) private document: Document,

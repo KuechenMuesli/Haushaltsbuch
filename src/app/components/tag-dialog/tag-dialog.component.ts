@@ -12,7 +12,7 @@ import { TagsService } from '../../services/tags-service/tags.service';
 export class TagDialogComponent implements OnInit, OnChanges{
   addTagForm: FormGroup;
   name: string = "";
-  tagsList: string[] = this.tagsService.getTags();
+  tagsList: string[] = [];
 
   @Input() openDialog: boolean = false;
   @Input() openFilterTagDialog = false;
@@ -29,19 +29,20 @@ export class TagDialogComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void{
     if(this.openDialog){
-      this.tagsList = this.tagsService.getTags();
+      this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
       this.name = "";
       this.showDialog();
     }
     if(this.openFilterTagDialog){
       this.filterTags = true;
-      this.tagsList = this.tagsService.getTags();
+      this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
       this.name = "";
       this.showDialog();
     }
   }
 
   ngOnInit(): void {
+    this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
   }
 
   onSubmit(){

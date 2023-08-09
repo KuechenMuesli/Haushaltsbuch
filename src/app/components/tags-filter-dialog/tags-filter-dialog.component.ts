@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TagsService } from '../../services/tags-service/tags.service';
 
@@ -12,12 +12,12 @@ import { TagsService } from '../../services/tags-service/tags.service';
 export class TagsFilterDialogComponent implements OnInit, OnChanges{
   addTagForm: FormGroup;
   name: string = "";
-  tagsList: string[] = this.tagsService.getTags();
+  tagsList: string[] = [];
 
   @Input() openFilterDialog: boolean = false;
   @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
 
-  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
+  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private tagsService: TagsService){
     this.addTagForm = this.formBuilder.group({
       name:[`${this.name}`, Validators.required]
@@ -26,13 +26,14 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
 
   ngOnChanges(changes: SimpleChanges): void{
     if(this.openFilterDialog){
-      this.tagsList = this.tagsService.getTags();
+      this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
       this.name = "";
       this.showDialog();
     }
   }
 
   ngOnInit(): void {
+    this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
     this.createAddTagForm();
   }
 

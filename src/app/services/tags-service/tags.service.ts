@@ -1,22 +1,28 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
+import {map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TagsService {
-  tags!: string[];
   addedTag!: string;
 
   constructor(private localStorageService: LocalStorageService) { }
 
-  getTags(){
-    this.localStorageService.getDataObservable("Tags", []).subscribe(tagsList => this.tags = tagsList);
-    return this.tags
+  getTags(): Observable<string[]>{
+    return this.localStorageService.getDataObservable("Tags", [])
+      .pipe(
+        map(tags => {
+            return tags;
+          }
+        )
+      );
   }
 
   addTag(name: string){
-    let tags: string[] = this.getTags();
+    let tags: string[] = [];
+    this.getTags().subscribe(tagsList => tags = tagsList);
 
     let index = tags.findIndex(tagName => tagName === name);
     if(index == -1){
