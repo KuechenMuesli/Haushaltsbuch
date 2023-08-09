@@ -4,7 +4,7 @@ import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
-import {Observable, map, tap, finalize} from 'rxjs';
+import {Observable, map, tap, of} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -29,7 +29,6 @@ export class BookingsService {
     this.booksService.getBooksList().subscribe(booksList => books = booksList);
     return books[books.findIndex(book => book.id == this.bookId)].bookingsList.length > 0? Math.max(...books[books.findIndex(book => book.id == this.bookId)].bookingsList.map(booking => booking.id)) + 1 : 0;
   }
-
   getBooking(id: number): Observable<Booking>{
     return this.getBookings(this.booksService.bookId)
       .pipe(
@@ -67,7 +66,6 @@ export class BookingsService {
           let bookingIndex: number = bookings.findIndex(booking => booking.id == id);
           bookingIndex !== -1 ? bookings.splice(bookingIndex, 1) : null;
           return {
-
             bookIndex,
             bookings
           }
@@ -110,14 +108,14 @@ export class BookingsService {
         )
   }
 
-  calculateBookingsTotal(bookings: Booking[]): number{
+  calculateBookingsTotal(bookings: Booking[]): Observable<number>{
     this.bookId = this.booksService.bookId;
 
     let total_amount = 0;
     for (let i = bookings.length - 1; i >= 0; i--){
-      total_amount += +bookings[i].amount;
+      total_amount += bookings[i].amount;
     }
-    return total_amount;
+    return of(total_amount);
   }
 
   getExpenses(bookingsList: Booking[]): Booking[]{

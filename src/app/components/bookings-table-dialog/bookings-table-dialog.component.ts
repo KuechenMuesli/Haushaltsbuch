@@ -42,7 +42,6 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
     this.createNewBookingForm();
   }
-
   createNewBookingForm(){
     this.newBookingForm = this.formBuilder.group({
       date:[`${this.date}`, Validators.required],

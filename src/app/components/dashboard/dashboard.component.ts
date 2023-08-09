@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit{
     this.lastBookingDate = this.bookings[this.bookings.length - 1].date;
     this.createForm();
 
-    this.totalAmount = this.bookingsService.calculateBookingsTotal(this.bookings);
+    this.bookingsService.calculateBookingsTotal(this.bookings).subscribe(amount => this.totalAmount = amount);
     [this.totalExpenses, this.totalEarnings] = this.bookingsService.calculateExpensesAmount(this.id);
     this.onSubmit();
   }

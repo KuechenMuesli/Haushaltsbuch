@@ -14,7 +14,7 @@ export class TotalAmountComponent implements AfterContentChecked{
   @Input() bookingsList!: Booking[];
 
   constructor(private bookingsService: BookingsService){}
-  
+
   ngOnInit(): void {
     this.calculateTotal();
   }
@@ -23,6 +23,6 @@ export class TotalAmountComponent implements AfterContentChecked{
     this.calculateTotal();
   }
   calculateTotal(): void {
-    this.total_amount = this.bookingsService.calculateBookingsTotal(this.bookingsList);
+    this.bookingsService.calculateBookingsTotal(this.bookingsList).subscribe(amount => this.total_amount = amount);
   }
 }

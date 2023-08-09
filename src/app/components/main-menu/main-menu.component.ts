@@ -77,7 +77,7 @@ export class MainMenuComponent implements OnInit{
   calculateAccountBalance(id:number){
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
-    this.accountBalance = this.bookingsService.calculateBookingsTotal(bookings);
+    this.bookingsService.calculateBookingsTotal(bookings).subscribe(balance => this.accountBalance = balance);
     return this.accountBalance;
   }
 
