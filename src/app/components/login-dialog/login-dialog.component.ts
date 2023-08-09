@@ -24,7 +24,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   ngOnInit(): void {
     let loggedInUser: string = "";
     this.localStorageService.getSessionStorage("LoggedIn", []).subscribe(loggedInUsers => loggedInUser = loggedInUsers[0]);
-    if (loggedInUser.length !== 0){
+    if (loggedInUser){
       this.loggedIn = true;
       this.userService.logIn();
       this.userService.currentUser = loggedInUser;

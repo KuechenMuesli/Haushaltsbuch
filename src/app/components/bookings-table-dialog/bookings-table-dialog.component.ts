@@ -77,7 +77,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
         this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags).subscribe();
       }else{
         this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList.concat(this.addedTags));
-        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags);
+        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags).subscribe();
       }
       this.addedTags = [];
     }

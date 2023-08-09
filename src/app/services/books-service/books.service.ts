@@ -33,7 +33,6 @@ export class BooksService {
 
   addBook(name: string){
     this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
-    console.log(this.books.length, this.bookId);
 
     this.books.push({id:this.bookId, name: name, bookingsList:[]});
     this.localStorageService.saveData(this.userService.currentUser, this.books);
@@ -86,13 +85,9 @@ export class BooksService {
     return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
       .pipe(
         map(books => {
-          return {
-            bookings: books[books.findIndex(book => book.id == id)].bookingsList
+          return books[books.findIndex(book => book.id == id)].bookingsList;
           }
-        })
-      )
-      .pipe(
-        map(books => books.bookings)
+        )
       )
   }
 
