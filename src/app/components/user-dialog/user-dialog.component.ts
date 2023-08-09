@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user-service/user.service';
 
@@ -9,9 +9,9 @@ import { UserService } from '../../services/user-service/user.service';
   templateUrl: './user-dialog.component.html',
   styleUrls: ['./user-dialog.component.css']
 })
-export class UserDialogComponent implements OnInit{
+export class UserDialogComponent implements OnInit, OnChanges{
   isdialogOpen: boolean = true;
-  editUserForm!: FormGroup; 
+  editUserForm!: FormGroup;
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
   changePassword: boolean = false;
@@ -19,7 +19,7 @@ export class UserDialogComponent implements OnInit{
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.openDialog){
       this.showDialog();
     }
@@ -40,7 +40,7 @@ export class UserDialogComponent implements OnInit{
   onSubmit(){
     let formData;
     if(this.editUserForm.valid){
-      formData = this.editUserForm.value; 
+      formData = this.editUserForm.value;
       this.userService.editUser(this.userService.currentUser, formData.name);
     }
     if(this.changePassword){

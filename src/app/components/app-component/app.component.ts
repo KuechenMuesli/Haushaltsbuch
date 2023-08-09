@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user-service/user.service';
 import { Router } from '@angular/router';
-import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +14,7 @@ export class AppComponent {
   }
 
   async logOut(){
-    this.router.navigate(["main-menu"]);
-    await new Promise(resolve => setTimeout(resolve, 0));
+    await this.router.navigate(["main-menu"]);
     this.userService.logOut();
   }
 }

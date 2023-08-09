@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -24,7 +24,7 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
     })
   }
 
-  ngOnChanges(changes: SimpleChanges): void{
+  ngOnChanges(): void{
     if(this.openFilterDialog){
       this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
       this.name = "";

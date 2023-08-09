@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChange, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Chart, registerables, Colors } from 'chart.js';
 
 import { Booking } from '../../booking';
@@ -22,7 +22,6 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
 
   constructor(private tagsService: TagsService,){}
   ngOnChanges(){
-
     this.expenses.sort((a, b) => a.amount - b.amount);
     if (this.chart){
       this.tagsList = [];
@@ -50,7 +49,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
         labels: expensesLabels,
 	      datasets: [{
         data: expensesValues,
-        
+
         hoverOffset: 10
       }],
       },
@@ -113,7 +112,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
           break;
         }
       }
-    } 
+    }
     this.expensesValues = expensesValues;
     this.expensesLabels = this.tagsList;
   }

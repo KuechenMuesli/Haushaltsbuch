@@ -1,7 +1,6 @@
-import { Component, Input, Inject, OnChanges, OnInit, SimpleChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Inject, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
-import { Md5 } from 'ts-md5';
 import { UserService } from '../../services/user-service/user.service';
 import { LocalStorageService } from '../../services/local-storage-service/local-storage.service';
 
@@ -33,7 +32,7 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (!this.loggedIn){
       this.loginForm.value.username = "";
       this.loginForm.value.password = "";

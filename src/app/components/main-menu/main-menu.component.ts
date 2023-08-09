@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BooksService } from '../../services/books-service/books.service';
 import { Book } from '../../book';
 import { Inject }  from '@angular/core';
@@ -19,7 +19,6 @@ export class MainMenuComponent implements OnInit{
   accountBalance: number = 0;
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
-  users!: string[];
   loggedIn: boolean = false;
   currentUser: string = this.userService.currentUser;
   loggedInSubscription: Subscription;

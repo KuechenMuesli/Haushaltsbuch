@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,10 +11,8 @@ import { BooksService } from '../../services/books-service/books.service';
   styleUrls: ['./books-dialog.component.css']
 })
 export class BooksDialogComponent implements OnInit, OnChanges{
-  isdialogOpen: boolean = true;
   newBookForm!: FormGroup;
   name: string = "";
-  accountBalance: number = 0;
   id: number = -1;
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
@@ -23,7 +21,7 @@ export class BooksDialogComponent implements OnInit, OnChanges{
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private booksService: BooksService){}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.openDialog){
       this.showDialog();
     }

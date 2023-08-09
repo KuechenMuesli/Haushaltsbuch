@@ -1,5 +1,5 @@
-import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { Chart, registerables, Colors } from 'chart.js';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Chart, registerables } from 'chart.js';
 import { Booking } from '../../booking';
 
 
@@ -17,7 +17,7 @@ export class LineGraphChartComponent implements OnInit, OnChanges{
 
   constructor(){}
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.amountValues = this.bookings.map(booking => booking.amount);
     this.amountLabels = this.bookings.map(booking => new Date(booking.date).toLocaleDateString("de"));
     this.calculateAmounts();
@@ -49,7 +49,7 @@ export class LineGraphChartComponent implements OnInit, OnChanges{
         scales:{
           y:{
             ticks:{
-              callback: function(value, index, ticks){
+              callback: function(value){
                 return value + "€"
               },
               font: {

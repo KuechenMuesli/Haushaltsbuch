@@ -4,7 +4,7 @@ import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
-import {Observable, findIndex, map, retry, tap, of} from 'rxjs';
+import {Observable, map, tap} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -117,10 +117,6 @@ export class BookingsService {
       }
     }
     return expensesList;
-  }
-
-  convertMonthsList(){
-
   }
 
   calculateExpensesAmount(id: number): number[]{
