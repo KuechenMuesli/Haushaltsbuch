@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter} from '@angular/core';
 import { Inject }  from '@angular/core';
-import { DOCUMENT } from '@angular/common'; 
+import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TagsService } from '../../services/tags-service/tags.service';
 
@@ -20,7 +20,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
   @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
-  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, 
+  constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private tagsService: TagsService){
     this.addTagForm = this.formBuilder.group({
       name:[`${this.name}`, Validators.required]
@@ -61,12 +61,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
   }
 
   closeDialog(){
-    if(this.filterTags){
-      this.filterTags = false;
-      this.filterTagsDialogOpen.emit(false);
-    }else{
-      this.dialogIsOpen.emit(false);
-    }
+    this.dialogIsOpen.emit(false);
     (this.document.getElementById("name") as HTMLInputElement).value = "";
     let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
     dia.close();

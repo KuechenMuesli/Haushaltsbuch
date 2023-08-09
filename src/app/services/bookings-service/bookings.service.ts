@@ -4,7 +4,7 @@ import { Book } from '../../book';
 import { BooksService } from '../books-service/books.service';
 import { LocalStorageService } from '../local-storage-service/local-storage.service';
 import { UserService } from '../user-service/user.service';
-import { Observable, findIndex, map, retry, tap } from 'rxjs';
+import {Observable, findIndex, map, retry, tap, of} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 
@@ -24,7 +24,6 @@ export class BookingsService {
           return bookings;
       }))
   }
-
   new_id(): number {
     let books: Book[] = [];
     this.booksService.getBooksList().subscribe(booksList => books = booksList);
@@ -86,10 +85,15 @@ export class BookingsService {
   }
 
   editBooking(id: number, date: string, description: string, amount: number, tags: string[]): void {
-    let bookings: Booking[] = this.booksService.getBookings(this.booksService.bookId);
+    let bookings: Booking[] = [];
+    this.booksService.getBookings(this.booksService.bookId).subscribe(bookingsList => bookings = bookingsList);
     let bookingsIndex: number = bookings.findIndex(booking => id == booking.id);
     if (bookingsIndex !== -1){
-      this.booksService.books[this.booksService.bookId].bookingsList[bookingsIndex] = {id, date, description, amount, tags};
+      let bookings: Booking[] = [];
+      this.getBookings(this.booksService.bookId).subscribe(bookingsList => bookings = bookingsList);
+      bookings[bookingsIndex] = {id, date, description, amount, tags};
+      let bookIndex: number = this.booksService.books.findIndex(book => book.id == this.booksService.bookId);
+      this.booksService.books[bookIndex].bookingsList = bookings;
     }
     this.localStorageService.saveData(this.userService.currentUser, this.booksService.books);
   }
@@ -137,7 +141,8 @@ export class BookingsService {
   }
 
   getMonths(id: number): string[]{
-    let bookings: Booking[] = this.booksService.getBookings(id);
+    let bookings: Booking[] = [];
+    this.booksService.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
     bookings.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     let months: string[] = [];
     let date: string[] = [];
@@ -213,21 +218,32 @@ export class BookingsService {
     return filteredBookings;
   }
 
-  getTagsOfBooking(id: number): string[]{
-    if(id >= 0){
-      let booking!: Booking;
-      this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
-      return booking.tags;
-    }
-    return [];
+  getTagsOfBooking(id: number): Observable<string[]>{
+    return this.getBooking(id)
+      .pipe(
+        map(booking => {
+            let tagsList: string[] = []
+            if(booking){
+              tagsList = booking.tags;
+            }
+            return tagsList;
+          }
+        )
+      )
   }
 
   deleteTag(id:number, name:string){
-    let booking!: Booking;
+    let booking: Booking = {id:-1, date:"", description:"", amount:-1, tags:[]};
     this.getBooking(id).subscribe(returnedBooking => booking = returnedBooking);
     let index: number = booking.tags.findIndex(tagName => tagName == name);
-    if (index != -1){
+
+    if (index !== -1){
       booking.tags.splice(index, 1);
+      let bookings: Booking[] = []
+      this.getBookings(this.booksService.bookId).subscribe(bookingsList => bookings = bookingsList);
+      let bookIndex = this.booksService.books.findIndex(book => book.id == this.booksService.bookId);
+      this.booksService.books[bookIndex].bookingsList[bookings.findIndex(listedBooking => listedBooking.id == id)] = booking;
+      this.localStorageService.saveData(this.userService.currentUser, this.booksService.books);
     }
   }
 }

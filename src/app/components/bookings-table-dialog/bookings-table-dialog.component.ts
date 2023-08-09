@@ -17,7 +17,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   @Input() openDialog!: boolean;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
-  tags: string[] = this.getTags();
+  tags: string[] = [];
   addedTags: string[] = [];
   date: string = "";
   description: string = "";
@@ -34,11 +34,12 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   ngOnChanges(): void {
     if(this.openDialog){
       this.showDialog();
-      this.tags = this.getTags();
+      this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
     }
   }
 
   ngOnInit(){
+    this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
     this.createNewBookingForm();
   }
 
@@ -75,7 +76,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
       if (this.bookingsService.bookingId == -1){
         this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags).subscribe();
       }else{
-        this.tags = this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).concat(this.addedTags);
+        this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList.concat(this.addedTags));
         this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags);
       }
       this.addedTags = [];
@@ -93,27 +94,22 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
     dia.close();
   }
 
-  getTags(): string[]{
-    if (this.bookingsService.bookingId == -1){
-      return [];
-    }
-    return this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId);
-  }
-
   addTagPressed(){
     this.addTagDialogOpen = true;
   }
 
   deleteTagPressed(name: string){
     this.bookingsService.deleteTag(this.bookingsService.bookingId, name);
+    this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
   }
 
   closeTagsDialog(dialogIsOpen: boolean){
     if(!dialogIsOpen){
       this.addTagDialogOpen = false;
+      this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
       if(this.tagsService.addedTag !== ""){
         this.addedTags.push(this.tagsService.addedTag);
-        this.tags = this.getTags().concat(this.addedTags);
+        this.tags = this.tags.concat(this.addedTags);
       }
     }
   }

@@ -82,10 +82,18 @@ export class BooksService {
       );
   }
 
-  getBookings(id: number): Booking[]{
-    let books!: Book[];
-    this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []).subscribe(booksList => books = booksList);
-    return books[books.findIndex(bookingsList => bookingsList.id == id)].bookingsList;
+  getBookings(id: number): Observable<Booking[]>{
+    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+      .pipe(
+        map(books => {
+          return {
+            bookings: books[books.findIndex(book => book.id == id)].bookingsList
+          }
+        })
+      )
+      .pipe(
+        map(books => books.bookings)
+      )
   }
 
   updateBooks(){
