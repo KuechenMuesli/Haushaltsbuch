@@ -3,6 +3,7 @@ import { Inject }  from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksService } from '../../services/books-service/books.service';
+import {Book} from "../../book";
 
 
 @Component({
@@ -42,9 +43,9 @@ export class BooksDialogComponent implements OnInit, OnChanges{
     if(this.newBookForm.valid){
       formData = this.newBookForm.value;
       if (this.booksService.bookId == -1){
-        this.booksService.addBook(formData.name);
+        this.booksService.addBook(formData.name).subscribe();
       }else{
-        this.booksService.editBook(this.booksService.bookId, formData.name).subscribe(books => this.booksService.books = books.books);
+        this.booksService.editBook(this.booksService.bookId, formData.name).subscribe();
       }
     }
     this.closeDialog();

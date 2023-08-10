@@ -52,7 +52,6 @@ export class BookingsService {
       .pipe(
         tap(allBooks =>{
           this.localStorageService.saveData(this.userService.currentUser, allBooks.books);
-          this.booksService.books[allBooks.books.findIndex(book => book.id == this.bookId)].bookingsList.push({id:this.new_id(), date:date, description:description, amount:amount, tags:tags});
         })
       )
   }
@@ -89,15 +88,20 @@ export class BookingsService {
                 let bookingsIndex: number = bookings.findIndex(curBooking => curBooking.id == id);
                 if (bookingsIndex !== -1){
                     bookings[bookingsIndex] = {id, date, description, amount, tags}
-                    let bookIndex: number = this.booksService.books.findIndex(book => book.id == this.booksService.bookId);
-                    this.booksService.books[bookIndex].bookingsList = bookings;
+                    let books: Book[] = [];
+                    this.booksService.getBooksList().subscribe(booksList => books = booksList);
+                    let bookIndex: number = books.findIndex(book => book.id == this.booksService.bookId);
                 }
             }
           )
         )
         .pipe(
             tap(bookings => {
-              this.localStorageService.saveData(this.userService.currentUser, this.booksService.books)
+              let books: Book[] = [];
+              let user: string = "";
+              this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+              this.booksService.getBooksList().subscribe(booksList => books = booksList);
+              this.localStorageService.saveData(user, books)
             }
             )
         )
@@ -247,9 +251,12 @@ export class BookingsService {
       booking.tags.splice(index, 1);
       let bookings: Booking[] = []
       this.getBookings(this.booksService.bookId).subscribe(bookingsList => bookings = bookingsList);
-      let bookIndex = this.booksService.books.findIndex(book => book.id == this.booksService.bookId);
-      this.booksService.books[bookIndex].bookingsList[bookings.findIndex(listedBooking => listedBooking.id == id)] = booking;
-      this.localStorageService.saveData(this.userService.currentUser, this.booksService.books);
+      let books: Book[] = [];
+      this.booksService.getBooksList().subscribe(booksList => books = booksList);
+      let bookIndex = books.findIndex(book => book.id == this.booksService.bookId);
+      let user = "";
+      this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+      this.localStorageService.saveData(user, books);
     }
   }
 }

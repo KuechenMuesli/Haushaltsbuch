@@ -10,32 +10,44 @@ import { Observable, map, tap } from 'rxjs';
 })
 export class BooksService {
   bookId: number = 0;
-  data: Book[] = this.setBooks();
-  books: Book[] = this.data.length > 0? this.data : []
 
   constructor(private localStorageService: LocalStorageService, private userService: UserService) { }
 
-  setBooks(): Book[]{
-    let booksList: Book[] = [];
-    this.localStorageService.getDataObservable(this.userService.currentUser, []).subscribe(books => booksList = books);
-    return booksList;
-  }
-
   getBooksList(): Observable<Book[]> {
-    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, []);
+    let user = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser)
+    return this.localStorageService.getDataObservable<Book[]>(user, []);
   }
 
   getName(id: number): string{
-    this.books = this.setBooks();
-    let index = this.books.findIndex(book => book.id == id);
-    return this.books[index].name;
+    let books: Book[] = [];
+    this.getBooksList().subscribe(booksList => books = booksList);
+    let index = books.findIndex(book => book.id == id);
+    return books[index].name;
   }
 
-  addBook(name: string){
-    this.bookId = this.books.length > 0? Math.max(...this.books.map(bookingsList => bookingsList.id)) + 1 : 0;
-
-    this.books.push({id:this.bookId, name: name, bookingsList:[]});
-    this.localStorageService.saveData(this.userService.currentUser, this.books);
+  addBook(name: string): Observable<void>{
+    return this.getBooksList()
+      .pipe(map(books => {
+          this.bookId = books.length > 0? Math.max(...books.map(bookingsList => bookingsList.id)) + 1 : 0;
+          books.push({id:this.bookId, name:name, bookingsList:[]});
+          let user = "";
+          this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+          return {
+            books: books,
+            user: user
+          }
+        }
+      ))
+      .pipe(
+        tap(booksUser => {
+            this.localStorageService.saveData(booksUser.user, booksUser.books);
+          }
+        )
+      )
+      .pipe(
+        map(() => {return})
+      )
   }
 
   deleteBook(id: number): Observable<number> {
@@ -44,16 +56,18 @@ export class BooksService {
         map(books => {
           const index = books.findIndex(book => book.id == id);
           index !== -1 ? books.splice(index, 1) : null;
+          let user = "";
+          this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
           return {
-            index,
-            books: books
+            index: index,
+            books: books,
+            user: user
           };
         })
       )
       .pipe(
         tap(bookingsWithIndex => {
-          this.localStorageService.saveData(this.userService.currentUser, bookingsWithIndex.books);
-          this.setBooks();
+          this.localStorageService.saveData(bookingsWithIndex.user, bookingsWithIndex.books);
         })
       )
       .pipe(
@@ -69,29 +83,30 @@ export class BooksService {
           if (index !== -1){
             books[index].name = name;
           }
+          let user = ""
+          this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
           return{
-            books: books
+            books: books,
+            user: user
           }
         })
       )
       .pipe(
-        tap(books => {
-          this.localStorageService.saveData(this.userService.currentUser, books.books);
+        tap(booksUser => {
+          this.localStorageService.saveData(booksUser.user, booksUser.books);
         })
       );
   }
 
   getBookings(id: number): Observable<Booking[]>{
-    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+    let currentUser = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => currentUser = returnedUser);
+    return this.localStorageService.getDataObservable<Book[]>(currentUser, [])
       .pipe(
         map(books => {
           return books[books.findIndex(book => book.id == id)].bookingsList;
           }
         )
       )
-  }
-
-  updateBooks(){
-    this.localStorageService.saveData(this.userService.currentUser, this.books);
   }
 }

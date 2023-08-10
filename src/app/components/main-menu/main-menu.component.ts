@@ -62,7 +62,7 @@ export class MainMenuComponent implements OnInit{
   closeDialog(dialogIsOpen: boolean){
     if (!dialogIsOpen){
       this.openBooksDialog = false;
-      this.bookingsList = this.booksService.books;
+      this.booksService.getBooksList().subscribe(booksList => this.bookingsList = booksList);
     }
   }
   closeUserDialog(dialogIsOpen: boolean){
