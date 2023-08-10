@@ -2,7 +2,7 @@
     font-family: 'Courier New', Courier, monospace;
     font-size: medium;
     margin: auto;
-    width: 50%;
+    width: 55%;
     padding: 10px;
 }
 
@@ -101,4 +101,11 @@ td {
 }
 #change-date-button:hover{
     background-color: rgb(207, 197, 183);
+}
+
+#bottom{
+  background-color: rgb(234, 212, 182);
+  margin-top: 100px;
+  height: 200px;
+  width: 100%;
 }

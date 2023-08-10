@@ -13,7 +13,7 @@ th{
 
 .all{
   margin: auto;
-  width: 50%;
+  width: 55%;
   padding: 10px;
   padding-left: 30px;
   padding-right: 30px;
@@ -197,8 +197,7 @@ th{
   border-color: rgb(231, 217, 194);
   border-width: 2px;
   width: 10em;
-  word-break: break-all;
-  overflow-wrap: break-word;
+  word-break: keep-all;
 }
 
 #expenses-chart{

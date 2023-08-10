@@ -42,7 +42,7 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
   }
 
   onSubmit(){
-    this.tagsService.addTag(this.addTagForm.value.name);
+    this.tagsService.addTag(this.addTagForm.value.name).subscribe();
     this.closeDialog();
   }
 
