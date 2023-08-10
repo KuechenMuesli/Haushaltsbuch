@@ -27,7 +27,6 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     if (loggedInUser){
       this.loggedIn = true;
       this.userService.logIn();
-      this.userService.currentUser = loggedInUser;
       this.closeDialog();
     }
   }
@@ -50,7 +49,6 @@ export class LoginDialogComponent implements OnChanges, OnInit{
   if(this.userService.checkPassword(username, password)){
     this.loggedIn = true;
     this.localStorageService.writeSessionStorage("LoggedIn", [username]);
-    this.userService.currentUser = username;
     this.userAlreadyExists = false;
     this.wrongUsernamePassword = false;
     this.closeDialog();
@@ -74,7 +72,6 @@ export class LoginDialogComponent implements OnChanges, OnInit{
     if (this.loginForm.valid){
       if (!this.userService.userExists(data.username)){
         this.userService.addUser(data.username, data.password);
-        this.userService.currentUser = data.username;
         this.localStorageService.writeSessionStorage("LoggedIn", [data.username]);
         this.loggedIn = true;
         this.userAlreadyExists = false;

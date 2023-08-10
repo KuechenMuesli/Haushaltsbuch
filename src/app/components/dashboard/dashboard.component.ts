@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit{
   ngOnInit(){
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.booksService.getName(this.id).subscribe(name => this.bookName = name);
-    this.currentUser = this.userService.currentUser;
+    this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookings = bookings.sort((a, b) => (new Date(a.date).getTime()) - (new Date(b.date).getTime()));

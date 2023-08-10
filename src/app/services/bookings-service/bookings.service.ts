@@ -39,7 +39,9 @@ export class BookingsService {
   }
 
   addBooking(date: string, description: string, amount: number, tags: string[]){
-    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+    return this.localStorageService.getDataObservable<Book[]>(user, [])
       .pipe(
         map(books => {
           let bookIndex = books.findIndex(book => book.id == this.bookId);
@@ -51,7 +53,9 @@ export class BookingsService {
       )
       .pipe(
         tap(allBooks =>{
-          this.localStorageService.saveData(this.userService.currentUser, allBooks.books);
+          let user: string = "";
+          this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+          this.localStorageService.saveData(user, allBooks.books);
         })
       )
   }
@@ -75,7 +79,9 @@ export class BookingsService {
           let newBooksList: Book[] = [];
           this.booksService.getBooksList().subscribe(booksList => newBooksList = booksList);
           newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
-          this.localStorageService.saveData(this.userService.currentUser, newBooksList);
+            let user: string = "";
+            this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+          this.localStorageService.saveData(user, newBooksList);
         }
         )
       )

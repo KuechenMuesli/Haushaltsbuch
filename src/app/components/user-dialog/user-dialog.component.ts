@@ -30,8 +30,10 @@ export class UserDialogComponent implements OnInit, OnChanges{
   }
 
   newEditUserForm(){
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
     this.editUserForm = this.formBuilder.group({
-      name:[`${this.userService.currentUser}`, Validators.required],
+      name:[`${user}`, Validators.required],
       oldPassword:[],
       newPassword:[]
     })
@@ -41,11 +43,15 @@ export class UserDialogComponent implements OnInit, OnChanges{
     let formData;
     if(this.editUserForm.valid){
       formData = this.editUserForm.value;
-      this.userService.editUser(this.userService.currentUser, formData.name);
+      let user: string = "";
+      this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+      this.userService.editUser(user, formData.name);
     }
     if(this.changePassword){
-      if(this.userService.checkPassword(this.userService.currentUser, formData.oldPassword)){
-        this.userService.changePassword(this.userService.currentUser, formData.newPassword);
+      let user: string = "";
+      this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+      if(this.userService.checkPassword(user, formData.oldPassword)){
+        this.userService.changePassword(user, formData.newPassword);
         this.incorrectPassword = false;
       }else{
         this.incorrectPassword = true;
@@ -61,7 +67,9 @@ export class UserDialogComponent implements OnInit, OnChanges{
   }
 
   deleteUser(){
-    this.userService.deleteUser(this.userService.currentUser);
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+    this.userService.deleteUser(user);
     this.closeDialog();
   }
 

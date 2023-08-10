@@ -19,7 +19,7 @@ export class MainMenuComponent implements OnInit{
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
   loggedIn: boolean = false;
-  currentUser: string = this.userService.currentUser;
+  currentUser: string = "";
   loggedInSubscription: Subscription;
 
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
@@ -33,9 +33,10 @@ export class MainMenuComponent implements OnInit{
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
     this.userService.getUsers();
-    this.userService.currentUser = this.userService.users[0];
+    //this.userService.currentUser = this.userService.users[0];
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
+    this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
   }
 
   updateID(id: number){
@@ -67,7 +68,9 @@ export class MainMenuComponent implements OnInit{
   closeUserDialog(dialogIsOpen: boolean){
     if (!dialogIsOpen){
       this.openUserDialog = false;
-      if (this.userService.currentUser === ""){
+      let user: string = "";
+      this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+      if (user === ""){
         this.userService.deleteUser("");
       }
       this.userChanged();
@@ -82,7 +85,7 @@ export class MainMenuComponent implements OnInit{
   }
 
   userChanged(){
-    this.currentUser = this.userService.currentUser;
+    this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
   }
@@ -96,7 +99,8 @@ export class MainMenuComponent implements OnInit{
       this.userChanged();
       this.loggedIn = true;
       this.changeDetectorRef.detectChanges();
-      this.currentUser = this.userService.currentUser;
+      this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
+
     }
   }
 }

@@ -39,8 +39,9 @@ export class BookingsTableComponent implements OnInit{
     let bookings: Booking[] = []
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList)
     this.bookings = this.bookingsService.filterMonth(bookings, this.month);
-
-    this.currentUser = this.userService.currentUser;
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+    this.currentUser = user;
 
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
   }

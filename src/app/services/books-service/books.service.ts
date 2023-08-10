@@ -54,7 +54,9 @@ export class BooksService {
   }
 
   deleteBook(id: number): Observable<number> {
-    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+    return this.localStorageService.getDataObservable<Book[]>(user, [])
       .pipe(
         map(books => {
           const index = books.findIndex(book => book.id == id);
@@ -79,7 +81,9 @@ export class BooksService {
   }
 
   editBook(id:number, name: string){
-    return this.localStorageService.getDataObservable<Book[]>(this.userService.currentUser, [])
+    let user: string = "";
+    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+    return this.localStorageService.getDataObservable<Book[]>(user, [])
       .pipe(
         map(books => {
           const index = books.findIndex(book => book.id == id);
