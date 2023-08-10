@@ -16,7 +16,6 @@ import { Booking } from '../../booking';
 })
 export class MainMenuComponent implements OnInit{
   bookingsList: Book[] = [];
-  accountBalance: number = 0;
   openBooksDialog: boolean = false;
   openUserDialog: boolean = false;
   loggedIn: boolean = false;
@@ -77,8 +76,9 @@ export class MainMenuComponent implements OnInit{
   calculateAccountBalance(id:number){
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
-    this.bookingsService.calculateBookingsTotal(bookings).subscribe(balance => this.accountBalance = balance);
-    return this.accountBalance;
+    let accountBalance = 0;
+    this.bookingsService.calculateBookingsTotal(bookings).subscribe(balance => accountBalance = balance);
+    return accountBalance;
   }
 
   userChanged(){
