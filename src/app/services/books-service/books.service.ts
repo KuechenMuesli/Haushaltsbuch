@@ -16,7 +16,7 @@ export class BooksService {
   getBooksList(): Observable<Book[]> {
     let user = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser)
-    return this.localStorageService.getDataObservable<Book[]>(user, []);
+    return this.localStorageService.getData<Book[]>(user, []);
   }
 
   getName(id: number): Observable<string>{
@@ -55,7 +55,7 @@ export class BooksService {
   deleteBook(id: number): Observable<number> {
     let user: string = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-    return this.localStorageService.getDataObservable<Book[]>(user, [])
+    return this.localStorageService.getData<Book[]>(user, [])
       .pipe(
         map(books => {
           const index = books.findIndex(book => book.id == id);
@@ -82,7 +82,7 @@ export class BooksService {
   editBook(id:number, name: string){
     let user: string = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-    return this.localStorageService.getDataObservable<Book[]>(user, [])
+    return this.localStorageService.getData<Book[]>(user, [])
       .pipe(
         map(books => {
           const index = books.findIndex(book => book.id == id);
@@ -107,7 +107,7 @@ export class BooksService {
   getBookings(id: number): Observable<Booking[]>{
     let currentUser = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => currentUser = returnedUser);
-    return this.localStorageService.getDataObservable<Book[]>(currentUser, [])
+    return this.localStorageService.getData<Book[]>(currentUser, [])
       .pipe(
         map(books => {
           return books[books.findIndex(book => book.id == id)].bookingsList;

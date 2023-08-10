@@ -6,7 +6,7 @@
         <h1>Buchungen von {{currentUser}}: </h1><h1 id="book-name">{{bookName}}</h1>
         <button routerLink="dashboard" id="dashboard-button"><mat-icon id="dashboard-icon">insert_chart</mat-icon></button>
         <button (click)="addBookingPressed()" id="add-button"><mat-icon id="add-icon">add_circle</mat-icon></button>
-        <app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
+        <app-bookings-table-dialog [bookingId]="editBookingId" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
     </div>
     <div id="time-select">
         <h3 id="time-select-heading">Buchungen aus </h3>
@@ -40,5 +40,5 @@
     </div>
 
 </div>
-<app-bookings-table-dialog [openDialog]="openDialog" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
+<app-bookings-table-dialog [bookingId]="editBookingId" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 <div id="bottom"></div>

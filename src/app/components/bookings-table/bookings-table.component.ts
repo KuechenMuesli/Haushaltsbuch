@@ -17,11 +17,11 @@ export class BookingsTableComponent implements OnInit{
   id: number = -1;
   bookName: string = "";
   sorter: string = "date";
-  openDialog: boolean = false;
   currentUser: string = "";
   expensesList: Booking[] = [];
   months: string[] = [];
   month: string = "";
+  editBookingId: number | null = null;
 
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
@@ -59,8 +59,7 @@ export class BookingsTableComponent implements OnInit{
   }
 
   editBooking(id: number): void{
-    this.bookingsService.bookingId = id;
-    this.openDialog = true;
+    this.editBookingId = id;
   }
 
   deleteBooking(id: number): void {
@@ -93,13 +92,12 @@ export class BookingsTableComponent implements OnInit{
   }
 
   addBookingPressed(): void {
-    this.bookingsService.bookingId = -1;
-    this.openDialog = true;
+    this.editBookingId = -1;
   }
 
   closeDialog(isDialogOpen: boolean){
     if(!isDialogOpen){
-      this.openDialog = false;
+      this.editBookingId = null;
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
 

@@ -12,7 +12,7 @@ export class TagsService {
   }
 
   getTags(): Observable<string[]> {
-    return this.localStorageService.getDataObservable("Tags", [])
+    return this.localStorageService.getData("Tags", [])
       .pipe(
         map(tags => {
             return tags;

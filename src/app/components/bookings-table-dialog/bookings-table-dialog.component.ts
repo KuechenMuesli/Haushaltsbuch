@@ -14,7 +14,7 @@ import { TagsService } from '../../services/tags-service/tags.service';
 
 export class BookingsTableDialogComponent implements OnInit, OnChanges{
   newBookingForm!: FormGroup;
-  @Input() openDialog!: boolean;
+  @Input() bookingId: number | null = null;
   @Output() dialogIsOpen = new EventEmitter<boolean>();
 
   tags: string[] = [];
@@ -22,25 +22,25 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   date: string = "";
   description: string = "";
   amount: number = 0;
-
   dialogOpen: boolean = true;
   addTagDialogOpen: boolean = false;
-
   constructor(@Inject(DOCUMENT) private document: Document,
   private formBuilder: FormBuilder, private bookingsService: BookingsService, private renderer: Renderer2,
   private tagsService: TagsService
   ){}
 
   ngOnChanges(): void {
-    if(this.openDialog){
+    if(this.bookingId !== null){
       this.showDialog();
-      this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
+      this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
     }
   }
 
   ngOnInit(){
-    this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
     this.createNewBookingForm();
+    if(this.bookingId){
+    this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
+    }
   }
   createNewBookingForm(){
     this.newBookingForm = this.formBuilder.group({
@@ -51,16 +51,18 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   }
 
   showDialog(){
-    if (this.bookingsService.bookingId == -1){
+    if (this.bookingId == -1){
       this.date = new Date().toISOString().split('T')[0];
       this.description = "";
       this.amount = 0;
-    }else{
+    }else if(this.bookingId !== null){
       let booking!: Booking;
-      this.bookingsService.getBooking(this.bookingsService.bookingId).subscribe(returnedBooking => booking = returnedBooking);
+      this.bookingsService.getBooking(this.bookingId).subscribe(returnedBooking => booking = returnedBooking);
       this.date= booking.date;
       this.description = booking.description;
       this.amount = booking.amount;
+    }else{
+      throw new Error("BookingId is undefined");
     }
     this.newBookingForm.patchValue({ date: this.date, description: this.description, amount: this.amount });
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
@@ -72,11 +74,13 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   onSubmit(){
     if(this.newBookingForm.valid){
       let formData = this.newBookingForm.value;
-      if (this.bookingsService.bookingId == -1){
+      if (this.bookingId == -1){
         this.bookingsService.addBooking(formData.date, formData.description, formData.amount, this.addedTags).subscribe();
+      }else if(this.bookingId !== null){
+        this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList.concat(this.addedTags));
+        this.bookingsService.editBooking(this.bookingId, formData.date, formData.description, formData.amount, this.tags).subscribe();
       }else{
-        this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList.concat(this.addedTags));
-        this.bookingsService.editBooking(this.bookingsService.bookingId, formData.date, formData.description, formData.amount, this.tags).subscribe();
+        throw new Error("BookingId is undefined")
       }
       this.addedTags = [];
     }
@@ -98,18 +102,23 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   }
 
   deleteTagPressed(name: string){
-    this.bookingsService.deleteTag(this.bookingsService.bookingId, name);
-    this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
+    if(!this.bookingId){
+      throw new Error("BookingId is undefined")
+    }
+    this.bookingsService.deleteTag(this.bookingId, name);
+    this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
   }
 
   closeTagsDialog(dialogIsOpen: boolean){
     if(!dialogIsOpen){
+      if(!this.bookingId){
+        throw new Error("BookingId is undefined");
+      }
       this.addTagDialogOpen = false;
-      this.bookingsService.getTagsOfBooking(this.bookingsService.bookingId).subscribe(tagsList => this.tags = tagsList);
+      this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
       if(this.tagsService.addedTag !== ""){
         this.addedTags.push(this.tagsService.addedTag);
         this.tags = this.tags.concat(this.addedTags);
-        console.log(this.tags)
       }
     }
   }
