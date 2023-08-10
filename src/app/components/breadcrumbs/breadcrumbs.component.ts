@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Breadcrumb} from "../../breadcrumb";
 import {BooksService} from "../../services/books-service/books.service";
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -11,15 +11,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BreadcrumbsComponent implements OnInit{
 
   breadcrumbs: Breadcrumb[] = [
-    {name:"main menu", path:"/main-menu"},
-    {name:"Table", path:`/table/${this.booksService.bookId}`},
+    {name:"Hauptmenü", path:"/main-menu"},
+    {name:"Buchungen", path:`/table/${this.booksService.bookId}`},
     {name:"Dashboard", path:`/table/${this.booksService.bookId}/dashboard`}
   ];
 
   currentBreadcrumbs: Breadcrumb[] = [];
   path: string = "";
 
-  constructor(private booksService: BooksService, private route: ActivatedRoute, private router: Router) {
+  constructor(private booksService: BooksService, private router: Router) {
   }
   ngOnInit(){
     this.path = this.router.url;
@@ -31,6 +31,4 @@ export class BreadcrumbsComponent implements OnInit{
       this.currentBreadcrumbs = this.breadcrumbs;
     }
   }
-
-
 }

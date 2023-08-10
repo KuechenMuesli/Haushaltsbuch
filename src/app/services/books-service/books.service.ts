@@ -20,7 +20,6 @@ export class BooksService {
   }
 
   getName(id: number): Observable<string>{
-    let books: Book[] = [];
     return this.getBooksList()
       .pipe(map(books => {
           let index: number = books.findIndex(book => book.id == id);
