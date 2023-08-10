@@ -114,10 +114,10 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
       if(this.bookingId == null){
         throw new Error("BookingId is undefined");
       }
-      this.addTagDialogOpen = false;
       this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
       this.addedTags.push(addedTag);
       this.tags = this.tags.concat(this.addedTags);
     }
+    this.addTagDialogOpen = false;
   }
 }
