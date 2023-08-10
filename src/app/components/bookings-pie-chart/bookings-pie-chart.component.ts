@@ -141,14 +141,12 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
     this.chart.update();
   }
 
-  closeTagsDialog(dialogIsOpen: boolean){
-    if(!dialogIsOpen){
-      this.tagDialogOpen = false;
-      if(this.tagsService.addedTag !== ""){
-        this.tagsList.push(this.tagsService.addedTag);
-      }
+  closeTagsDialog(addedTag: string | null){
+    if(addedTag !== null){
+      this.tagsList.push(addedTag);
       this.updateChart();
     }
+    this.tagDialogOpen = false;
   }
 
   deleteTagPressed(tagName: string){

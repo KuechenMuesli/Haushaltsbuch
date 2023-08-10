@@ -6,8 +6,6 @@ import {map, Observable, tap} from "rxjs";
   providedIn: 'root'
 })
 export class TagsService {
-  addedTag!: string;
-
   constructor(private localStorageService: LocalStorageService) {
   }
 
@@ -29,7 +27,6 @@ export class TagsService {
           if (index == -1) {
             tags.push(name);
           }
-          this.addedTag = name;
           return {tags: tags}
         })
       )

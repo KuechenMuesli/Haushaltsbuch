@@ -13,9 +13,10 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
   addTagForm: FormGroup;
   name: string = "";
   tagsList: string[] = [];
+  addedTag: string = "";
 
   @Input() openFilterDialog: boolean = false;
-  @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
+  @Output() filterTagsDialogOpen = new EventEmitter<string | null>();
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private tagsService: TagsService){
@@ -34,20 +35,16 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
 
   ngOnInit(): void {
     this.tagsService.getTags().subscribe(tags => this.tagsList = tags);
-    this.createAddTagForm();
-  }
-
-  createAddTagForm(){
-
   }
 
   onSubmit(){
-    this.tagsService.addTag(this.addTagForm.value.name).subscribe();
+    this.addedTag = this.addTagForm.value.name;
+    this.tagsService.addTag(this.addedTag).subscribe();
     this.closeDialog();
   }
 
   cancelAddingTag(){
-    this.tagsService.addedTag = "";
+    this.addedTag = "";
     this.closeDialog();
   }
 
@@ -58,7 +55,11 @@ export class TagsFilterDialogComponent implements OnInit, OnChanges{
   }
 
   closeDialog(){
-    this.filterTagsDialogOpen.emit(false);
+    if(this.addedTag == ""){
+      this.filterTagsDialogOpen.emit(null);
+    }else{
+      this.filterTagsDialogOpen.emit(this.addedTag);
+    }
     let dia = this.document.getElementById("filter-tag-dialog") as HTMLDialogElement;
     (this.document.getElementById("name-input") as HTMLInputElement).value = "";
     dia.close();
