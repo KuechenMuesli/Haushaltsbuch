@@ -18,6 +18,7 @@ import { TagsFilterDialogComponent } from './components/tags-filter-dialog/tags-
 import { LoginDialogComponent } from './components/login-dialog/login-dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LineGraphChartComponent } from './components/line-graph-chart/line-graph-chart.component';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { LineGraphChartComponent } from './components/line-graph-chart/line-grap
     TagsFilterDialogComponent,
     LoginDialogComponent,
     DashboardComponent,
-    LineGraphChartComponent
+    LineGraphChartComponent,
+    BreadcrumbsComponent
   ],
   imports: [
     BrowserModule,
