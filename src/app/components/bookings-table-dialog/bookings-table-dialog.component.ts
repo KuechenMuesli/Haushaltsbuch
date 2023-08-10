@@ -109,6 +109,7 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
       if(this.tagsService.addedTag !== ""){
         this.addedTags.push(this.tagsService.addedTag);
         this.tags = this.tags.concat(this.addedTags);
+        console.log(this.tags)
       }
     }
   }

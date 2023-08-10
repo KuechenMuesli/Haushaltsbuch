@@ -81,7 +81,7 @@ export class BookingsService {
           newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
             let user: string = "";
             this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-          this.localStorageService.saveData(user, newBooksList);
+            this.localStorageService.saveData(user, newBooksList);
         }
         )
       )
@@ -92,22 +92,22 @@ export class BookingsService {
         .pipe(
             map(bookings => {
                 let bookingsIndex: number = bookings.findIndex(curBooking => curBooking.id == id);
+                let books: Book[] = [];
                 if (bookingsIndex !== -1){
                     bookings[bookingsIndex] = {id, date, description, amount, tags}
-                    let books: Book[] = [];
                     this.booksService.getBooksList().subscribe(booksList => books = booksList);
                     let bookIndex: number = books.findIndex(book => book.id == this.booksService.bookId);
+                    books[bookIndex].bookingsList = bookings;
                 }
+                return { books: books }
             }
           )
         )
         .pipe(
-            tap(bookings => {
-              let books: Book[] = [];
+            tap(books => {
               let user: string = "";
               this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-              this.booksService.getBooksList().subscribe(booksList => books = booksList);
-              this.localStorageService.saveData(user, books)
+              this.localStorageService.saveData(user, books.books)
             }
             )
         )
@@ -255,8 +255,6 @@ export class BookingsService {
 
     if (index !== -1){
       booking.tags.splice(index, 1);
-      let bookings: Booking[] = []
-      this.getBookings(this.booksService.bookId).subscribe(bookingsList => bookings = bookingsList);
       let books: Book[] = [];
       this.booksService.getBooksList().subscribe(booksList => books = booksList);
       let bookIndex = books.findIndex(book => book.id == this.booksService.bookId);
