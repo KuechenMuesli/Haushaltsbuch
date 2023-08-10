@@ -1,1 +1,7 @@
-<p>breadcrumbs works!</p>
+
+<div class="breadcrumb">
+  <div *ngFor="let breadcrumb of currentBreadcrumbs" class="breadcrumb">
+    <p routerLink="{{breadcrumb.path}}" class="route-link">{{breadcrumb.name}}</p>
+    <mat-icon class="arrow-icon">keyboard_arrow_right</mat-icon>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+.breadcrumb{
+  display: flex;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.arrow-icon{
+  margin-top: 18px;
+}
+.route-link{
+  background-color: #bab096;
+  padding: 5px;
+  border-radius: 2px;
+}

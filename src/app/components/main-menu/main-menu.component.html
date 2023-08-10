@@ -1,4 +1,5 @@
 <app-login-dialog [loggedIn]="loggedIn" (loginStatus)="loginDialogClosed($event)"></app-login-dialog>
+<app-breadcrumbs></app-breadcrumbs>
 <div class="all" *ngIf="loggedIn">
     <div class="user-select">
         <h4 id="user-heading">Benutzer: {{currentUser}}</h4>
