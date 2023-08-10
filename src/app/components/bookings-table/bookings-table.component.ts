@@ -65,8 +65,8 @@ export class BookingsTableComponent implements OnInit{
 
   deleteBooking(id: number): void {
     let bookings: Booking[] = [];
-    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookingsService.deleteBooking(id).subscribe();
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookings = this.bookingsService.filterMonth(bookings, this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
     this.months = this.bookingsService.getMonths(this.id);
