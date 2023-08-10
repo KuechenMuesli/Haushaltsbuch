@@ -25,9 +25,9 @@
             </tr>
 
             <tr *ngFor="let booking of bookings" class="booking-cells">
-                <td class="table-element" class="date">{{ displayDate(booking.date) }}</td>
-                <td class="table-element" class="description">{{ booking.description }}</td>
-                <td class="table-element" class="amount-cell" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
+                <td id="table-element" class="date">{{ displayDate(booking.date) }}</td>
+                <td id="table-element" class="description">{{ booking.description }}</td>
+                <td id="table-element" class="amount-cell" class="amount" [ngClass]="{'positive': booking.amount > 0, 'negative': booking.amount < 0}">
                     {{ booking.amount }} €
                 </td>
                 <td id="buttons-cells">

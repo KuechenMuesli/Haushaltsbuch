@@ -82,20 +82,20 @@ th{
   transform: scale(1.01);
 
 }
-.booking-cells:hover .table-element:nth-child(1){
+.booking-cells:hover #table-element:nth-child(1){
   border-bottom-left-radius: 10px;
   border-top-left-radius: 10px;
 }
-.booking-cells:hover .table-element:nth-child(3){
+.booking-cells:hover #table-element:nth-child(3){
   border-bottom-right-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-.booking-cells:last-child .table-element:nth-child(1){
+.booking-cells:last-child #table-element:nth-child(1){
   border-bottom-left-radius: 15px;
 }
 
-.booking-cells:last-child .table-element:nth-child(3){
+.booking-cells:last-child #table-element:nth-child(3){
   border-bottom-right-radius: 15px;
 }
 
@@ -192,7 +192,7 @@ th{
   background-color: rgb(200, 184, 163);
 }
 
-.table-element{
+#table-element{
   border-style: solid;
   border-color: rgb(231, 217, 194);
   border-width: 2px;

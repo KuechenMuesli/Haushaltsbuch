@@ -46,11 +46,12 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
       type: 'pie',
 
       data: {
-        labels: expensesLabels,
-	      datasets: [{
-        data: expensesValues,
-
-        hoverOffset: 10
+          labels: expensesLabels,
+          datasets: [{
+          data: expensesValues,
+          hoverOffset: 10,
+          hoverBackgroundColor:"antiquewhite",
+          hoverBorderColor:"antiquewhite"
       }],
       },
       options: {
