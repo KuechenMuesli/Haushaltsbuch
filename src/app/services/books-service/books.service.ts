@@ -19,11 +19,14 @@ export class BooksService {
     return this.localStorageService.getDataObservable<Book[]>(user, []);
   }
 
-  getName(id: number): string{
+  getName(id: number): Observable<string>{
     let books: Book[] = [];
-    this.getBooksList().subscribe(booksList => books = booksList);
-    let index = books.findIndex(book => book.id == id);
-    return books[index].name;
+    return this.getBooksList()
+      .pipe(map(books => {
+          let index: number = books.findIndex(book => book.id == id);
+          return books[index].name;
+        }
+      ))
   }
 
   addBook(name: string): Observable<void>{

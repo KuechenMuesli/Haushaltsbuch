@@ -31,7 +31,7 @@ export class BookingsTableComponent implements OnInit{
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.bookName = this.booksService.getName(this.id);
+    this.booksService.getName(this.id).subscribe(name => this.bookName = name);
     this.booksService.bookId = this.id;
 
     this.months = this.bookingsService.getMonths(this.id);

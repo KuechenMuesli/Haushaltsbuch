@@ -58,7 +58,7 @@ export class BooksDialogComponent implements OnInit, OnChanges{
   showDialog(){
     this.name = "";
     if(this.booksService.bookId != -1){
-      this.name = this.booksService.getName(this.booksService.bookId);
+      this.booksService.getName(this.booksService.bookId).subscribe(name => this.name = name);
     }
     let dia = this.document.getElementById("bookings-dialog") as HTMLDialogElement;
     dia.show();

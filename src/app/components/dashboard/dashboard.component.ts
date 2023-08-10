@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit{
 
   ngOnInit(){
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.bookName = this.booksService.getName(this.id);
+    this.booksService.getName(this.id).subscribe(name => this.bookName = name);
     this.currentUser = this.userService.currentUser;
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
