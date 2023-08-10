@@ -1,13 +1,19 @@
 .breadcrumb{
   display: flex;
   font-family: 'Courier New', Courier, monospace;
+  margin-left: 10px
 }
 
 .arrow-icon{
-  margin-top: 18px;
+  margin-top: 23px;
 }
 .route-link{
-  background-color: #bab096;
+  background-color: rgb(234, 212, 182);
+  font-size: 20px;
   padding: 5px;
-  border-radius: 2px;
+  border-radius: 5px;
+}
+
+.route-link:hover{
+  cursor: pointer;
 }
