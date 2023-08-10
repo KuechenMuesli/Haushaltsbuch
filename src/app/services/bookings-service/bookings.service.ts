@@ -113,7 +113,7 @@ export class BookingsService {
         )
         .pipe(
           map(
-            bookings => {return}
+            () => {return}
           )
         )
   }
@@ -258,6 +258,8 @@ export class BookingsService {
       let books: Book[] = [];
       this.booksService.getBooksList().subscribe(booksList => books = booksList);
       let bookIndex = books.findIndex(book => book.id == this.booksService.bookId);
+      let bookingIndex: number = books[bookIndex].bookingsList.findIndex(booking => booking.id == id);
+      books[bookIndex].bookingsList[bookingIndex] = booking;
       let user = "";
       this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
       this.localStorageService.saveData(user, books);
