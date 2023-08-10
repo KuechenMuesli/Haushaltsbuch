@@ -11,6 +11,7 @@ import { TagsService } from '../../services/tags-service/tags.service';
 })
 export class TagDialogComponent implements OnInit, OnChanges{
   addTagForm: FormGroup;
+  addedTag: string = "";
   name: string = "";
   tagsList: string[] = [];
 
@@ -18,7 +19,7 @@ export class TagDialogComponent implements OnInit, OnChanges{
   @Input() openFilterTagDialog = false;
   filterTags: boolean = false;
   @Output() filterTagsDialogOpen = new EventEmitter<boolean>();
-  @Output() dialogIsOpen = new EventEmitter<boolean>();
+  @Output() dialogIsOpen = new EventEmitter<string|null>();
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder,
   private tagsService: TagsService){
@@ -46,12 +47,13 @@ export class TagDialogComponent implements OnInit, OnChanges{
   }
 
   onSubmit(){
-    this.tagsService.addTag(this.addTagForm.value.name).subscribe();
+    this.addedTag = this.addTagForm.value.name;
+    this.tagsService.addTag(this.addedTag).subscribe();
     this.closeDialog();
   }
 
   cancelAddingTag(){
-    this.tagsService.addedTag = "";
+    this.addedTag = "";
     this.closeDialog();
   }
 
@@ -62,7 +64,11 @@ export class TagDialogComponent implements OnInit, OnChanges{
   }
 
   closeDialog(){
-    this.dialogIsOpen.emit(false);
+    if(this.addedTag !== ""){
+      this.dialogIsOpen.emit(this.addedTag);
+    }else{
+      this.dialogIsOpen.emit(null);
+    }
     (this.document.getElementById("name") as HTMLInputElement).value = "";
     let dia = this.document.getElementById("tag-dialog") as HTMLDialogElement;
     dia.close();

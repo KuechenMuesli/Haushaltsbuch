@@ -102,24 +102,22 @@ export class BookingsTableDialogComponent implements OnInit, OnChanges{
   }
 
   deleteTagPressed(name: string){
-    if(!this.bookingId){
+    if(this.bookingId == null){
       throw new Error("BookingId is undefined")
     }
     this.bookingsService.deleteTag(this.bookingId, name);
     this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
   }
 
-  closeTagsDialog(dialogIsOpen: boolean){
-    if(!dialogIsOpen){
-      if(!this.bookingId){
+  closeTagsDialog(addedTag: string | null){
+    if (addedTag !== null){
+      if(this.bookingId == null){
         throw new Error("BookingId is undefined");
       }
       this.addTagDialogOpen = false;
       this.bookingsService.getTagsOfBooking(this.bookingId).subscribe(tagsList => this.tags = tagsList);
-      if(this.tagsService.addedTag !== ""){
-        this.addedTags.push(this.tagsService.addedTag);
-        this.tags = this.tags.concat(this.addedTags);
-      }
+      this.addedTags.push(addedTag);
+      this.tags = this.tags.concat(this.addedTags);
     }
   }
 }
