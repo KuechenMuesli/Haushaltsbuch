@@ -21,6 +21,7 @@ export class MainMenuComponent implements OnInit{
   loggedIn: boolean = false;
   currentUser: string = "";
   loggedInSubscription: Subscription;
+  deleteId: number | null = null;
 
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef) {
@@ -52,11 +53,7 @@ export class MainMenuComponent implements OnInit{
     this.openBooksDialog = true;
   }
   deleteBook(id: number){
-    this.booksService.deleteBook(id)
-      .subscribe(index => {
-        let table = this.document.getElementById('table-list') as HTMLTableElement;
-        table.deleteRow(index);
-      });
+    this.deleteId = id;
   }
 
   closeDialog(dialogIsOpen: boolean){
@@ -101,6 +98,17 @@ export class MainMenuComponent implements OnInit{
       this.changeDetectorRef.detectChanges();
       this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
 
+    }
+  }
+
+  deletionDialogClosed(output: any){
+    if(output !== null){
+      this.deleteId = null;
+      let outputId: number = Number(output);
+      this.booksService.deleteBook(outputId).subscribe(index => {
+        let table = this.document.getElementById('table-list') as HTMLTableElement;
+        table.deleteRow(index);
+      });
     }
   }
 }
