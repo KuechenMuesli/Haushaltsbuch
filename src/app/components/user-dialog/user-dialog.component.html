@@ -22,8 +22,5 @@
         <p *ngIf="incorrectPassword && changePassword" id="incorrect-password">Altes Passwort ist nicht korrekt!</p>
         <button type="submit" [disabled]="editUserForm.invalid" id="submit-button"><mat-icon>done</mat-icon></button>
         <button type="reset" (click)="cancelEditing()" id="cancel-button"><mat-icon>close</mat-icon></button>
-        <button type="button" id="delete-user-button" (click)="deleteUser()"><mat-icon>delete_forever</mat-icon></button>
     </form>
 </dialog>
-<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)" class="delete-confirm-dialog"></app-deletion-dialog>
-

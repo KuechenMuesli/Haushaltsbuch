@@ -1,10 +1,13 @@
 <app-login-dialog [loggedIn]="loggedIn" (loginStatus)="loginDialogClosed($event)"></app-login-dialog>
+<app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeUserDialog($event)"></app-user-dialog>
+<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)"></app-deletion-dialog>
+
 <app-breadcrumbs></app-breadcrumbs>
 <div class="all" *ngIf="loggedIn">
     <div class="user-select">
         <h4 id="user-heading">Benutzer: {{currentUser}}</h4>
         <button id="edit-user-button" (click)="editUser()"><mat-icon>border_color</mat-icon></button>
-        <app-user-dialog [openDialog]="openUserDialog" (dialogIsOpen)="closeUserDialog($event)"></app-user-dialog>
+        <button id="delete-user-button" (click)="deleteUserClicked()"><mat-icon>delete_forever</mat-icon></button>
     </div>
 
     <div class="books">
@@ -25,4 +28,3 @@
         </tr>
     </table>
 </div>
-<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)"></app-deletion-dialog>

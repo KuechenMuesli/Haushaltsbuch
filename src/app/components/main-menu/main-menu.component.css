@@ -7,7 +7,7 @@
 }
 
 .all{
-    
+
     font-family: 'Courier New', Courier, monospace;
     font-size: 20px;
     margin: auto;
@@ -153,4 +153,17 @@
 }
 #bookings-list:first-child #buttons{
     border-top-right-radius: 15px;
+}
+
+#delete-user-button{
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  height: 35px;
+  margin-top: 20px;
+  color:rgb(161, 142, 118);
+}
+
+#delete-user-button:hover{
+  background-color: rgb(200, 184, 163);
 }

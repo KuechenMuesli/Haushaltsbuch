@@ -7,6 +7,8 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
 import { UserService } from '../../services/user-service/user.service';
 import { Subscription } from 'rxjs';
 import { Booking } from '../../booking';
+import _default from "chart.js/dist/plugins/plugin.tooltip";
+import type = _default.defaults.animations.numbers.type;
 
 
 @Component({
@@ -21,7 +23,7 @@ export class MainMenuComponent implements OnInit{
   loggedIn: boolean = false;
   currentUser: string = "";
   loggedInSubscription: Subscription;
-  deleteId: number | null = null;
+  deleteId: number | string | null = null;
 
   constructor (private booksService: BooksService, @Inject(DOCUMENT) private document: Document,
   private bookingsService: BookingsService, private userService: UserService, private changeDetectorRef: ChangeDetectorRef) {
@@ -101,14 +103,22 @@ export class MainMenuComponent implements OnInit{
     }
   }
 
+  deleteUserClicked(){
+    this.userService.getLoggedInUser().subscribe(user => this.deleteId = user);
+  }
   deletionDialogClosed(output: any){
+    this.deleteId = null;
     if(output !== null){
-      this.deleteId = null;
-      let outputId: number = Number(output);
-      this.booksService.deleteBook(outputId).subscribe(index => {
-        let table = this.document.getElementById('table-list') as HTMLTableElement;
-        table.deleteRow(index);
-      });
+      if(typeof output === "number"){
+        let outputId: number = Number(output);
+        this.booksService.deleteBook(outputId).subscribe(index => {
+          let table = this.document.getElementById('table-list') as HTMLTableElement;
+          table.deleteRow(index);
+        });
+      }else if(typeof output === "string"){
+        let user = output.toString();
+        this.userService.deleteUser(user);
+      }
     }
   }
 }
