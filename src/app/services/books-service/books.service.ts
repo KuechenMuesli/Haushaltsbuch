@@ -84,22 +84,24 @@ export class BooksService {
   }
 
   editBook(id:number, name: string){
-    let user: string = "";
-    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-    return this.localStorageService.getData<Book[]>(user, [])
+    return this.userService.getLoggedInUser()
       .pipe(
-        map(books => {
-          const index = books.findIndex(book => book.id == id);
-          if (index !== -1){
-            books[index].name = name;
-          }
-          let user = ""
-          this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-          return{
-            books: books,
-            user: user
-          }
-        })
+        switchMap(user => this.localStorageService.getData<Book[]>(user, [])
+          .pipe(
+            map(books => {
+              const index = books.findIndex(book => book.id == id);
+              if (index !== -1){
+                books[index].name = name;
+              }
+              let user = ""
+              this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
+              return{
+                books: books,
+                user: user
+              }
+            })
+          )
+        )
       )
       .pipe(
         tap(booksUser => {
