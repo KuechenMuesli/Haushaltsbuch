@@ -82,7 +82,7 @@ export class UserService {
     let userData: Book[] = []
     this.localStorageService.getData(oldName, []).subscribe(returnedData => userData = returnedData);
     this.localStorageService.deleteData(oldName);
-    //this.localStorageService.saveData(newName, userData);
+    this.localStorageService.saveData(newName, userData);
 
     interface userPassword{
       username: string,
@@ -91,9 +91,11 @@ export class UserService {
     let passwordList: userPassword[] = [];
     this.localStorageService.getData("Passwords", []).subscribe(passwords => passwordList = passwords);
     let userIndex = passwordList.findIndex(pair => pair.username == oldName);
+    console.log(passwordList)
     passwordList[userIndex] = {username:newName, password:passwordList[userIndex].password};
     this.localStorageService.saveData("Passwords", passwordList);
     this.getUsers();
+    this.localStorageService.writeSessionStorage("LoggedIn", [newName]);
     this.currentUser = newName;
   }
 
