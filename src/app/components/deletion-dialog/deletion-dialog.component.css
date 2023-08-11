@@ -1,3 +1,30 @@
 #deletion-dialog{
   z-index: 100;
+  position: fixed;
+  margin-top: -20%;
+  width: 300px;
+  background-color: antiquewhite;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+  border-radius: 9px;
+  border-color: rgb(220, 195, 162);
+}
+
+#confirm-button, #cancel-button{
+  float: right;
+  background-color: antiquewhite;
+  border: none;
+  border-radius: 7px;
+}
+
+#confirm-button:hover, #cancel-button:hover{
+  background-color: rgb(207, 197, 183);
+}
+
+#confirm-button{
+  color: green;
+}
+
+#cancel-button{
+  color:rgb(161, 142, 118);
 }

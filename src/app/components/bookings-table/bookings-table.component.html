@@ -40,5 +40,6 @@
     </div>
 
 </div>
+<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)" class="delete-confirm-dialog"></app-deletion-dialog>
 <app-bookings-table-dialog [bookingId]="editBookingId" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 <div id="bottom"></div>

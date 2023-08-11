@@ -22,6 +22,7 @@ export class BookingsTableComponent implements OnInit{
   months: string[] = [];
   month: string = "";
   editBookingId: number | null = null;
+  deleteId: number | null = null;
 
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
@@ -63,12 +64,7 @@ export class BookingsTableComponent implements OnInit{
   }
 
   deleteBooking(id: number): void {
-    let bookings: Booking[] = [];
-    this.bookingsService.deleteBooking(id).subscribe();
-    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-    this.bookings = this.bookingsService.filterMonth(bookings, this.month);
-    this.expensesList = this.bookingsService.getExpenses(this.bookings);
-    this.months = this.bookingsService.getMonths(this.id);
+    this.deleteId = id;
   }
 
   sortTableByDate(): void{
@@ -119,5 +115,18 @@ export class BookingsTableComponent implements OnInit{
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
     this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
+  }
+
+  deletionDialogClosed(output: any){
+    if (output !== null){
+      let id = Number(output);
+      let bookings: Booking[] = [];
+      this.bookingsService.deleteBooking(id).subscribe();
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+      this.bookings = this.bookingsService.filterMonth(bookings, this.month);
+      this.expensesList = this.bookingsService.getExpenses(this.bookings);
+      this.months = this.bookingsService.getMonths(this.id);
+    }
+    this.deleteId = null;
   }
 }

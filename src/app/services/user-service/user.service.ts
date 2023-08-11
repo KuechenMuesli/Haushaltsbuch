@@ -91,7 +91,6 @@ export class UserService {
     let passwordList: userPassword[] = [];
     this.localStorageService.getData("Passwords", []).subscribe(passwords => passwordList = passwords);
     let userIndex = passwordList.findIndex(pair => pair.username == oldName);
-    console.log(passwordList)
     passwordList[userIndex] = {username:newName, password:passwordList[userIndex].password};
     this.localStorageService.saveData("Passwords", passwordList);
     this.getUsers();

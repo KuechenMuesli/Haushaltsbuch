@@ -14,7 +14,6 @@ export class DeletionDialogComponent implements OnChanges{
   constructor(private formBuilder: FormBuilder, @Inject(DOCUMENT) private document: Document) {}
 
   ngOnChanges(){
-    console.log(this.inputId)
     if(this.inputId !== null){
       this.showDialog();
     }

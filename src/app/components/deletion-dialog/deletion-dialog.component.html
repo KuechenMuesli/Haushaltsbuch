@@ -1,7 +1,7 @@
 <dialog id="deletion-dialog">
   <form (ngSubmit)="onSubmit()">
     <p>Möchtest du das Element wirklich löschen?</p>
-    <button type="submit">Ja</button>
-    <button type="button" (click)="onCancel()">Nein</button>
+    <button type="submit" id="confirm-button"><mat-icon>done</mat-icon></button>
+    <button type="button" id="cancel-button" (click)="onCancel()"><mat-icon>close</mat-icon></button>
   </form>
 </dialog>
