@@ -1,4 +1,5 @@
 <app-breadcrumbs></app-breadcrumbs>
+<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)" class="delete-confirm-dialog"></app-deletion-dialog>
 <div class="all">
     <button class="focus" (click)="addBookingPressed()"></button>
     <div class = "all-table">
@@ -40,6 +41,5 @@
     </div>
 
 </div>
-<app-deletion-dialog [inputId]="deleteId" (outputValue)="deletionDialogClosed($event)" class="delete-confirm-dialog"></app-deletion-dialog>
 <app-bookings-table-dialog [bookingId]="editBookingId" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
 <div id="bottom"></div>

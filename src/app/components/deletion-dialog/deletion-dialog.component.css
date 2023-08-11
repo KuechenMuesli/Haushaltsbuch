@@ -1,7 +1,7 @@
 #deletion-dialog{
-  z-index: 100;
+  z-index: 3;
   position: fixed;
-  margin-top: -20%;
+  margin-top: -0%;
   width: 300px;
   background-color: antiquewhite;
   font-family: 'Courier New', Courier, monospace;
