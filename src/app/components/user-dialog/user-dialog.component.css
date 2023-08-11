@@ -3,6 +3,10 @@
     font-size: medium;
 }
 
+.delete-confirm-dialog{
+  z-index: 10000;
+}
+
 #user-dialog{
     z-index: 2;
     background-color: antiquewhite;

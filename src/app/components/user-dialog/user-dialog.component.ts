@@ -16,6 +16,7 @@ export class UserDialogComponent implements OnInit, OnChanges{
   @Output() dialogIsOpen = new EventEmitter<boolean>();
   changePassword: boolean = false;
   incorrectPassword: boolean = false;
+  deleteId: string | null = null;
 
   constructor(@Inject(DOCUMENT) private document: Document, private formBuilder: FormBuilder, private userService: UserService){}
 
@@ -67,10 +68,7 @@ export class UserDialogComponent implements OnInit, OnChanges{
   }
 
   deleteUser(){
-    let user: string = "";
-    this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-    this.userService.deleteUser(user);
-    this.closeDialog();
+    this.userService.getLoggedInUser().subscribe(returnedUser => this.deleteId = returnedUser);
   }
 
   cancelEditing(){
@@ -87,5 +85,14 @@ export class UserDialogComponent implements OnInit, OnChanges{
     this.dialogIsOpen.emit(false);
     let dia = this.document.getElementById("user-dialog") as HTMLDialogElement;
     dia.close();
+  }
+
+  deletionDialogClosed(outputValue: any){
+    if (outputValue !== null){
+      let user = outputValue.toString();
+      this.userService.deleteUser(user);
+      this.closeDialog();
+    }
+    this.deleteId = null;
   }
 }
