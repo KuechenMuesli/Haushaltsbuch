@@ -103,6 +103,10 @@ export class BookingsTableComponent implements OnInit{
 
       let bookings: Booking[] = [];
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+      if(bookings.length == 1){
+        this.months = this.bookingsService.getMonths(this.id);
+        this.month = this.months[0];
+      }
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.id);
