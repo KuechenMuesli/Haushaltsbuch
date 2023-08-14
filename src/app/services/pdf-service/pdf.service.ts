@@ -11,7 +11,7 @@ export class PdfService {
   generatePDF(data: Booking[]){
     let doc = new jsPDF();
 
-    let dates = [(new Date(data[0].date)).toLocaleDateString("de", {month: "long", year:"numeric"}), (new Date(data[data.length - 1].date)).toLocaleDateString("de", {month: "long", year: "numeric"})];
+    let dates = [(new Date(data[0].date)).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), (new Date(data[data.length - 1].date)).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"})];
     doc.text(`Buchungen von ${dates[0]} bis ${dates[1]}`, 10, 10);
 
     let headers = [['Datum', 'Beschreibung', 'Betrag']];
