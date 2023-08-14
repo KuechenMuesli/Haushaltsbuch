@@ -22,7 +22,6 @@ export class PdfService {
       head: headers,
       body: rows,
       startY,
-      theme: "grid",
     });
 
     let pdfBlob = doc.output('blob');

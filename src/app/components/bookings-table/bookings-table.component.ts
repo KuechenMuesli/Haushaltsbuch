@@ -37,8 +37,8 @@ export class BookingsTableComponent implements OnInit{
 
     this.months = this.bookingsService.getMonths(this.id);
     this.month = this.months[0];
-    let bookings: Booking[] = []
-    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList)
+    let bookings: Booking[] = [];
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookings = this.bookingsService.filterMonth(bookings, this.month);
     let user: string = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
@@ -55,8 +55,7 @@ export class BookingsTableComponent implements OnInit{
   }
 
   displayDate(dateString: string): string{
-    let date = new Date(dateString);
-    return date.getDate()+"."+(date.getMonth() + 1 + "." + date.getFullYear())
+    return new Date(dateString).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"});
   }
 
   editBooking(id: number): void{
