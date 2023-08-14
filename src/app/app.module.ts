@@ -20,6 +20,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LineGraphChartComponent } from './components/line-graph-chart/line-graph-chart.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { DeletionDialogComponent } from './components/deletion-dialog/deletion-dialog.component';
+import { ExportPdfComponent } from './components/export-pdf/export-pdf.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { DeletionDialogComponent } from './components/deletion-dialog/deletion-d
     DashboardComponent,
     LineGraphChartComponent,
     BreadcrumbsComponent,
-    DeletionDialogComponent
+    DeletionDialogComponent,
+    ExportPdfComponent
   ],
   imports: [
     BrowserModule,

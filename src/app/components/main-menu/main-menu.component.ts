@@ -7,9 +7,6 @@ import { BookingsService } from '../../services/bookings-service/bookings.servic
 import { UserService } from '../../services/user-service/user.service';
 import { Subscription } from 'rxjs';
 import { Booking } from '../../booking';
-import _default from "chart.js/dist/plugins/plugin.tooltip";
-import type = _default.defaults.animations.numbers.type;
-
 
 @Component({
   selector: 'app-main-menu',
@@ -36,7 +33,6 @@ export class MainMenuComponent implements OnInit{
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
     this.userService.getUsers();
-    //this.userService.currentUser = this.userService.users[0];
     this.booksService.getBooksList()
       .subscribe(list => this.bookingsList = list);
     this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
@@ -99,7 +95,6 @@ export class MainMenuComponent implements OnInit{
       this.loggedIn = true;
       this.changeDetectorRef.detectChanges();
       this.userService.getLoggedInUser().subscribe(returnedUser => this.currentUser = returnedUser);
-
     }
   }
 

@@ -25,6 +25,8 @@ export class DashboardComponent implements OnInit{
   lastBookingDate: string = "";
   dateSelectForm!: FormGroup;
 
+  pdfData: Booking[] | null = null;
+
   constructor(private bookingsService: BookingsService, private route: ActivatedRoute, private userService: UserService,
     private formBuilder: FormBuilder, private booksService: BooksService){
   }
@@ -58,5 +60,9 @@ export class DashboardComponent implements OnInit{
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
     this.bookings = this.bookingsService.filterTimespan(bookings, data.startingDate, data.endingDate);
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
+  }
+
+  exportPDF(){
+    this.pdfData = this.bookings;
   }
 }

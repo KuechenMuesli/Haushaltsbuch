@@ -60,9 +60,13 @@ export class BookingsService {
           )
           .pipe(
             tap(allBooks =>{
-              let user: string = "";
-              this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-              this.localStorageService.saveData(user, allBooks);
+              this.userService.getLoggedInUser()
+                .pipe(
+                  map(user => {
+                    this.localStorageService.saveData(user, allBooks);
+                  })
+                ).subscribe().unsubscribe()
+
             })
           ))
       );
@@ -84,12 +88,19 @@ export class BookingsService {
       )
       .pipe(
         tap(bookingsAndIndex => {
-          let newBooksList: Book[] = [];
-          this.booksService.getBooksList().subscribe(booksList => newBooksList = booksList);
-          newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
-            let user: string = "";
-            this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-            this.localStorageService.saveData(user, newBooksList);
+          this.booksService.getBooksList()
+            .pipe(map(newBooksList => {
+              newBooksList[bookingsAndIndex.bookIndex].bookingsList = bookingsAndIndex.bookings;
+              let user: string = "";
+
+              this.userService.getLoggedInUser()
+                .pipe(
+                  map(user => {
+                    this.localStorageService.saveData(user, newBooksList);
+                  })
+                ).subscribe().unsubscribe()
+            })
+            ).subscribe().unsubscribe()
         }
         )
       )
@@ -103,7 +114,11 @@ export class BookingsService {
                 let books: Book[] = [];
                 if (bookingsIndex !== -1){
                     bookings[bookingsIndex] = {id, date, description, amount, tags}
-                    this.booksService.getBooksList().subscribe(booksList => books = booksList);
+                    this.booksService.getBooksList()
+                      .pipe(map(booksList => {
+                        books = booksList;
+                        }
+                      )).subscribe()
                     let bookIndex: number = books.findIndex(book => book.id == this.booksService.bookId);
                     books[bookIndex].bookingsList = bookings;
                 }
@@ -113,9 +128,12 @@ export class BookingsService {
         )
         .pipe(
             tap(books => {
-              let user: string = "";
-              this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
-              this.localStorageService.saveData(user, books.books)
+              this.userService.getLoggedInUser()
+                .pipe(
+                  map(user => {
+                    this.localStorageService.saveData(user, books.books)
+                  })
+                ).subscribe()
             }
             )
         )
