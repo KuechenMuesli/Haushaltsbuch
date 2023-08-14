@@ -102,6 +102,18 @@ td {
     background-color: rgb(207, 197, 183);
 }
 
+#export-button{
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  justify-self: center;
+  color: cornflowerblue;
+}
+
+#export-button:hover{
+  background-color: rgb(207, 197, 183);
+}
+
 #bottom{
   background-color: rgb(234, 212, 182);
   margin-top: 100px;
