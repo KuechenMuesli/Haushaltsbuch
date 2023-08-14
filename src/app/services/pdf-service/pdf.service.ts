@@ -15,13 +15,29 @@ export class PdfService {
     doc.text(`Buchungen von ${dates[0]} bis ${dates[1]}`, 10, 10);
 
     let headers = [['Datum', 'Beschreibung', 'Betrag']];
-    let rows = data.map(booking => [booking.date, booking.description, booking.amount]);
+    let rows = data.map(booking => [new Date(booking.date).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), booking.description, booking.amount]);
     let startY = 20;
 
     autoTable(doc, {
       head: headers,
       body: rows,
       startY,
+      headStyles:{
+        font: "courier",
+        textColor: "#000000",
+        fillColor: "#D3D3D3"
+      },
+      columnStyles: {
+        0:{
+          font:"courier"
+        },
+        1:{
+          font:"courier"
+        },
+        2:{
+          font:"courier"
+        }
+      }
     });
 
     let pdfBlob = doc.output('blob');
