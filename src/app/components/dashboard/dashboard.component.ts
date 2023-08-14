@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user-service/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BooksService } from '../../services/books-service/books.service';
+import {PdfService} from "../../services/pdf-service/pdf.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -28,7 +29,7 @@ export class DashboardComponent implements OnInit{
   pdfData: Booking[] | null = null;
 
   constructor(private bookingsService: BookingsService, private route: ActivatedRoute, private userService: UserService,
-    private formBuilder: FormBuilder, private booksService: BooksService){
+    private formBuilder: FormBuilder, private booksService: BooksService, private pdfService: PdfService){
   }
 
   ngOnInit(){
@@ -63,6 +64,6 @@ export class DashboardComponent implements OnInit{
   }
 
   exportPDF(){
-    this.pdfData = this.bookings;
+    this.pdfService.generatePDF(this.bookings);
   }
 }

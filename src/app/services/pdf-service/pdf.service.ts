@@ -8,12 +8,13 @@ import {Booking} from "../../booking";
   providedIn: 'root'
 })
 export class PdfService {
-  generatePDF(data: Booking[]): void {
+  generatePDF(data: Booking[]){
     let doc = new jsPDF();
 
-    doc.text('Table Example', 10, 10);
+    let dates = [(new Date(data[0].date)).toLocaleDateString("de", {month: "long", year:"numeric"}), (new Date(data[data.length - 1].date)).toLocaleDateString("de", {month: "long", year: "numeric"})];
+    doc.text(`Buchungen von ${dates[0]} bis ${dates[1]}`, 10, 10);
 
-    let headers = [['Date', 'Description', 'Amount']];
+    let headers = [['Datum', 'Beschreibung', 'Betrag']];
     let rows = data.map(booking => [booking.date, booking.description, booking.amount]);
     let startY = 20;
 
@@ -21,9 +22,10 @@ export class PdfService {
       head: headers,
       body: rows,
       startY,
+      theme: "grid",
     });
 
     let pdfBlob = doc.output('blob');
-    saveAs(pdfBlob, 'tabelle.pdf');
+    saveAs(pdfBlob, `bookings-${dates[0].replace(" ", "_")}-${dates[0].replace(" ", "_")}.pdf`);
   }
 }
