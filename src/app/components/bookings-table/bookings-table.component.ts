@@ -143,7 +143,10 @@ export class BookingsTableComponent implements OnInit{
   }
 
   importFile(event: any) {
-    this.pdfService.importFile(event);
+    const inputElement: HTMLInputElement = event.target;
+    if (inputElement.files){
+      this.pdfService.importFile(event);
+    }
   }
 
   processFileContent(){
