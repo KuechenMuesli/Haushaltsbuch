@@ -20,7 +20,7 @@ export class PdfService {
     doc.text(`Buchungen von ${dates[0]} bis ${dates[1]}`, 10, 10);
 
     let headers = [['Datum', 'Beschreibung', 'Betrag']];
-    let rows = data.map(booking => [new Date(booking.date).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), booking.description, booking.amount]);
+    let rows = data.map(booking => [new Date(booking.date).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), booking.description, (booking.amount.toString() + " €")]);
     let startY = 20;
 
     autoTable(doc, {

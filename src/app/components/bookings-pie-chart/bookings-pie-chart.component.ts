@@ -152,6 +152,7 @@ export class BookingsPieChartComponent implements OnInit, OnChanges{
   deleteTagPressed(tagName: string){
     let index: number = this.tagsList.findIndex(name => name == tagName);
     this.tagsList.splice(index, 1);
+    console.log(this.tagsList)
     this.updateChart();
   }
 }
