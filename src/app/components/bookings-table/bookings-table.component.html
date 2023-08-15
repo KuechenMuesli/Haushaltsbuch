@@ -8,9 +8,12 @@
         <button routerLink="dashboard" id="dashboard-button"><mat-icon id="dashboard-icon">insert_chart</mat-icon></button>
         <button (click)="addBookingPressed()" id="add-button"><mat-icon id="add-icon">add_circle</mat-icon></button>
         <app-bookings-table-dialog [bookingId]="editBookingId" (dialogIsOpen)="closeDialog($event)"></app-bookings-table-dialog>
-        <input type="file" class="file-upload" (change)="this.importFile($event)">
     </div>
-    <div id="time-select">
+      <div class="file-import">
+        <label for="file-input" id="file-input-label">Liste importieren: </label>
+        <input type="file" id="file-input" (change)="this.importFile($event)">
+      </div>
+      <div id="time-select">
         <h3 id="time-select-heading">Buchungen aus </h3>
         <select id="monthSelect" #dateSelect (change)="dateChanged(dateSelect.value)">
             <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>

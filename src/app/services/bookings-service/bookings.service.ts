@@ -182,9 +182,7 @@ export class BookingsService {
     return [totalExpenses, totalEarnings];
   }
 
-  getMonths(id: number): string[]{
-    let bookings: Booking[] = [];
-    this.booksService.getBookings(id).subscribe(bookingsList => bookings = bookingsList);
+  getMonths(bookings: Booking[]): string[]{
     bookings.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
     let months: string[] = [];
     let date: string[] = [];

@@ -230,3 +230,8 @@ th{
   height: 30px;
   font-size: 30px;
 }
+
+#file-input-label, #file-input{
+  font-size: large;
+  font-family: 'Courier New', Courier, monospace;
+}

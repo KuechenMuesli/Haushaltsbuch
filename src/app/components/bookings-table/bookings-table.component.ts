@@ -46,8 +46,9 @@ export class BookingsTableComponent implements OnInit{
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.booksService.getName(this.id).subscribe(name => this.bookName = name);
     this.booksService.bookId = this.id;
+    this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
 
-    this.months = this.bookingsService.getMonths(this.id);
+    this.months = this.bookingsService.getMonths(this.bookings);
     this.month = this.months[0];
     let bookings: Booking[] = [];
     this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
@@ -111,12 +112,12 @@ export class BookingsTableComponent implements OnInit{
       let bookings: Booking[] = [];
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
       if(bookings.length == 1){
-        this.months = this.bookingsService.getMonths(this.id);
+        this.months = this.bookingsService.getMonths(this.bookings);
         this.month = this.months[0];
       }
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
-      this.months = this.bookingsService.getMonths(this.id);
+      this.months = this.bookingsService.getMonths(this.bookings);
 
     }
   }
@@ -136,7 +137,7 @@ export class BookingsTableComponent implements OnInit{
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
-      this.months = this.bookingsService.getMonths(this.id);
+      this.months = this.bookingsService.getMonths(this.bookings);
     }
     this.deleteId = null;
   }
@@ -155,13 +156,11 @@ export class BookingsTableComponent implements OnInit{
 
       let bookings: Booking[] = [];
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-      if(bookings.length == 1){
-        this.months = this.bookingsService.getMonths(this.id);
-        this.month = this.months[0];
-      }
+      this.months = this.bookingsService.getMonths(bookings);
+      this.month = this.months[0];
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
-      this.months = this.bookingsService.getMonths(this.id);
+      this.months = this.bookingsService.getMonths(this.bookings);
     }
   }
 }
