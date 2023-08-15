@@ -26,6 +26,8 @@ export class DashboardComponent implements OnInit{
   lastBookingDate: string = "";
   dateSelectForm!: FormGroup;
 
+  fileContent: string | null = null;
+
   pdfData: Booking[] | null = null;
 
   constructor(private bookingsService: BookingsService, private route: ActivatedRoute, private userService: UserService,

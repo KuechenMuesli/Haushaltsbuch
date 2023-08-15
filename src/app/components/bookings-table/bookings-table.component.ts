@@ -4,6 +4,8 @@ import { Booking } from '../../booking';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
 import { UserService } from '../../services/user-service/user.service';
+import {PdfService} from "../../services/pdf-service/pdf.service";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -24,11 +26,21 @@ export class BookingsTableComponent implements OnInit{
   editBookingId: number | null = null;
   deleteId: number | null = null;
 
+  fileContent: string |undefined;
+  fileContentSubscription: Subscription | undefined;
+
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
-    private userService: UserService
-   ) {}
+    private userService: UserService, private pdfService: PdfService
+   ) {
+    this.fileContentSubscription = this.pdfService.getFileContentObservable().subscribe(
+      (content: string) => {
+        this.fileContent = content;
+        this.processFileContent();
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
@@ -127,5 +139,29 @@ export class BookingsTableComponent implements OnInit{
       this.months = this.bookingsService.getMonths(this.id);
     }
     this.deleteId = null;
+  }
+
+  importFile(event: any) {
+    this.pdfService.importFile(event);
+  }
+
+  processFileContent(){
+    if (this.fileContent){
+      let fileBookings = this.fileContent.split("\n");
+      for (let booking of fileBookings){
+        let bookingData = booking.split(";");
+        this.bookingsService.addBooking("2023-09-09", bookingData[1], Number(bookingData[2]), []).subscribe();
+      }
+
+      let bookings: Booking[] = [];
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
+      if(bookings.length == 1){
+        this.months = this.bookingsService.getMonths(this.id);
+        this.month = this.months[0];
+      }
+      this.bookings = this.bookingsService.filterMonth(bookings, this.month);
+      this.expensesList = this.bookingsService.getExpenses(this.bookings);
+      this.months = this.bookingsService.getMonths(this.id);
+    }
   }
 }
