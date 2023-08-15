@@ -4,7 +4,7 @@ import { Booking } from '../../booking';
 import { ActivatedRoute } from '@angular/router';
 import { BooksService } from '../../services/books-service/books.service';
 import { UserService } from '../../services/user-service/user.service';
-import {PdfService} from "../../services/pdf-service/pdf.service";
+import {FileService} from "../../services/file-service/file.service";
 import {Subscription} from "rxjs";
 
 
@@ -32,7 +32,7 @@ export class BookingsTableComponent implements OnInit{
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
-    private userService: UserService, private pdfService: PdfService
+    private userService: UserService, private pdfService: FileService
    ) {
     this.fileContentSubscription = this.pdfService.getFileContentObservable().subscribe(
       (content: string) => {

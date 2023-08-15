@@ -8,7 +8,7 @@ import {Observable, Subject} from "rxjs";
 @Injectable({
   providedIn: 'root'
 })
-export class PdfService {
+export class FileService {
   fileContent = new Subject<string>();
   generatePDF(data: Booking[]){
     let doc = new jsPDF();
