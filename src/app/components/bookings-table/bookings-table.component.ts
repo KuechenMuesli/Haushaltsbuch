@@ -1,4 +1,4 @@
-import { Component, HostListener, Renderer2, OnInit } from '@angular/core';
+import { Component, HostListener, Renderer2, OnInit, Inject } from '@angular/core';
 import { BookingsService } from '../../services/bookings-service/bookings.service';
 import { Booking } from '../../booking';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +6,8 @@ import { BooksService } from '../../services/books-service/books.service';
 import { UserService } from '../../services/user-service/user.service';
 import {FileService} from "../../services/file-service/file.service";
 import {Subscription} from "rxjs";
+import { DOCUMENT } from '@angular/common';
+
 
 
 @Component({
@@ -27,13 +29,12 @@ export class BookingsTableComponent implements OnInit{
   deleteId: number | null = null;
   fileContent: string | null = null;
   fileContentSubscription: Subscription | undefined;
-
   helpOpened: boolean = false;
 
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
-    private userService: UserService, private fileService: FileService
+    private userService: UserService, private fileService: FileService, @Inject(DOCUMENT) private document: Document
    ) {
     this.fileContentSubscription = this.fileService.getFileContentObservable().subscribe(
       (content: string) => {
@@ -51,14 +52,14 @@ export class BookingsTableComponent implements OnInit{
 
     this.months = this.bookingsService.getMonths(this.bookings);
     this.month = this.months[0];
-    let bookings: Booking[] = [];
-    this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-    this.bookings = this.bookingsService.filterMonth(bookings, this.month);
+
+    this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
     let user: string = "";
     this.userService.getLoggedInUser().subscribe(returnedUser => user = returnedUser);
     this.currentUser = user;
 
     this.expensesList = this.bookingsService.getExpenses(this.bookings);
+
   }
 
   @HostListener('document:keypress', ['$event'])
@@ -133,10 +134,9 @@ export class BookingsTableComponent implements OnInit{
   deletionDialogClosed(output: any){
     if (output !== null){
       let id = Number(output);
-      let bookings: Booking[] = [];
       this.bookingsService.deleteBooking(id).subscribe();
-      this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-      this.bookings = this.bookingsService.filterMonth(bookings, this.month);
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
+      this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.bookings);
     }
@@ -158,11 +158,10 @@ export class BookingsTableComponent implements OnInit{
         this.bookingsService.addBooking(bookingData[0], bookingData[1], Number(bookingData[2]), JSON.parse(bookingData[3])).subscribe();
       }
 
-      let bookings: Booking[] = [];
-      this.bookingsService.getBookings(this.id).subscribe(bookingsList => bookings = bookingsList);
-      this.months = this.bookingsService.getMonths(bookings);
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
+      this.months = this.bookingsService.getMonths(this.bookings);
       this.month = this.months[0];
-      this.bookings = this.bookingsService.filterMonth(bookings, this.month);
+      this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.bookings);
       this.fileContent = null;

@@ -4,7 +4,6 @@
     margin-left: 0%;
 }
 
-
 #tag{
     margin-top: 5px;
     max-height: 20px;
@@ -15,6 +14,11 @@
     border-radius: 30px;
     align-items: center;
 }
+#tag:hover{
+    transform: scale(1.02);
+    background-color: rgb(202, 172, 135)
+}
+
 #delete-tag-icon{
     display: flex;
     font-size: 15px;
