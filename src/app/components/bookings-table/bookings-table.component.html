@@ -14,6 +14,10 @@
         <input type="file" id="file-input" accept=".csv" (change)="this.importFile($event)">
         <button id="help-button" (mouseenter)="helpHovered()" (mouseleave)="helpHoveredEnded()"><mat-icon>help</mat-icon></button>
       </div>
+      <app-help-dialog [helpDialogOpen]="helpOpened"></app-help-dialog>
+      <div class="file-export">
+        <button id="export-csv-button" (click)="exportCsvClicked()">CSV exportieren</button>
+      </div>
       <div></div>
       <div id="time-select">
         <h3 id="time-select-heading">Buchungen aus </h3>
@@ -21,7 +25,7 @@
             <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>
         </select>
     </div>
-    <app-help-dialog [helpDialogOpen]="helpOpened"></app-help-dialog>
+
     <div class="bookings">
         <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
         <table id="bookings-table">

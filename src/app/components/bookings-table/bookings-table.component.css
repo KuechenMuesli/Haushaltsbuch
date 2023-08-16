@@ -99,6 +99,10 @@ th{
   border-bottom-right-radius: 15px;
 }
 
+.file-export{
+  margin-top: 10px;
+}
+
 #book-name{
   margin-left: 3px;
   font-style: italic;
@@ -240,4 +244,9 @@ th{
   background-color: transparent;
   border: none;
   color: blue;
+}
+
+#export-csv-button{
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
 }

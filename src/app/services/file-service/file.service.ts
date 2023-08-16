@@ -69,4 +69,12 @@ export class FileService {
   getFileContentObservable(): Observable<string>{
     return this.fileContent.asObservable();
   }
+
+  exportCsv(bookings: Booking[], dateString: string){
+    let date = new Date(dateString);
+    let csvArray = bookings.map(booking => `${booking.date};${booking.description};${booking.amount}`);
+    let csvData = csvArray.join("\r\n")
+    let blob = new Blob([csvData], {type: "text/csv"});
+    saveAs(blob, `Buchungen-${(date.toLocaleDateString("de", {month:"long", year:"numeric"})).replace(" ", "-")}.csv`);
+  }
 }

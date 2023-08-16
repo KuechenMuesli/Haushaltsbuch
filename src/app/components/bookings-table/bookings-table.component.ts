@@ -34,9 +34,9 @@ export class BookingsTableComponent implements OnInit{
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
-    private userService: UserService, private pdfService: FileService
+    private userService: UserService, private fileService: FileService
    ) {
-    this.fileContentSubscription = this.pdfService.getFileContentObservable().subscribe(
+    this.fileContentSubscription = this.fileService.getFileContentObservable().subscribe(
       (content: string) => {
         this.fileContent = content;
         this.processFileContent();
@@ -147,7 +147,7 @@ export class BookingsTableComponent implements OnInit{
   importFile(event: any) {
     const inputElement: HTMLInputElement = event.target;
     if (inputElement.files){
-      this.pdfService.importFile(event);
+      this.fileService.importFile(event);
     }
   }
 
@@ -175,5 +175,9 @@ export class BookingsTableComponent implements OnInit{
 
   helpHoveredEnded(){
     this.helpOpened = false;
+  }
+
+  exportCsvClicked(){
+    this.fileService.exportCsv(this.bookings, this.bookings[0].date);
   }
 }
