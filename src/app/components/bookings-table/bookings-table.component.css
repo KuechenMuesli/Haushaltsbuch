@@ -235,3 +235,9 @@ th{
   font-size: large;
   font-family: 'Courier New', Courier, monospace;
 }
+
+#help-button{
+  background-color: transparent;
+  border: none;
+  color: blue;
+}

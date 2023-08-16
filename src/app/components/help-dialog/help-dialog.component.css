@@ -1,0 +1,14 @@
+#help-dialog{
+  background-color: antiquewhite;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: medium;
+  border-radius: 9px;
+  border-color: rgb(220, 195, 162);
+  max-width: 400px;
+  position: absolute;
+  margin-top: -3%;
+}
+
+#important{
+  color:red;
+}

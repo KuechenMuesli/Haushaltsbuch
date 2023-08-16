@@ -29,6 +29,8 @@ export class BookingsTableComponent implements OnInit{
   fileContent: string |undefined;
   fileContentSubscription: Subscription | undefined;
 
+  helpOpened: boolean = false;
+
   constructor(private bookingsService: BookingsService,
     private booksService: BooksService,
     private route: ActivatedRoute, private renderer: Renderer2,
@@ -165,5 +167,13 @@ export class BookingsTableComponent implements OnInit{
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.bookings);
     }
+  }
+
+  helpHovered(){
+    this.helpOpened = true;
+  }
+
+  helpHoveredEnded(){
+    this.helpOpened = false;
   }
 }

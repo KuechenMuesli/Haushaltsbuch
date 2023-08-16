@@ -12,14 +12,16 @@
       <div class="file-import">
         <label for="file-input" id="file-input-label">Liste importieren: </label>
         <input type="file" id="file-input" accept=".csv" (change)="this.importFile($event)">
+        <button id="help-button" (mouseenter)="helpHovered()" (mouseleave)="helpHoveredEnded()"><mat-icon>help</mat-icon></button>
       </div>
+      <div></div>
       <div id="time-select">
         <h3 id="time-select-heading">Buchungen aus </h3>
         <select id="monthSelect" #dateSelect (change)="dateChanged(dateSelect.value)">
             <option id="option" *ngFor="let month of months" [value]="month">{{month}}</option>
         </select>
     </div>
-
+    <app-help-dialog [helpDialogOpen]="helpOpened"></app-help-dialog>
     <div class="bookings">
         <app-total-amount [bookingsList]="bookings" id="total-amount"></app-total-amount>
         <table id="bookings-table">
