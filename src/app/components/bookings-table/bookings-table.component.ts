@@ -13,7 +13,7 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-bookings-table',
   templateUrl: './bookings-table.component.html',
-  styleUrls: ['./bookings-table.component.css']
+  styleUrls: ['./bookings-table.component.css'],
 })
 
 export class BookingsTableComponent implements OnInit{
@@ -173,6 +173,7 @@ export class BookingsTableComponent implements OnInit{
 
   helpHovered(){
     this.helpOpened = true;
+
   }
 
   helpHoveredEnded(){
