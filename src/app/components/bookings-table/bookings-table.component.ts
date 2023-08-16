@@ -111,14 +111,14 @@ export class BookingsTableComponent implements OnInit{
       let focusElement = this.renderer.selectRootElement(".focus");
       focusElement.focus();
 
-      this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
       if(this.bookings.length == 1){
         this.months = this.bookingsService.getMonths(this.bookings);
         this.month = this.months[0];
       }
-      this.expensesList = this.bookingsService.getExpenses(this.bookings);
+      this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
       this.months = this.bookingsService.getMonths(this.bookings);
       this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
+      this.expensesList = this.bookingsService.getExpenses(this.bookings);
 
     }
   }
@@ -134,6 +134,10 @@ export class BookingsTableComponent implements OnInit{
     if (output !== null){
       let id = Number(output);
       this.bookingsService.deleteBooking(id).subscribe();
+      if(this.bookings.length == 0){
+        this.months = this.bookingsService.getMonths(this.bookings);
+        this.month = this.months[0];
+      }
       this.bookingsService.getBookings(this.id).subscribe(bookingsList => this.bookings = bookingsList);
       this.months = this.bookingsService.getMonths(this.bookings);
       this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
