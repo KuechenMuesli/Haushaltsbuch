@@ -70,7 +70,9 @@ export class FileService {
 
   exportCsv(bookings: Booking[], dateString: string){
     let date = new Date(dateString);
-    let csvArray = bookings.map(booking => `${booking.date};${booking.description};${booking.amount}`);
+    let tagsList = bookings.map(booking => booking.tags)
+
+    let csvArray = bookings.map(booking => `${booking.date};${booking.description};${booking.amount};${JSON.stringify(booking.tags)}`);
     let csvData = csvArray.join("\r\n")
     let blob = new Blob([csvData], {type: "text/csv"});
     saveAs(blob, `Buchungen-${(date.toLocaleDateString("de", {month:"long", year:"numeric"})).replace(" ", "-")}.csv`);
