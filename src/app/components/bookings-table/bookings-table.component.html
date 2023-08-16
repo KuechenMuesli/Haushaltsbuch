@@ -16,7 +16,8 @@
       </div>
       <app-help-dialog [helpDialogOpen]="helpOpened"></app-help-dialog>
       <div class="file-export">
-        <button id="export-csv-button" (click)="exportCsvClicked()">CSV exportieren</button>
+        <label for="export-csv-button">CSV-Datei exportieren: </label>
+        <button id="export-csv-button" (click)="exportCsvClicked()"><mat-icon>save_alt</mat-icon></button>
       </div>
       <div></div>
       <div id="time-select">

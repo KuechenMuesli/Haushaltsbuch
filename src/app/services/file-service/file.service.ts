@@ -60,9 +60,7 @@ export class FileService {
         let content = e.target.result;
         this.fileContent.next(content);
       };
-
       reader.readAsText(file);
-      console.log(this.fileContent)
     }
   }
 

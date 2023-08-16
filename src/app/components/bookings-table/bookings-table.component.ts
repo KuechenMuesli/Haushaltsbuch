@@ -26,7 +26,7 @@ export class BookingsTableComponent implements OnInit{
   editBookingId: number | null = null;
   deleteId: number | null = null;
 
-  fileContent: string |undefined;
+  fileContent: string | null = null;
   fileContentSubscription: Subscription | undefined;
 
   helpOpened: boolean = false;
@@ -166,6 +166,7 @@ export class BookingsTableComponent implements OnInit{
       this.bookings = this.bookingsService.filterMonth(bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
       this.months = this.bookingsService.getMonths(this.bookings);
+      this.fileContent = null;
     }
   }
 

@@ -247,6 +247,13 @@ th{
 }
 
 #export-csv-button{
-  font-family: 'Courier New', Courier, monospace;
-  font-size: medium;
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  justify-self: center;
+  color: cornflowerblue;
+}
+
+#export-csv-button:hover{
+  background-color: rgb(207, 197, 183);
 }
