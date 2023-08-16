@@ -25,7 +25,6 @@ export class BookingsTableComponent implements OnInit{
   month: string = "";
   editBookingId: number | null = null;
   deleteId: number | null = null;
-
   fileContent: string | null = null;
   fileContentSubscription: Subscription | undefined;
 
