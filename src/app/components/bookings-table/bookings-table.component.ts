@@ -156,7 +156,7 @@ export class BookingsTableComponent implements OnInit{
       let fileBookings = this.fileContent.split("\n");
       for (let booking of fileBookings){
         let bookingData = booking.split(";");
-        this.bookingsService.addBooking("2023-09-09", bookingData[1], Number(bookingData[2]), []).subscribe();
+        this.bookingsService.addBooking(bookingData[0], bookingData[1], Number(bookingData[2]), []).subscribe();
       }
 
       let bookings: Booking[] = [];
