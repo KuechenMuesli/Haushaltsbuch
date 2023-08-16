@@ -1,5 +1,5 @@
 <div>
-    <h3>Gefilterte Tags: </h3>
+    <h3>Gefilterte Tags ({{tagsList.length}}):</h3>
     <div id="tag" *ngFor="let tag of tagsList"><div>{{tag}}</div><button type="button" id="delete-tag-button" (click)="deleteTagPressed(tag)"><mat-icon id="delete-tag-icon">close</mat-icon></button></div>
     <button id="add-tag-button" (click)="openTagDialog()"><mat-icon>add_circle</mat-icon></button>
 
