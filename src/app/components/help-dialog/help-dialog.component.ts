@@ -9,8 +9,7 @@ import { DOCUMENT } from '@angular/common';
 export class HelpDialogComponent implements OnChanges{
   @Input() helpDialogOpen = false;
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
-  }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if(this.helpDialogOpen){

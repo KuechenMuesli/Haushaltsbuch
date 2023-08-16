@@ -119,7 +119,6 @@ export class BookingsTableComponent implements OnInit{
       this.months = this.bookingsService.getMonths(this.bookings);
       this.bookings = this.bookingsService.filterMonth(this.bookings, this.month);
       this.expensesList = this.bookingsService.getExpenses(this.bookings);
-
     }
   }
 
@@ -131,10 +130,10 @@ export class BookingsTableComponent implements OnInit{
   }
 
   deletionDialogClosed(output: any){
-    if (output !== null){
+    if (output !== null) {
       let id = Number(output);
       this.bookingsService.deleteBooking(id).subscribe();
-      if(this.bookings.length == 0){
+      if(this.bookings.length == 0) {
         this.months = this.bookingsService.getMonths(this.bookings);
         this.month = this.months[0];
       }

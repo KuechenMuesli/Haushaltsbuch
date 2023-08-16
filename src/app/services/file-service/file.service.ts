@@ -15,10 +15,8 @@ export class FileService {
     doc.setFillColor("#FEFEFE");
     doc.setFont("courier");
     doc.rect(0, 0, doc.internal.pageSize.width, doc.internal.pageSize.height, "F");
-
     let dates = [(new Date(data[0].date)).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), (new Date(data[data.length - 1].date)).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"})];
     doc.text(`Buchungen vom ${dates[0]} bis ${dates[1]}`, 10, 10);
-
     let headers = [['Datum', 'Beschreibung', 'Betrag']];
     let rows = data.map(booking => [new Date(booking.date).toLocaleDateString("de", {day:"2-digit", month: "2-digit", year:"numeric"}), booking.description, (booking.amount.toString() + " €")]);
     let startY = 20;
