@@ -173,7 +173,6 @@ export class BookingsTableComponent implements OnInit{
 
   helpHovered(){
     this.helpOpened = true;
-
   }
 
   helpHoveredEnded(){
